@@ -1,2 +1,2 @@
 # .vim
-My Vim configuration and plugin files.
+My personal Vim configuration and plugin files.
