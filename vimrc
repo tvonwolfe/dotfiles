@@ -137,6 +137,11 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if has("gui_macvim")
+    set guifont=Hack\ Nerd\ Font:h11
+endif
+
 set modelines=0         " CVE-2007-2438
 
 " Normally we use vim-extensions. If you want true vi-compatibility
@@ -197,8 +202,10 @@ set splitright
 " palenight color scheme.
 colorscheme palenight
 
-" use the  terminal bg color.
-hi Normal guibg=NONE ctermbg=NONE
+" use the terminal bg color.
+if !has("gui_macvim")
+    hi Normal guibg=NONE ctermbg=NONE
+endif
 
 " don't wrap lines.
 set nowrap
