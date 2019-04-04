@@ -28,7 +28,9 @@ Plugin 'drewtempelmeyer/palenight.vim' "palenight colorscheme
 Plugin 'arcticicestudio/nord-vim' " nord colorscheme
 Plugin 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plugin 'w0rp/ale' " Asynchronous Lint Engine
-Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-commentary' " Better Vim commenting
+Plugin 'ap/vim-css-color' " CSS color highlighting in Vim
+Plugin 'ludovicchabant/vim-gutentags' " better tag file management
 " All Plugins must be added before the following line
 call vundle#end()            " required
 " To ignore plugin indent changes, instead use:
@@ -108,28 +110,25 @@ function! LightlineFilename()
        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 
-" ale lint aliases to map one filetype's lint settings to another if we want
-let g:ale_linter_aliases = {'typescript': ['typescript', 'javascript']}
-
 " ale fixers to run while creating a file
-let b:ale_fixers = {
+let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \   'javascript': ['prettier', 'eslint']
-    \}
-
-" ale linters to run based on filetype 
-let b:ale_linters = {
-    \   'python': ['pylint']
+    \   'javascript': ['prettier', 'eslint'],
+    \   'typescript': ['prettier', 'tslint'],
+    \   'python': ['add_blank_lines_for_python_control_statements', 'isort', 'yapf']
     \}
 
 " ale fixers run on file write.
 let g:ale_fix_on_save = 1
 
-" always show gutter column, because shifting the text while typing is
-" annoying.
-let g:ale_lint_on_text_changed = 'normal'
+" lint when leaving insert mode
 let g:ale_lint_on_insert_leave = 1
 
+" always show the ALE gutter, so the window doesn't constantly shift back and
+" forth.
+let g:ale_sign_column_always = 1
+
+" custom ALE warning/error message string
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
@@ -152,14 +151,16 @@ set backspace=2         " more powerful backspacing
 " Syntax highlighting.
 syntax on
 
+set directory=$HOME/.vim/swapfiles//
+
 " Show line numbers.
 set nu
 
-" Turn on auto indenting. 
+" Turn on auto indenting.
 set autoindent
 
 " Turn on smart indenting.
-set smartindent 
+set smartindent
 
 " Set indentation to 4 spaces.
 set shiftwidth=4
@@ -223,7 +224,7 @@ set ttimeoutlen=50
 " auto-insert matching angle braces on the same line for html & xml files.
 au FileType html,xml inoremap < <><Left>
 
-" Set markdown syntax highlighting for any .md file 
+" Set markdown syntax highlighting for any .md file
 au BufNewFile, BufRead *.md setf markdown
 
 " Turn off showing line numbers for regulat text files
@@ -271,9 +272,10 @@ let g:NERDTreeWinSize=40
 
 " set apache, html, css, json, typscript, php and sql files to have 2 space tab widths.
 au FileType apache,html,css,json,typescript,php,sql set ts=2 sw=2
+au FileType python set ts=4
 
 " set the git diff window to vertical split.
-set diffopt+=vertical 
+set diffopt+=vertical
 
 " % matching of HTML tags
 runtime macros/matchit.vim
