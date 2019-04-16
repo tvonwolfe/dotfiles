@@ -17,7 +17,6 @@ Plugin 'itchyny/lightline.vim' " lightline plugin
 Plugin 'https://github.com/itchyny/vim-gitbranch.git' " git plugin
 Plugin 'scrooloose/nerdtree' " NERDTree plugin
 Plugin 'Xuyuanp/nerdtree-git-plugin' " NERDTree Git plugin
-Plugin 'keith/swift.vim' " Swift syntax highlighting
 Plugin 'leafgarland/typescript-vim' " Typescript syntax highlighting
 Plugin 'Yggdroot/indentLine' " plugin for indentation guides
 Plugin 'vim-utils/vim-man' " look up man pages without leaving Vim
@@ -30,7 +29,8 @@ Plugin 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plugin 'w0rp/ale' " Asynchronous Lint Engine
 Plugin 'tpope/vim-commentary' " Better Vim commenting
 Plugin 'ap/vim-css-color' " CSS color highlighting in Vim
-Plugin 'ludovicchabant/vim-gutentags' " better tag file management
+Plugin 'keith/swift.vim' " Support for Swift syntax highlighting
+Plugin 'sonph/onehalf', {'rtp': 'vim/'}
 " All Plugins must be added before the following line
 call vundle#end()            " required
 " To ignore plugin indent changes, instead use:
@@ -51,7 +51,7 @@ filetype plugin on
 " PLUGIN CONFIG
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'palenight',
+      \ 'colorscheme': 'onehalfdark',
       \ 'active': {
       \   'left': [
       \     [ 'mode', 'paste' ],
@@ -115,7 +115,8 @@ let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
     \   'javascript': ['prettier', 'eslint'],
     \   'typescript': ['prettier', 'tslint'],
-    \   'python': ['add_blank_lines_for_python_control_statements', 'isort', 'yapf']
+    \   'python': ['add_blank_lines_for_python_control_statements', 'isort', 'yapf'],
+    \   'swift': ['swiftformat']
     \}
 
 " ale fixers run on file write.
@@ -131,17 +132,26 @@ let g:ale_sign_column_always = 1
 " custom ALE warning/error message string
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
+
+" set the width of the NERDTree pane.
+let g:NERDTreeWinSize=40
+
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if has("gui_macvim")
-    set guifont=Hack\ Nerd\ Font:h11
-endif
+" palenight color scheme.
+colorscheme palenight
+
+" SQL highlighting in PHP strings.
+let php_sql_query = 1
 
 set modelines=0         " CVE-2007-2438
+
+" set the git diff window to vertical split.
+set diffopt+=vertical
 
 " Normally we use vim-extensions. If you want true vi-compatibility
 " remove change the following statements
@@ -151,10 +161,22 @@ set backspace=2         " more powerful backspacing
 " Syntax highlighting.
 syntax on
 
+" keep lines limited to 80 characters in width.
+set textwidth=80
+
+" UTF-8 text encoding.
+set encoding=utf-8
+
 set directory=$HOME/.vim/swapfiles//
 
 " Show line numbers.
 set nu
+
+" wildmenu on.
+set wildmenu
+
+" 80 column line widths.
+set textwidth=80
 
 " Turn on auto indenting.
 set autoindent
@@ -178,6 +200,15 @@ set smarttab
 " Set background to dark for lighter colors in terminal.
 set background=dark
 
+" if using GUI (gVim, MacVim), set the font to Hack.
+" otherwise, use the terminal bg color, since terminal already
+" uses the Hack font and Vim background colors don't play nice with Terminal.
+if has("gui")
+    set guifont=Hack\ Nerd\ Font:h11
+else
+    hi Normal guibg=NONE ctermbg=NONE
+endif
+
 " Highlight search results.
 set hlsearch
 
@@ -191,30 +222,22 @@ set ignorecase
 " Auto-save when switching buffers.
 set autowrite
 
-" SQL highlighting in PHP strings.
-let php_sql_query = 1
-
 " set active buffer to bottom one when doing splits.
 set splitbelow
 
 " set active buffer to right one when doing vertical splits.
 set splitright
 
-" palenight color scheme.
-colorscheme palenight
-
-" use the terminal bg color.
-if !has("gui_macvim")
-    hi Normal guibg=NONE ctermbg=NONE
-endif
-
 " don't wrap lines.
 set nowrap
 
+" show statusline.
 set laststatus=2
 
-set noshowmode " don't show mode in statusline, lightline shows it.
+" don't show mode in statusline, lightline shows it.
+set noshowmode
 
+" speed up terminal timeout. lightline mode transitions are laggy without it.
 set ttimeoutlen=50
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -229,15 +252,21 @@ au BufNewFile, BufRead *.md setf markdown
 
 " Turn off showing line numbers for regulat text files
 au FileType text setlocal nonu | IndentLinesDisable
+
 " also turn on spellcheck for text files.
 au FileType text setlocal spell spelllang=en_us
+
+" set apache, html, css, json, typscript, php and sql files to have 2 space tab widths.
+au FileType apache,html,css,json,typescript,javascript,php,sql set ts=2 sw=2
+au FileType python set ts=4
+
 
 " Don't wrap text on SQL files, since table insertions tend to be long.
 au FileType sql set nowrap
 
-
 " Don't write backup file if vim is being called by "crontab -e"
 au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
+
 " Don't write backup file if vim is being called by "chpass"
 au BufWrite /private/etc/pw.* set nowritebackup nobackup
 
@@ -262,20 +291,6 @@ inoremap ( ()<Left>
 
 " auto-insert matching brackets.
 inoremap [ []<Left>
-
-" auto-insert matching single and double quotes.
-inoremap " ""<Left>
-inoremap ' ''<Left>
-
-" set the width of the NERDTree pane.
-let g:NERDTreeWinSize=40
-
-" set apache, html, css, json, typscript, php and sql files to have 2 space tab widths.
-au FileType apache,html,css,json,typescript,php,sql set ts=2 sw=2
-au FileType python set ts=4
-
-" set the git diff window to vertical split.
-set diffopt+=vertical
 
 " % matching of HTML tags
 runtime macros/matchit.vim
