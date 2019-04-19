@@ -1,51 +1,43 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype off                  " required for Vundle
+" Install vim-plug if we don't have it already
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Themes
+Plug 'drewtempelmeyer/palenight.vim' "palenight colorscheme
+Plug 'arcticicestudio/nord-vim' " nord colorscheme
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
-Plugin 'https://github.com/tpope/vim-fugitive' " vim fugitive for git
-Plugin 'itchyny/lightline.vim' " lightline plugin
-Plugin 'https://github.com/itchyny/vim-gitbranch.git' " git plugin
-Plugin 'scrooloose/nerdtree' " NERDTree plugin
-Plugin 'Xuyuanp/nerdtree-git-plugin' " NERDTree Git plugin
-Plugin 'leafgarland/typescript-vim' " Typescript syntax highlighting
-Plugin 'Yggdroot/indentLine' " plugin for indentation guides
-Plugin 'vim-utils/vim-man' " look up man pages without leaving Vim
-Plugin 'junegunn/fzf' " binary for fzf
-Plugin 'junegunn/fzf.vim' " fuzzy file finder
-Plugin 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
-Plugin 'drewtempelmeyer/palenight.vim' "palenight colorscheme
-Plugin 'arcticicestudio/nord-vim' " nord colorscheme
-Plugin 'ryanoasis/vim-devicons' " cool icons for filetypes
-Plugin 'w0rp/ale' " Asynchronous Lint Engine
-Plugin 'tpope/vim-commentary' " Better Vim commenting
-Plugin 'ap/vim-css-color' " CSS color highlighting in Vim
-Plugin 'keith/swift.vim' " Support for Swift syntax highlighting
-Plugin 'sonph/onehalf', {'rtp': 'vim/'}
+" Persistent plugins
+Plug 'tpope/vim-fugitive' " vim fugitive for git
+Plug 'itchyny/lightline.vim' " lightline plugin
+Plug 'scrooloose/nerdtree' " NERDTree plugin
+Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree Git plugin
+Plug 'Yggdroot/indentLine' " plugin for indentation guides
+Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
+Plug 'junegunn/fzf.vim' " fuzzy file finder
+Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
+Plug 'w0rp/ale' " Asynchronous Lint Engine
+Plug 'tpope/vim-commentary' " Better Vim commenting
+Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
+
+" Syntax plugins
+Plug 'keith/swift.vim', { 'for': 'swift' } " Support for Swift syntax highlighting
+Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " CSS color highlighting in Vim
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " Typescript syntax highlighting
+Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
+
 " All Plugins must be added before the following line
-call vundle#end()            " required
 " To ignore plugin indent changes, instead use:
-filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-" Configuration file for vim
+filetype plugin indent on  " required
+call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN CONFIG
