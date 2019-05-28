@@ -22,12 +22,13 @@ Plug 'scrooloose/nerdtree' " NERDTree plugin
 Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree Git plugin
 Plug 'Yggdroot/indentLine' " plugin for indentation guides
 Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
-Plug 'junegunn/fzf.vim' " fuzzy file finder
+Plug 'junegunn/fzf' "fzf binary
+Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
 Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
-
+Plug 'tmsvg/pear-tree' " Auto-maching of parens, brackets, quotes, etc.
 " Syntax plugins
 Plug 'keith/swift.vim', { 'for': 'swift' } " Support for Swift syntax highlighting
 Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " CSS color highlighting in Vim
@@ -47,14 +48,14 @@ let g:lightline = {
       \ 'active': {
       \   'left': [
       \     [ 'mode', 'paste' ],
-      \     [ 'fugitive', 'filename' ]
+      \     [ 'coc#status', 'fugitive', 'filename' ]
       \   ]
       \ },
       \ 'component_function': {
       \   'fugitive': 'LightlineFugitive',
       \   'readonly': 'LightlineReadonly',
-      \   'modified': 'LightlineModified',
-      \   'filename': 'LightlineFilename'
+      \   'filename': 'LightlineFilename',
+      \   'modified': 'LightlineModified'
       \ },
       \ 'separator': {
       \   'left': '',
@@ -77,6 +78,7 @@ function! LightlineModified()
     return ""
   endif
 endfunction
+
 
 function! LightlineReadonly()
   if &filetype == "help"
@@ -273,16 +275,6 @@ map ; :Files<CR>
 
 " Search for visual selection by pressing //.
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
-
-" auto-insert matching braces.
-inoremap {<CR> {<CR>}<Esc>ko
-inoremap { {}<Left>
-
-" auto-insert matching parens.
-inoremap ( ()<Left>
-
-" auto-insert matching brackets.
-inoremap [ []<Left>
 
 " % matching of HTML tags
 runtime macros/matchit.vim
