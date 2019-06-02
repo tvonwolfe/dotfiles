@@ -254,7 +254,6 @@ au FileType text setlocal spell spelllang=en_us
 au FileType apache,html,css,json,typescript,javascript,php,sql set ts=2 sw=2
 au FileType python set ts=4
 
-
 " Don't wrap text on SQL files, since table insertions tend to be long.
 au FileType sql set nowrap
 
