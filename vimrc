@@ -20,15 +20,21 @@ Plug 'tpope/vim-fugitive' " vim fugitive for git
 Plug 'itchyny/lightline.vim' " lightline plugin
 Plug 'scrooloose/nerdtree' " NERDTree plugin
 Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree Git plugin
-Plug 'Yggdroot/indentLine' " plugin for indentation guides
+"Plug 'Yggdroot/indentLine' " plugin for indentation guides
 Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
 Plug 'junegunn/fzf' "fzf binary
 Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
 Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'tpope/vim-commentary' " Better Vim commenting
-Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
-Plug 'tmsvg/pear-tree' " Auto-maching of parens, brackets, quotes, etc.
+
+"Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
+
+" Clojure-specific plugins
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-salve', { 'for': 'clojure' }
+Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
+
 " Syntax plugins
 Plug 'keith/swift.vim', { 'for': 'swift' } " Support for Swift syntax highlighting
 Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " CSS color highlighting in Vim
@@ -104,7 +110,7 @@ function! LightlineFilename()
        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 
-" ale fixers to run while creating a file
+"ale fixers to run while creating a file
 let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
     \   'javascript': ['prettier', 'eslint'],
@@ -126,11 +132,14 @@ let g:ale_sign_column_always = 1
 " custom ALE warning/error message string
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " set the width of the NERDTree pane.
 let g:NERDTreeWinSize=40
 
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+set updatetime=300
+set signcolumn=yes
+set hidden
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
@@ -193,6 +202,8 @@ set smarttab
 
 " Set background to dark for lighter colors in terminal.
 set background=dark
+
+highlight Comment gui=italic
 
 " if using GUI (gVim, MacVim), set the font to Hack.
 " otherwise, use the terminal bg color, since terminal already
@@ -280,3 +291,16 @@ runtime macros/matchit.vim
 
 " Ctrl+\ to show word count and stuff.
 map <C-\> g<C-g>
+
+" auto-insert matching parentheses, brackets and single/double quotes.
+inoremap { {}<Left>
+inoremap {<CR> {<CR>}<Esc>ko
+
+inoremap ( ()<Left>
+inoremap (<CR> (<CR>)<Esc>ko
+
+inoremap [ []<Left>
+inoremap [<CR> [<CR>]<Esc>ko
+
+inoremap ' ''<Left>
+inoremap " ""<Left>
