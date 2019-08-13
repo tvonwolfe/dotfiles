@@ -6,3 +6,4 @@ My personal Vim configuration and plugin files.
 - Create a `swapfiles` directory under the newly cloned `.vim` directory.
 - open Vim.
 - the plugin manager and plugins themselves should auto-install.
+- restart Vim.
