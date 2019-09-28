@@ -21,7 +21,7 @@ Plug 'tpope/vim-fugitive' " vim fugitive for git
 Plug 'itchyny/lightline.vim' " lightline plugin
 Plug 'scrooloose/nerdtree' " NERDTree plugin
 Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree Git plugin
-"Plug 'Yggdroot/indentLine' " plugin for indentation guides
+Plug 'Yggdroot/indentLine' " plugin for indentation guides
 Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
 Plug 'junegunn/fzf' "fzf binary
 Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
@@ -35,6 +35,8 @@ Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-salve', { 'for': 'clojure' }
 Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
+
+Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 
 " Syntax plugins
 Plug 'keith/swift.vim', { 'for': 'swift' } " Support for Swift syntax highlighting
@@ -179,9 +181,6 @@ set nu
 " wildmenu on.
 set wildmenu
 
-" 80 column line widths.
-set textwidth=80
-
 " Turn on auto indenting.
 set autoindent
 
@@ -249,9 +248,6 @@ set ttimeoutlen=50
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILETYPE SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" auto-insert matching angle braces on the same line for html & xml files.
-au FileType html,xml inoremap < <><Left>
 
 " Set markdown syntax highlighting for any .md file
 au BufNewFile, BufRead *.md setf markdown
