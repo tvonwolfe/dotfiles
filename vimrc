@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'drewtempelmeyer/palenight.vim' "palenight colorscheme
 Plug 'arcticicestudio/nord-vim' " nord colorscheme
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'joshdick/onedark.vim' " onedark colorscheme
 
 " Persistent plugins
 Plug 'tpope/vim-fugitive' " vim fugitive for git
@@ -29,8 +30,6 @@ Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'tpope/vim-commentary' " Better Vim commenting
 
-"Plug 'neoclide/coc.nvim', { 'do': { -> coc#util#install() } }
-
 " Clojure-specific plugins
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-salve', { 'for': 'clojure' }
@@ -39,9 +38,12 @@ Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 
 " Syntax plugins
+Plug 'posva/vim-vue' "Syntax highlighting for Vue components.
 Plug 'keith/swift.vim', { 'for': 'swift' } " Support for Swift syntax highlighting
 Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " CSS color highlighting in Vim
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " Typescript syntax highlighting
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " Javascript syntax highlighting
+Plug 'mxw/vim-jsx', { 'for': 'javascript' } " JSX syntax highlighting/indenting
 Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
 
 " All Plugins must be added before the following line
@@ -53,7 +55,7 @@ call plug#end()
 " PLUGIN CONFIG
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'onehalfdark',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [
       \     [ 'mode', 'paste' ],
@@ -118,9 +120,11 @@ let g:ale_fixers = {
     \   '*': ['remove_trailing_lines', 'trim_whitespace'],
     \   'javascript': ['prettier', 'eslint'],
     \   'typescript': ['prettier', 'tslint'],
-    \   'python': ['add_blank_lines_for_python_control_statements', 'isort', 'yapf'],
-    \   'swift': ['swiftformat']
+    \   'vue': ['prettier', 'eslint'],
+    \   'python': ['add_blank_lines_for_python_control_statements', 'isort', 'yapf']
     \}
+
+let g:ale_linters = { 'vue': ['eslint', 'vls'] }
 
 " ale fixers run on file write.
 let g:ale_fix_on_save = 1
@@ -132,6 +136,9 @@ let g:ale_lint_on_insert_leave = 1
 " forth.
 let g:ale_sign_column_always = 1
 
+let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
+
+
 " custom ALE warning/error message string
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -139,6 +146,8 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " set the width of the NERDTree pane.
 let g:NERDTreeWinSize=40
+
+let g:closetag_filetypes='html,xhtml,jsx,vue,xml'
 
 set updatetime=300
 set signcolumn=yes
@@ -148,11 +157,10 @@ set hidden
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" palenight color scheme.
-colorscheme palenight
-
 " SQL highlighting in PHP strings.
 let php_sql_query = 1
+
+set termsize=15x0
 
 set modelines=0         " CVE-2007-2438
 
@@ -177,6 +185,9 @@ set directory=$HOME/.vim/swapfiles//
 
 " Show line numbers.
 set nu
+
+" Show relative line numbers too.
+set relativenumber
 
 " wildmenu on.
 set wildmenu
@@ -203,15 +214,18 @@ set smarttab
 " Set background to dark for lighter colors in terminal.
 set background=dark
 
-highlight Comment gui=italic
+highlight Comment gui=italic cterm=italic
 
 " if using GUI (gVim, MacVim), set the font to Hack.
 " otherwise, use the terminal bg color, since terminal already
 " uses the Hack font and Vim background colors don't play nice with Terminal.
-if has("gui")
-    set guifont=Hack\ Nerd\ Font:h11
+if has("gui_running")
+    set guifont=Hack\ Nerd\ Font
+    set guioptions-=T
+    colorscheme onedark
 else
-    hi Normal guibg=NONE ctermbg=NONE
+    colorscheme palenight
+    hi Normal ctermbg=NONE
 endif
 
 " Highlight search results.
@@ -259,7 +273,7 @@ au FileType text setlocal nonu | IndentLinesDisable
 au FileType text setlocal spell spelllang=en_us
 
 " set apache, html, css, json, typscript, php and sql files to have 2 space tab widths.
-au FileType apache,html,css,json,typescript,javascript,php,sql set ts=2 sw=2
+au FileType apache,html,css,json,typescript,javascript,php,sql,vue set ts=2 sw=2
 au FileType python set ts=4
 
 " Don't wrap text on SQL files, since table insertions tend to be long.
