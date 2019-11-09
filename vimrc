@@ -29,6 +29,7 @@ Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
 Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'tpope/vim-commentary' " Better Vim commenting
+Plug 'jianmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 
 " Clojure-specific plugins
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -302,16 +303,3 @@ runtime macros/matchit.vim
 
 " Ctrl+\ to show word count and stuff.
 map <C-\> g<C-g>
-
-" auto-insert matching parentheses, brackets and single/double quotes.
-inoremap { {}<Left>
-inoremap {<CR> {<CR>}<Esc>ko
-
-inoremap ( ()<Left>
-inoremap (<CR> (<CR>)<Esc>ko
-
-inoremap [ []<Left>
-inoremap [<CR> [<CR>]<Esc>ko
-
-inoremap ' ''<Left>
-inoremap " ""<Left>
