@@ -29,7 +29,7 @@ Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
 Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'tpope/vim-commentary' " Better Vim commenting
-Plug 'jianmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
+Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 
 " Clojure-specific plugins
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
