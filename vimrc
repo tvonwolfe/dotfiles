@@ -161,8 +161,6 @@ set hidden
 " SQL highlighting in PHP strings.
 let php_sql_query = 1
 
-set termsize=15x0
-
 set modelines=0         " CVE-2007-2438
 
 " set the git diff window to vertical split.
