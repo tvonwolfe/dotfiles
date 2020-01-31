@@ -151,14 +151,11 @@ let g:NERDTreeWinSize=40
 
 let g:closetag_filetypes='html,xhtml,jsx,vue,xml'
 
-set updatetime=300
-set signcolumn=yes
-set hidden
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
+
 " if using GUI (gVim, MacVim), set the font to Hack.
 " otherwise, use the terminal bg color, since colorschemes can sometimes not play
 " nice with the terminal emulator.
@@ -168,6 +165,7 @@ if has('gui_running')
     set guifont=Hack\ Nerd\ Font
     set guioptions-=T
     colorscheme gruvbox
+    let g:gruvbox_contrast_dark = 'hard'
     let g:lightline.colorscheme = 'gruvbox'
 else
     let g:lightline.colorscheme = 'onedark'
@@ -175,7 +173,12 @@ else
     hi Normal ctermbg=NONE
 endif
 
-let g:gruvbox_contrast_dark = 'hard'
+set updatetime=300
+set signcolumn=yes
+set hidden
+
+" Indicate more visibly which line the cursor is on.
+set cursorline
 
 " SQL highlighting in PHP strings.
 let php_sql_query = 1
