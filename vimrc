@@ -16,6 +16,7 @@ Plug 'drewtempelmeyer/palenight.vim' "palenight colorscheme
 Plug 'arcticicestudio/nord-vim' " nord colorscheme
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'joshdick/onedark.vim' " onedark colorscheme
+Plug 'morhetz/gruvbox'
 
 " Persistent plugins
 Plug 'tpope/vim-fugitive' " vim fugitive for git
@@ -30,6 +31,7 @@ Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'w0rp/ale' " Asynchronous Lint Engine
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
+Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
 
 " Clojure-specific plugins
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -56,7 +58,6 @@ call plug#end()
 " PLUGIN CONFIG
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [
       \     [ 'mode', 'paste' ],
@@ -157,11 +158,31 @@ set hidden
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" if using GUI (gVim, MacVim), set the font to Hack.
+" otherwise, use the terminal bg color, since colorschemes can sometimes not play
+" nice with the terminal emulator.
+" Also use different colorschemes between GUI Vim and terminal Vim.
+
+if has('gui_running')
+    set guifont=Hack\ Nerd\ Font
+    set guioptions-=T
+    colorscheme gruvbox
+    let g:lightline.colorscheme = 'gruvbox'
+else
+    let g:lightline.colorscheme = 'onedark'
+    colorscheme onedark
+    hi Normal ctermbg=NONE
+endif
+
+let g:gruvbox_contrast_dark = 'hard'
 
 " SQL highlighting in PHP strings.
 let php_sql_query = 1
 
 set modelines=0         " CVE-2007-2438
+
+set cursorline
 
 " set the git diff window to vertical split.
 set diffopt+=vertical
@@ -213,19 +234,8 @@ set smarttab
 " Set background to dark for lighter colors in terminal.
 set background=dark
 
+" Italicize comments
 highlight Comment gui=italic cterm=italic
-
-" if using GUI (gVim, MacVim), set the font to Hack.
-" otherwise, use the terminal bg color, since terminal already
-" uses the Hack font and Vim background colors don't play nice with Terminal.
-if has("gui_running")
-    set guifont=Hack\ Nerd\ Font
-    set guioptions-=T
-    colorscheme onedark
-else
-    colorscheme palenight
-    hi Normal ctermbg=NONE
-endif
 
 " Highlight search results.
 set hlsearch
