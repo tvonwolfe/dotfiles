@@ -28,10 +28,12 @@ Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
 Plug 'junegunn/fzf' "fzf binary
 Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
 Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
-Plug 'w0rp/ale' " Asynchronous Lint Engine
+Plug 'dense-analysis/ale' " Asynchronous Lint Engine
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
+Plug 'ycm-core/YouCompleteMe' " YouCompleteMe for autocompletion.
+
 
 " Clojure-specific plugins
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -40,14 +42,10 @@ Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 
-" Syntax plugins
-Plug 'posva/vim-vue' "Syntax highlighting for Vue components.
-Plug 'keith/swift.vim', { 'for': 'swift' } " Support for Swift syntax highlighting
+" Filetype-sensitive plugins
 Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " CSS color highlighting in Vim
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " Typescript syntax highlighting
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " Javascript syntax highlighting
-Plug 'mxw/vim-jsx', { 'for': 'javascript' } " JSX syntax highlighting/indenting
 Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
+Plug 'sheerun/vim-polyglot' " Multiple language packs for Vim.
 
 " All Plugins must be added before the following line
 " To ignore plugin indent changes, instead use:
@@ -164,12 +162,12 @@ let g:closetag_filetypes='html,xhtml,jsx,vue,xml'
 if has('gui_running')
     set guifont=Hack\ Nerd\ Font
     set guioptions-=T
-    colorscheme gruvbox
-    let g:gruvbox_contrast_dark = 'hard'
-    let g:lightline.colorscheme = 'gruvbox'
+    colorscheme palenight
+    let g:lightline.colorscheme = 'palenight'
 else
-    let g:lightline.colorscheme = 'onedark'
-    colorscheme onedark
+    let g:lightline.colorscheme = 'gruvbox'
+    colorscheme gruvbox
+    " let g:gruvbox_contrast_dark = 'hard'
     hi Normal ctermbg=NONE
 endif
 
@@ -238,7 +236,7 @@ set smarttab
 set background=dark
 
 " Italicize comments
-highlight Comment gui=italic cterm=italic
+highlight Comment gui=italic
 
 " Highlight search results.
 set hlsearch
@@ -270,6 +268,9 @@ set noshowmode
 
 " speed up terminal timeout. lightline mode transitions are laggy without it.
 set ttimeoutlen=50
+
+" use the terminal background color for terminal Vim.
+hi Normal ctermbg=NONE
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILETYPE SETTINGS
