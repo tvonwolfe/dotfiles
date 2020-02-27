@@ -154,23 +154,6 @@ let g:closetag_filetypes='html,xhtml,jsx,vue,xml'
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" if using GUI (gVim, MacVim), set the font to Hack.
-" otherwise, use the terminal bg color, since colorschemes can sometimes not play
-" nice with the terminal emulator.
-" Also use different colorschemes between GUI Vim and terminal Vim.
-
-if has('gui_running')
-    set guifont=Hack\ Nerd\ Font
-    set guioptions-=T
-    colorscheme palenight
-    let g:lightline.colorscheme = 'palenight'
-else
-    let g:lightline.colorscheme = 'gruvbox'
-    colorscheme gruvbox
-    " let g:gruvbox_contrast_dark = 'hard'
-    hi Normal ctermbg=NONE
-endif
-
 set updatetime=300
 set signcolumn=yes
 set hidden
@@ -269,8 +252,20 @@ set noshowmode
 " speed up terminal timeout. lightline mode transitions are laggy without it.
 set ttimeoutlen=50
 
-" use the terminal background color for terminal Vim.
-hi Normal ctermbg=NONE
+" if using GUI (gVim, MacVim), set the font to Hack.
+" otherwise, use the terminal bg color, since colorschemes can sometimes not play
+" nice with the terminal emulator.
+" Also use different colorschemes between GUI Vim and terminal Vim.
+if has('gui_running')
+    set guifont=Hack\ Nerd\ Font
+    set guioptions-=T
+    colorscheme palenight
+    let g:lightline.colorscheme = 'palenight'
+else
+    let g:lightline.colorscheme = 'gruvbox'
+    colorscheme gruvbox
+    hi Normal ctermbg=NONE
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILETYPE SETTINGS
