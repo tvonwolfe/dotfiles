@@ -252,18 +252,34 @@ set noshowmode
 " speed up terminal timeout. lightline mode transitions are laggy without it.
 set ttimeoutlen=50
 
-" if using GUI (gVim, MacVim), set the font to Hack.
+" if using GUI (GVIM, MacVim), set the font to Hack.
 " otherwise, use the terminal bg color, since colorschemes can sometimes not play
 " nice with the terminal emulator.
-" Also use different colorschemes between GUI Vim and terminal Vim.
+" Also use different colorschemes between GUI Vim and terminal Vim,
+" and use different colorschemes between OSes.
+
 if has('gui_running')
-    set guifont=Hack\ Nerd\ Font
     set guioptions-=T
-    colorscheme palenight
-    let g:lightline.colorscheme = 'palenight'
+    set guioptions-=m
+    if has('mac')
+        set guifont=Hack\ Nerd\ Font
+        colorscheme palenight
+        let g:lightline.colorscheme = 'palenight'
+    elseif has('win32')
+        set guifont=Hack:h10
+        colorscheme onedark
+        let g:lightline.colorscheme = 'onedark'
+    else " Linux
+        set guifont=Hack
+        colorscheme gruvbox
+        let g:lightline.colorscheme = 'gruvbox'
+        let g:gruvbox_contrast_dark = 'medium'
+    endif
 else
-    let g:lightline.colorscheme = 'gruvbox'
+    " Use gruvbox for terminal Vim.
     colorscheme gruvbox
+    let g:lightline.colorscheme = 'gruvbox'
+        let g:gruvbox_contrast_dark = 'medium'
     hi Normal ctermbg=NONE
 endif
 
