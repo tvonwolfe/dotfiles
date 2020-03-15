@@ -270,7 +270,7 @@ if has('gui_running')
         colorscheme onedark
         let g:lightline.colorscheme = 'onedark'
     else " Linux
-        set guifont=Hack
+        set guifont=Hack\ 9 "
         colorscheme gruvbox
         let g:lightline.colorscheme = 'gruvbox'
         let g:gruvbox_contrast_dark = 'medium'
