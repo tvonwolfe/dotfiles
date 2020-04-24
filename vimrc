@@ -17,6 +17,7 @@ Plug 'arcticicestudio/nord-vim' " nord colorscheme
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'joshdick/onedark.vim' " onedark colorscheme
 Plug 'morhetz/gruvbox'
+Plug 'mhartington/oceanic-next'
 
 " Persistent plugins
 Plug 'tpope/vim-fugitive' " vim fugitive for git
@@ -28,7 +29,6 @@ Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
 Plug 'junegunn/fzf' "fzf binary
 Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
 Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
-Plug 'dense-analysis/ale' " Asynchronous Lint Engine
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
@@ -115,35 +115,6 @@ function! LightlineFilename()
        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 
-"ale fixers to run while creating a file
-let g:ale_fixers = {
-    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-    \   'javascript': ['prettier', 'eslint'],
-    \   'typescript': ['prettier', 'tslint'],
-    \   'vue': ['prettier', 'eslint'],
-    \   'python': ['add_blank_lines_for_python_control_statements', 'isort', 'yapf']
-    \}
-
-let g:ale_linters = { 'vue': ['eslint', 'vls'] }
-
-" ale fixers run on file write.
-let g:ale_fix_on_save = 1
-
-" lint when leaving insert mode
-let g:ale_lint_on_insert_leave = 1
-
-" always show the ALE gutter, so the window doesn't constantly shift back and
-" forth.
-let g:ale_sign_column_always = 1
-
-let g:ale_linter_aliases = {'vue': ['vue', 'javascript']}
-
-
-" custom ALE warning/error message string
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
 " set the width of the NERDTree pane.
 let g:NERDTreeWinSize=40
 
@@ -218,9 +189,6 @@ set smarttab
 " Set background to dark for lighter colors in terminal.
 set background=dark
 
-" Italicize comments
-highlight Comment gui=italic
-
 " Highlight search results.
 set hlsearch
 
@@ -270,18 +238,18 @@ if has('gui_running')
         colorscheme onedark
         let g:lightline.colorscheme = 'onedark'
     else " Linux
-        set guifont=Hack\ 9 "
-        colorscheme gruvbox
-        let g:lightline.colorscheme = 'gruvbox'
-        let g:gruvbox_contrast_dark = 'medium'
+        set guifont=Source\ Code\ Pro\ Regular\ 9 "
+        colorscheme nord
+        let g:lightline.colorscheme = 'nord'
     endif
 else
-    " Use gruvbox for terminal Vim.
-    colorscheme gruvbox
-    let g:lightline.colorscheme = 'gruvbox'
-        let g:gruvbox_contrast_dark = 'medium'
-    hi Normal ctermbg=NONE
+    " Terminal Vim colorscheme settings.
+    colorscheme nord
+    let g:lightline.colorscheme = 'nord'
 endif
+
+" Italicize comments
+highlight Comment gui=italic
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FILETYPE SETTINGS
@@ -315,8 +283,8 @@ au BufWrite /private/etc/pw.* set nowritebackup nobackup
 " open NERDTree window with Ctrl+n
 map <C-n> :NERDTreeToggle<CR>
 
-" open a fzf search with a ;
-map ; :Files<CR>
+" open a fzf search with Ctrl+P
+map <C-p> :Files<CR>
 
 " Search for visual selection by pressing //.
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
