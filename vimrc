@@ -16,7 +16,7 @@ Plug 'drewtempelmeyer/palenight.vim' "palenight colorscheme
 Plug 'arcticicestudio/nord-vim' " nord colorscheme
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'joshdick/onedark.vim' " onedark colorscheme
-Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox' 
 Plug 'mhartington/oceanic-next'
 
 " Persistent plugins
@@ -217,15 +217,10 @@ set laststatus=2
 " don't show mode in statusline, lightline shows it.
 set noshowmode
 
-" speed up terminal timeout. lightline mode transitions are laggy without it.
+" speed up terminal timeout. lightline mode transitions can be laggy without it.
 set ttimeoutlen=50
 
-" if using GUI (GVIM, MacVim), set the font to Hack.
-" otherwise, use the terminal bg color, since colorschemes can sometimes not play
-" nice with the terminal emulator.
-" Also use different colorschemes between GUI Vim and terminal Vim,
-" and use different colorschemes between OSes.
-
+"Different colorschemes for GVim and regular Vim on different systems.
 if has('gui_running')
     set guioptions-=T
     set guioptions-=m
@@ -244,11 +239,12 @@ if has('gui_running')
     endif
 else
     " Terminal Vim colorscheme settings.
-    colorscheme nord
-    let g:lightline.colorscheme = 'nord'
+    colorscheme gruvbox
+    let g:lightline.colorscheme = 'gruvbox'
+    let g:gruvbox_contrast_dark = 'hard'
 endif
 
-" Italicize comments
+" Italicize comments in GVim
 highlight Comment gui=italic
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -261,15 +257,12 @@ au BufNewFile, BufRead *.md setf markdown
 " Turn off showing line numbers for regulat text files
 au FileType text setlocal nonu | IndentLinesDisable
 
-" also turn on spellcheck for text files.
-au FileType text setlocal spell spelllang=en_us
+" also turn on spellcheck for text and markdown files.
+au FileType text,markdown setlocal spell spelllang=en_us
 
-" set apache, html, css, json, typscript, php and sql files to have 2 space tab widths.
+" set various webdev-related files to 2 space indentation widths.
 au FileType apache,html,css,json,typescript,javascript,php,sql,vue set ts=2 sw=2
 au FileType python set ts=4
-
-" Don't wrap text on SQL files, since table insertions tend to be long.
-au FileType sql set nowrap
 
 " Don't write backup file if vim is being called by "crontab -e"
 au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
