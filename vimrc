@@ -32,6 +32,7 @@ Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
+Plug 'tpope/vim-repeat' " enable repetition of plugin maps with '.'
 Plug 'ycm-core/YouCompleteMe' " YouCompleteMe for autocompletion.
 
 
