@@ -118,7 +118,7 @@ endfunction
 " set the width of the NERDTree pane.
 let g:NERDTreeWinSize=40
 
-let g:closetag_filetypes='html,xhtml,jsx,vue,xml'
+let g:closetag_filetypes='html,xhtml,jsx,vue,xml,javascript'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -199,6 +199,9 @@ set incsearch
 " ignore case when searching
 set ignorecase
 
+" Don't ignore case when using caps.
+set smartcase 
+
 " Auto-save when switching buffers.
 set autowrite
 
@@ -220,10 +223,7 @@ set noshowmode
 " speed up terminal timeout. lightline mode transitions are laggy without it.
 set ttimeoutlen=50
 
-" if using GUI (GVIM, MacVim), set the font to Hack.
-" otherwise, use the terminal bg color, since colorschemes can sometimes not play
-" nice with the terminal emulator.
-" Also use different colorschemes between GUI Vim and terminal Vim,
+" Use different colorschemes between GUI Vim and terminal Vim,
 " and use different colorschemes between OSes.
 
 if has('gui_running')
@@ -244,8 +244,8 @@ if has('gui_running')
     endif
 else
     " Terminal Vim colorscheme settings.
-    colorscheme nord
-    let g:lightline.colorscheme = 'nord'
+    colorscheme gruvbox
+    let g:lightline.colorscheme = 'gruvbox'
 endif
 
 " Italicize comments
@@ -265,8 +265,8 @@ au FileType text setlocal nonu | IndentLinesDisable
 au FileType text setlocal spell spelllang=en_us
 
 " set apache, html, css, json, typscript, php and sql files to have 2 space tab widths.
-au FileType apache,html,css,json,typescript,javascript,php,sql,vue set ts=2 sw=2
 au FileType python set ts=4
+au FileType apache,html,css,json,typescript,javascript,php,sql,vue set ts=2 sw=2
 
 " Don't wrap text on SQL files, since table insertions tend to be long.
 au FileType sql set nowrap
