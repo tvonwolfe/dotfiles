@@ -237,7 +237,7 @@ if has('gui_running')
         colorscheme onedark
         let g:lightline.colorscheme = 'onedark'
     else " Linux
-        set guifont=Source\ Code\ Pro\ Regular\ 9 "
+        set guifont=Source\ Code\ Pro\ Regular\ 11 "
         colorscheme nord
         let g:lightline.colorscheme = 'nord'
     endif
