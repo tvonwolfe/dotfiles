@@ -20,20 +20,24 @@ Plug 'morhetz/gruvbox'
 Plug 'mhartington/oceanic-next'
 
 " Persistent plugins
-Plug 'tpope/vim-fugitive' " vim fugitive for git
 Plug 'itchyny/lightline.vim' " lightline plugin
 Plug 'scrooloose/nerdtree' " NERDTree plugin
 Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree Git plugin
 Plug 'Yggdroot/indentLine' " plugin for indentation guides
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Vim code-completion engine that uses language servers.
+Plug 'ervandew/supertab' " tab-completion for coc.nvim
 Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
 Plug 'junegunn/fzf' "fzf binary
 Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
 Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
-Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
 Plug 'tpope/vim-repeat' " enable repetition of plugin maps with '.'
-Plug 'ycm-core/YouCompleteMe' " YouCompleteMe for autocompletion.
+Plug 'tpope/vim-commentary' " Better Vim commenting
+Plug 'tpope/vim-fugitive' " vim fugitive for git
+Plug 'tpope/vim-rails' " Ruby on Rails plugin
+Plug 'ludovicchabant/vim-gutentags' " gutentags for tagfile generation
+Plug 'voldikss/vim-floaterm'
 
 
 " Clojure-specific plugins
@@ -56,11 +60,13 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN CONFIG
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:floaterm_autoclose = 2 " always auto-close floating terminal
+
 let g:lightline = {
       \ 'active': {
       \   'left': [
       \     [ 'mode', 'paste' ],
-      \     [ 'coc#status', 'fugitive', 'filename' ]
+      \     [ 'fugitive', 'filename' ]
       \   ]
       \ },
       \ 'component_function': {
@@ -68,14 +74,6 @@ let g:lightline = {
       \   'readonly': 'LightlineReadonly',
       \   'filename': 'LightlineFilename',
       \   'modified': 'LightlineModified'
-      \ },
-      \ 'separator': {
-      \   'left': '',
-      \   'right': ''
-      \ },
-      \ 'subseparator': {
-      \   'left': '',
-      \   'right': ''
       \ }
     \ }
 
@@ -103,11 +101,8 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineFugitive()
-  if exists("*fugitive#head")
-    let branch = fugitive#head()
-    return branch !=# '' ? ' '.branch : ''
-  endif
-  return ''
+  let branch = fugitive#head()
+  return branch !=# '' ? ' '.branch : ''
 endfunction
 
 function! LightlineFilename()
@@ -119,8 +114,9 @@ endfunction
 " set the width of the NERDTree pane.
 let g:NERDTreeWinSize=40
 
-let g:closetag_filetypes='html,xhtml,jsx,vue,xml,javascript'
+let g:closetag_filetypes='html,xhtml,jsx,vue,xml,javascript,javascriptreact,eruby'
 
+let g:SuperTabDefaultCompletionType = "<C-n>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
@@ -224,31 +220,24 @@ set noshowmode
 " speed up terminal timeout. lightline mode transitions can be laggy without it.
 set ttimeoutlen=50
 
-"Different colorschemes for GVim and regular Vim on different systems.
+" colorscheme settings
+colorscheme nord
+let g:lightline.colorscheme = 'nord'
+
 if has('gui_running')
+    " only set these if a GUI is running.
     set guioptions-=T
     set guioptions-=m
-    if has('mac')
-        set guifont=Hack\ Nerd\ Font
-        colorscheme palenight
-        let g:lightline.colorscheme = 'palenight'
-    elseif has('win32')
-        set guifont=Hack:h10
-        colorscheme onedark
-        let g:lightline.colorscheme = 'onedark'
-    else " Linux
-        set guifont=Source\ Code\ Pro\ Regular\ 11 "
-        colorscheme nord
-        let g:lightline.colorscheme = 'nord'
-    endif
+    set guifont=SauceCodePro\ Nerd\ Font\ Mono\ 11 
 else
-    " Terminal Vim colorscheme settings.
-    colorscheme gruvbox
-    let g:lightline.colorscheme = 'gruvbox'
-    let g:gruvbox_contrast_dark = 'hard'
+    if !has('mac')
+        " don't turn on termguicolors if we're on a Mac; Terminal.app gets wonky
+        " with this on.
+        set termguicolors
+    endif
 endif
 
-" Italicize comments in GVim
+" Italicize comments
 highlight Comment gui=italic
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -265,7 +254,7 @@ au FileType text setlocal nonu | IndentLinesDisable
 au FileType text,markdown setlocal spell spelllang=en_us
 
 " set various webdev-related files to 2 space indentation widths.
-au FileType apache,html,css,json,typescript,javascript,php,sql,vue set ts=2 sw=2
+au FileType apache,html,css,json,typescript,javascript,javascriptreact,php,sql,vue,ruby set ts=2 sw=2
 au FileType python set ts=4
 au FileType apache,html,css,json,typescript,javascript,php,sql,vue set ts=2 sw=2
 
@@ -290,5 +279,5 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 " % matching of HTML tags
 runtime macros/matchit.vim
 
-" Ctrl+\ to show word count and stuff.
-map <C-\> g<C-g>
+" Ctrl+\ to open a terminal. 
+map <C-\> :FloatermToggle<CR>
