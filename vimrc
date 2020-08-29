@@ -67,6 +67,11 @@ let g:lightline = {
       \   'left': [
       \     [ 'mode', 'paste' ],
       \     [ 'fugitive', 'filename' ]
+      \   ],
+      \   'right': [
+      \     [ 'lineinfo' ],
+      \     [ 'percent' ],
+      \     [ 'filetype' ]
       \   ]
       \ },
       \ 'component_function': {
