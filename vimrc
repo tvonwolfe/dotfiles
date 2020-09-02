@@ -233,7 +233,13 @@ if has('gui_running')
     " only set these if a GUI is running.
     set guioptions-=T
     set guioptions-=m
-    set guifont=SauceCodePro\ Nerd\ Font\ Mono\ 11 
+    if has('mac') 
+      if !has('nvim')
+        set guifont=SauceCodePro\ Nerd\ Font\ Mono:h12 
+      endif
+    else
+      set guifont=SauceCodePro\ Nerd\ Font\ Mono\ 11 
+    endif
 else
     if !has('mac')
         " don't turn on termguicolors if we're on a Mac; Terminal.app gets wonky
