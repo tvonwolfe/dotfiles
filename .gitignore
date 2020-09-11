@@ -5,3 +5,5 @@ plugged/
 swapfiles/
 autoload/
 tags
+ctagscache/*
+!ctagscache/.gitkeep

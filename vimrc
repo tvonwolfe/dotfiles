@@ -21,24 +21,26 @@ Plug 'mhartington/oceanic-next'
 
 " Persistent plugins
 Plug 'itchyny/lightline.vim' " lightline plugin
-Plug 'scrooloose/nerdtree' " NERDTree plugin
-Plug 'Xuyuanp/nerdtree-git-plugin' " NERDTree Git plugin
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " NERDTree plugin
+Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'} " NERDTree Git plugin
 Plug 'Yggdroot/indentLine' " plugin for indentation guides
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Vim code-completion engine that uses language servers.
 Plug 'ervandew/supertab' " tab-completion for coc.nvim
 Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
-Plug 'junegunn/fzf' "fzf binary
-Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
+Plug 'junegunn/fzf', {'on': 'Files'} "fzf binary
+Plug 'junegunn/fzf.vim', {'on': 'Files'} " fuzzy file finder plugin
 Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
 Plug 'tpope/vim-repeat' " enable repetition of plugin maps with '.'
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'tpope/vim-fugitive' " vim fugitive for git
-Plug 'tpope/vim-rails' " Ruby on Rails plugin
+Plug 'sheerun/vim-polyglot' " Multiple language packs for Vim.
 Plug 'ludovicchabant/vim-gutentags' " gutentags for tagfile generation
-Plug 'voldikss/vim-floaterm'
+Plug 'voldikss/vim-floaterm' " Floating terminal window
 
+" Ruby-specific plugins
+Plug 'tpope/vim-rails', {'for': [ 'ruby', 'eruby' ]} " Ruby on Rails plugin
 
 " Clojure-specific plugins
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -47,10 +49,11 @@ Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 
-" Filetype-sensitive plugins
+" CSS-specific plugins
 Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " CSS color highlighting in Vim
+
+" SQL-specific plugins
 Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
-Plug 'sheerun/vim-polyglot' " Multiple language packs for Vim.
 
 " All Plugins must be added before the following line
 " To ignore plugin indent changes, instead use:
@@ -61,6 +64,12 @@ call plug#end()
 " PLUGIN CONFIG
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:floaterm_autoclose = 2 " always auto-close floating terminal
+
+let g:gutentags_exclude_project_root = ['/usr/local', '~/.vim']
+
+let g:gutentags_cache_dir = '~/.vim/ctagscache/'
+
+let g:gutentags_project_root = ['node_modules', 'Makefile', 'Gemfile', 'pom.xml']
 
 let g:lightline = {
       \ 'active': {
@@ -131,6 +140,8 @@ set updatetime=300
 set signcolumn=yes
 set hidden
 
+filetype plugin on
+
 " Indicate more visibly which line the cursor is on.
 set cursorline
 
@@ -144,8 +155,6 @@ set cursorline
 " set the git diff window to vertical split.
 set diffopt+=vertical
 
-" Normally we use vim-extensions. If you want true vi-compatibility
-" remove change the following statements
 set nocompatible        " Use Vim defaults instead of 100% vi compatibility
 set backspace=2         " more powerful backspacing
 
@@ -154,6 +163,8 @@ syntax on
 
 " keep lines limited to 80 characters in width.
 set textwidth=80
+
+set formatoptions=tcqjron
 
 " UTF-8 text encoding.
 set encoding=utf-8
@@ -175,11 +186,11 @@ set autoindent
 " Turn on smart indenting.
 set smartindent
 
-" Set indentation to 4 spaces.
-set shiftwidth=4
+" Set default indentation
+set shiftwidth=2
 
-" Set tabs to display as 4 spaces.
-set tabstop=4
+" Set default tabstop.
+set tabstop=2
 
 " Insert spaces rather than a tab character.
 set expandtab
@@ -251,23 +262,8 @@ endif
 " Italicize comments
 highlight Comment gui=italic
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FILETYPE SETTINGS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Set markdown syntax highlighting for any .md file
 au BufNewFile, BufRead *.md setf markdown
-
-" Turn off showing line numbers for regulat text files
-au FileType text setlocal nonu | IndentLinesDisable
-
-" also turn on spellcheck for text and markdown files.
-au FileType text,markdown setlocal spell spelllang=en_us
-
-" set various webdev-related files to 2 space indentation widths.
-au FileType apache,html,css,json,typescript,javascript,javascriptreact,php,sql,vue,ruby set ts=2 sw=2
-au FileType python set ts=4
-au FileType apache,html,css,json,typescript,javascript,php,sql,vue set ts=2 sw=2
 
 " Don't write backup file if vim is being called by "crontab -e"
 au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
