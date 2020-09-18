@@ -1,9 +1,4 @@
-coc-settings.json
-colors/
 .DS_Store
-plugged/
-swapfiles/
-autoload/
+node_modules/
 tags
-ctagscache/*
-!ctagscache/.gitkeep
+coc/

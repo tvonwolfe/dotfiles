@@ -2,19 +2,19 @@
 " PLUGINS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Install vim-plug if we don't have it already
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  silent !mkdir ~/.vim/swapfiles
+  silent !mkdir ~/.config/nvim/swapfiles
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Themes
 Plug 'drewtempelmeyer/palenight.vim' "palenight colorscheme
 Plug 'arcticicestudio/nord-vim' " nord colorscheme
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'sonph/onehalf', {'rtp': '.config/nvim/'}
 Plug 'joshdick/onedark.vim' " onedark colorscheme
 Plug 'morhetz/gruvbox' 
 Plug 'mhartington/oceanic-next'
@@ -25,10 +25,9 @@ Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " NERDTree plugin
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'} " NERDTree Git plugin
 Plug 'Yggdroot/indentLine' " plugin for indentation guides
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " Vim code-completion engine that uses language servers.
-Plug 'ervandew/supertab' " tab-completion for coc.nvim
 Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
-Plug 'junegunn/fzf', {'on': 'Files'} "fzf binary
-Plug 'junegunn/fzf.vim', {'on': 'Files'} " fuzzy file finder plugin
+Plug 'junegunn/fzf', {'do': { -> fzf#install() }} "fzf binary
+Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
 Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
@@ -65,11 +64,18 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:floaterm_autoclose = 2 " always auto-close floating terminal
 
-let g:gutentags_exclude_project_root = ['/usr/local', '~/.vim']
+let g:gutentags_exclude_project_root = ['/usr/local', '~/.config/nvim']
 
-let g:gutentags_cache_dir = '~/.vim/ctagscache/'
+let g:gutentags_ctags_exclude = ['bundle.js', '.gif', '.jpg', '.ico', 
+      \'.zip,', '.map', '.tar.gz', '.pdf', 'dist', 'bin', 'node_modules',
+      \ 'output', 'docs']
 
-let g:gutentags_project_root = ['node_modules', 'Makefile', 'Gemfile', 'pom.xml']
+let g:gutentags_cache_dir = '~/.config/nvim/ctagscache/'
+
+let g:gutentags_project_root = ['node_modules', 'Makefile', 'Gemfile', 'pom.xml', 'package.json']
+
+let g:gutentags_ctags_extra_args = ['--tag-relative=yes',  '--fields=+ailmnS']
+
 
 let g:lightline = {
       \ 'active': {
@@ -103,7 +109,6 @@ function! LightlineModified()
   endif
 endfunction
 
-
 function! LightlineReadonly()
   if &filetype == "help"
     return ""
@@ -128,9 +133,7 @@ endfunction
 " set the width of the NERDTree pane.
 let g:NERDTreeWinSize=40
 
-let g:closetag_filetypes='html,xhtml,jsx,vue,xml,javascript,javascriptreact,eruby'
-
-let g:SuperTabDefaultCompletionType = "<C-n>"
+let g:closetag_filetypes='html,xhtml,jsx,vue,xml,javascript,javascriptreact,eruby,liquid'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
@@ -169,7 +172,7 @@ set formatoptions=tcqjron
 " UTF-8 text encoding.
 set encoding=utf-8
 
-set directory=$HOME/.vim/swapfiles//
+set directory=$HOME/.config/nvim/swapfiles//
 
 " Show line numbers.
 set nu
@@ -260,7 +263,7 @@ else
 endif
 
 " Italicize comments
-highlight Comment gui=italic
+highlight Comment gui=italic cterm=italic
 
 " Set markdown syntax highlighting for any .md file
 au BufNewFile, BufRead *.md setf markdown
@@ -277,8 +280,65 @@ au BufWrite /private/etc/pw.* set nowritebackup nobackup
 " open NERDTree window with Ctrl+n
 map <C-n> :NERDTreeToggle<CR>
 
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+nmap <leader>rn <Plug>(coc-rename)
+
+" If we're in a git repository, only search for files not being ignored.
+" Otherwise, fall back to a regular file search.
+function! GFilesFallback()
+  let output = system('git rev-parse --show-toplevel')
+  let prefix = get(g:, 'fzf_command_prefix', '')
+  if v:shell_error == 0
+    exec "normal :" . prefix . "GFiles\<CR>"
+  else
+    exec "normal :" . prefix . "Files\<CR>"
+  endif
+  return 0
+endfunction
+
 " open a fzf search with Ctrl+P
-map <C-p> :Files<CR>
+nnoremap <C-p> :call GFilesFallback()<CR>
 
 " Search for visual selection by pressing //.
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
@@ -286,5 +346,5 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 " % matching of HTML tags
 runtime macros/matchit.vim
 
-" Ctrl+\ to open a terminal. 
+" Ctrl+\ to open a terminal window. 
 map <C-\> :FloatermToggle<CR>

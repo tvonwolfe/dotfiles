@@ -1,2 +1,2 @@
 " Adjust tabstop and shiftwidth.
-set ts=4 sw=4
+setlocal ts=4 sw=4
