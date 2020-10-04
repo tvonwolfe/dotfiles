@@ -1,3 +1,3 @@
-# .config
+# .vim
 
-My personal configuration files.
+My personal vim/nvim configuration files.
