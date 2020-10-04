@@ -1,5 +1,0 @@
-plugged/
-swapfiles/
-autoload/
-ctagscache/*
-!ctagscache/.gitkeep
