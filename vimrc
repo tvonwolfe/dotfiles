@@ -157,6 +157,7 @@ let g:closetag_filetypes='html,xhtml,jsx,vue,xml,javascript,javascriptreact,erub
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+set printheader=\ 
 set updatetime=300
 set signcolumn=yes
 set hidden
@@ -194,7 +195,7 @@ syntax on
 " keep lines limited to 80 characters in width.
 set textwidth=80
 
-set formatoptions=tcqjron
+set formatoptions=tcqjronw
 
 " UTF-8 text encoding.
 set encoding=utf-8
