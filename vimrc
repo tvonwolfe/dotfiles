@@ -28,9 +28,9 @@ Plug 'mhartington/oceanic-next'
 " Universal plugins
 Plug 'itchyny/lightline.vim' " lightline plugin
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " NERDTree plugin
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'} " NERDTree Git plugin
+Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'} " file tree
 Plug 'Yggdroot/indentLine' " plugin for indentation guides
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Vim code-completion engine that uses language servers.
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " code-completion via LSP.
 Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }} "fzf binary
 Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
@@ -43,9 +43,8 @@ Plug 'tpope/vim-fugitive' " vim fugitive for git
 Plug 'sheerun/vim-polyglot' " Multiple language packs for Vim.
 Plug 'ludovicchabant/vim-gutentags' " gutentags for tagfile generation
 Plug 'voldikss/vim-floaterm' " Floating terminal window
-" Plug 'tpope/vim-endwise' " Adds 'endif', 'endfunction', etc. in the appropriate filetypes.
 
-Plug 'tpope/vim-liquid', { 'for': 'liquid' } " runtime files for Liquid templates.
+Plug 'tpope/vim-liquid', { 'for': 'liquid' } " plugin for liquid templates.
 
 " Ruby-specific plugins
 Plug 'tpope/vim-rails' " Ruby on Rails plugin
@@ -58,7 +57,7 @@ Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 
 " CSS-specific plugins
-Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " CSS color highlighting in Vim
+Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " highlight colors.
 
 " SQL-specific plugins
 Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
@@ -81,7 +80,8 @@ let g:gutentags_ctags_exclude = ['bundle.js', '.gif', '.jpg', '.ico',
 
 let g:gutentags_cache_dir = '~/.vim/ctagscache/'
 
-let g:gutentags_project_root = ['node_modules', 'Makefile', 'Gemfile', 'pom.xml', 'package.json']
+let g:gutentags_project_root = ['node_modules', 'Makefile', 'Gemfile', 
+      \ 'pom.xml', 'package.json']
 
 let g:gutentags_ctags_extra_args = ['--tag-relative=yes',  '--fields=+ailmnS']
 
@@ -135,8 +135,9 @@ endfunction
 
 function! LightlineFilename()
   return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-       \ ('' != expand('%:t') ? WebDevIconsGetFileTypeSymbol() . ' ' . expand('%:t') : '[No Name]') .
-       \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+       \ ('' != expand('%:t') ? WebDevIconsGetFileTypeSymbol() . ' ' . 
+       \ expand('%:t') : '[No Name]') . ('' != LightlineModified() ? 
+       \ ' ' . LightlineModified() : '')
 endfunction
 
 " set the width of the NERDTree pane.
@@ -149,9 +150,10 @@ let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 
 " Ignore certain files in NERDTree
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', '\.idea$[[dir]]', '\.sass-cache$']
+let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', 
+      \ '\.idea$[[dir]]', '\.sass-cache$']
 
-let g:closetag_filetypes='html,xhtml,jsx,vue,xml,javascript,javascriptreact,eruby,liquid'
+let g:closetag_filetypes='html,xhtml,jsx,xml,javascript,javascriptreact,eruby,liquid'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
@@ -185,7 +187,10 @@ set cursorline
 " set the git diff window to vertical split.
 set diffopt+=vertical
 
-set nocompatible        " Use Vim defaults instead of 100% vi compatibility
+if !g:is_nvim 
+  set nocompatible        " Use Vim defaults instead of 100% vi compatibility
+endif
+
 set backspace=indent,eol,start         " proper backspacing
 
 " Syntax highlighting.
