@@ -54,6 +54,9 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-salve', { 'for': 'clojure' }
 Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 
+" JSON-specific plugins 
+Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' }
+
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 
 " CSS-specific plugins
@@ -395,3 +398,15 @@ runtime macros/matchit.vim
 
 " Ctrl+\ to open a terminal window. 
 map <C-\> :FloatermToggle<CR>
+
+" Yank into system clipboard.
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+yg_
+nnoremap <leader>yy "+yy
+
+" Paste from system clipboard.
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+nnoremap <leader>P "+P
+
