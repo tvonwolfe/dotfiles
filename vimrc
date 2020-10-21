@@ -56,6 +56,7 @@ Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
 
 " JSON-specific plugins 
 Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' }
+Plug 'tpope/vim-jdaddy', { 'for': 'json' }
 
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 
