@@ -62,6 +62,7 @@ Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 
 " CSS-specific plugins
 Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " highlight colors.
+Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " Syntax highlighting for CSS/SCSS
 
 " SQL-specific plugins
 Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
@@ -411,3 +412,5 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
+" close all buffers without exiting
+command! Close bufdo bd
