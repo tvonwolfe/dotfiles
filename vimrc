@@ -414,3 +414,4 @@ nnoremap <leader>P "+P
 
 " close all buffers without exiting
 command! Close bufdo bd
+nnoremap <leader>c :Close<CR>
