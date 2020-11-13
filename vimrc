@@ -165,6 +165,7 @@ let g:closetag_filetypes='html,xhtml,jsx,xml,javascript,javascriptreact,eruby,li
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set printheader=\ 
+set printoptions=paper:letter
 set updatetime=300
 set signcolumn=yes
 set hidden
