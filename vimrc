@@ -25,7 +25,7 @@ Plug 'joshdick/onedark.vim' " onedark colorscheme
 Plug 'morhetz/gruvbox' 
 Plug 'mhartington/oceanic-next'
 
-" Universal plugins
+" Plugins
 Plug 'itchyny/lightline.vim' " lightline plugin
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " NERDTree plugin
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'} " file tree
@@ -43,29 +43,26 @@ Plug 'tpope/vim-fugitive' " vim fugitive for git
 Plug 'sheerun/vim-polyglot' " Multiple language packs for Vim.
 Plug 'ludovicchabant/vim-gutentags' " gutentags for tagfile generation
 Plug 'voldikss/vim-floaterm' " Floating terminal window
-
 Plug 'tpope/vim-liquid', { 'for': 'liquid' } " plugin for liquid templates.
-
-" Ruby-specific plugins
 Plug 'tpope/vim-rails' " Ruby on Rails plugin
-
-" Clojure-specific plugins
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-salve', { 'for': 'clojure' }
 Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
-
-" JSON-specific plugins 
 Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' }
 Plug 'tpope/vim-jdaddy', { 'for': 'json' }
-
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
-
-" CSS-specific plugins
 Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " highlight colors.
 Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " Syntax highlighting for CSS/SCSS
-
-" SQL-specific plugins
 Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
+Plug 'glippi/yarn-vim' " Yarn integration in Vim.
+
+
+" Neovim-only plugins
+if g:is_nvim
+  " treesitter requires a more recent nightly version of Neovim right now, so 
+  " until the official release will work with this, leaving commented out.
+  " Plug 'nvim-treesitter/nvim-treesitter' " Better syntax highlighting
+endif
 
 " All Plugins must be added before the following line
 " To ignore plugin indent changes, instead use:
@@ -76,6 +73,8 @@ call plug#end()
 " PLUGIN CONFIG
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:floaterm_autoclose = 2 " always auto-close floating terminal
+
+let g:indentLine_char = '│'
 
 let g:gutentags_exclude_project_root = ['/usr/local', '~/.vim']
 
