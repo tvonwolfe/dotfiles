@@ -18,10 +18,10 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Themes
-Plug 'drewtempelmeyer/palenight.vim' "palenight colorscheme
-Plug 'arcticicestudio/nord-vim' " nord colorscheme
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'sonph/onehalf', {'rtp': '.vim/'}
-Plug 'joshdick/onedark.vim' " onedark colorscheme
+Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox' 
 Plug 'mhartington/oceanic-next'
 
@@ -287,14 +287,22 @@ set autoread
 
 " colorscheme settings
 try
-  colorscheme nord
-  let g:lightline.colorscheme = 'nord'
+  " use Gruvbox on Mac, Nord on Linux or otherwise.
+  if !has('mac')
+    colorscheme nord
+    let g:lightline.colorscheme = 'nord'
+  else
+    colorscheme gruvbox
+    let g:lightline.colorscheme = 'gruvbox'
+    let g:gruvbox_contrast_dark = 'hard'
+  endif
 catch 
+  " if nord/gruvbox isn't installed yet, fall back to built-in slate colorscheme.
   colorscheme slate
 endtry
 
 if has('gui_running')
-  " only set these if a GUI is running.
+  " various settings for GVim.
   set guioptions-=T
   set guioptions-=m
   try 
@@ -322,6 +330,7 @@ au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
 " Don't write backup file if vim is being called by "chpass"
 au BufWrite /private/etc/pw.* set nowritebackup nobackup
 
+" Exit if we close the last window, and the only thing left open is NERDTree.
 au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
