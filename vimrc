@@ -55,6 +55,7 @@ Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " highlight colors.
 Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " Syntax highlighting for CSS/SCSS
 Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
 Plug 'glippi/yarn-vim' " Yarn integration in Vim.
+Plug 'tpope/vim-rvm' " Use RVM from within Vim.
 
 
 " Neovim-only plugins
@@ -162,6 +163,10 @@ let g:closetag_filetypes='html,xhtml,jsx,xml,javascript,javascriptreact,eruby,li
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if g:is_nvim
+  autocmd TermOpen * setlocal nonumber norelativenumber 
+endif
 
 set printheader=\ 
 set printoptions=paper:letter
@@ -337,8 +342,8 @@ au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTre
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " open NERDTree window with <leader>+n
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
