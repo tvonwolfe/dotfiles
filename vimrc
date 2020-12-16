@@ -292,17 +292,15 @@ set autoread
 
 " colorscheme settings
 try
-  " use Gruvbox on Mac, Nord on Linux or otherwise.
   if !has('mac')
     colorscheme nord
     let g:lightline.colorscheme = 'nord'
   else
-    colorscheme gruvbox
-    let g:lightline.colorscheme = 'gruvbox'
-    let g:gruvbox_contrast_dark = 'hard'
+    colorscheme onedark
+    let g:lightline.colorscheme = 'onedark'
   endif
 catch 
-  " if nord/gruvbox isn't installed yet, fall back to built-in slate colorscheme.
+  " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme.
   colorscheme slate
 endtry
 
