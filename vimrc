@@ -56,13 +56,18 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " Syntax highligh
 Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
 Plug 'glippi/yarn-vim' " Yarn integration in Vim.
 Plug 'tpope/vim-rvm' " Use RVM from within Vim.
+Plug 'kkvh/vim-docker-tools' " Docker integration for Vim.
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " Live markdown-rendering preview in the browser
 
 
 " Neovim-only plugins
 if g:is_nvim
-  " treesitter requires a more recent nightly version of Neovim right now, so 
-  " until the official release will work with this, leaving commented out.
+  " These need Neovim 0.5, which hasn't officially released yet.
   " Plug 'nvim-treesitter/nvim-treesitter' " Better syntax highlighting
+  " Plug 'nvim-lua/popup.nvim' " Dep for octo.vim
+  " Plug 'nvim-lua/plenary.nvim' " Dep for octo.vim
+  " Plug 'nvim-telescope/telescope.nvim' " Dep for octo.vim
+  " Plug 'pwntester/octo.nvim' " GitHub CLI integration
 endif
 
 " All Plugins must be added before the following line
@@ -73,6 +78,11 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN CONFIG
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:mkdp_open_to_the_world = 1
+
+let g:mkdp_auto_start = 1
+
 let g:floaterm_autoclose = 2 " always auto-close floating terminal
 
 let g:indentLine_char = '│'
@@ -163,10 +173,6 @@ let g:closetag_filetypes='html,xhtml,jsx,xml,javascript,javascriptreact,eruby,li
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if g:is_nvim
-  autocmd TermOpen * setlocal nonumber norelativenumber 
-endif
 
 set printheader=\ 
 set printoptions=paper:letter
@@ -325,16 +331,33 @@ endif
 highlight Comment gui=italic cterm=italic
 
 " Set markdown syntax highlighting for any .md file
-au BufNewFile, BufRead *.md setf markdown
+augroup MD
+  autocmd BufNewFile,BufRead *.md setf markdown
+augroup end
 
 " Don't write backup file if vim is being called by "crontab -e"
-au BufWrite /private/tmp/crontab.* set nowritebackup nobackup
+augroup CRON
+  autocmd BufWrite /private/tmp/crontab.* set nowritebackup nobackup
+augroup end
 
 " Don't write backup file if vim is being called by "chpass"
-au BufWrite /private/etc/pw.* set nowritebackup nobackup
+augroup CHPASS
+  autocmd BufWrite /private/etc/pw.* set nowritebackup nobackup
+augroup end
 
-" Exit if we close the last window, and the only thing left open is NERDTree.
-au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Disable indentation guides for man page buffers.
+augroup MAN_PAGE
+  autocmd FileType man IndentLinesDisable
+augroup end
+
+if g:is_nvim
+  " settings for terminal buffers.
+  augroup TERM
+    autocmd TermOpen * setlocal nonumber norelativenumber 
+    autocmd BufEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
+  augroup end
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
