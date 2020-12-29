@@ -310,7 +310,7 @@ catch
   colorscheme slate
 endtry
 
-if has('gui_running')
+if has('gui_running') || exists('g:GuiLoaded')
   " various settings for GVim.
   set guioptions-=T
   set guioptions-=m
@@ -320,7 +320,9 @@ if has('gui_running')
           set guifont=SauceCodePro\ Nerd\ Font\ Mono:h12 
       endif
     else
-      set guifont=SauceCodePro\ Nerd\ Font\ Mono\ 11 
+      if g:is_nvim
+        call :GuiFont! SauceCodePro Nerd Font Mono:h11
+      endif
     endif
   catch
     echo "SauceCodePro font not installed."
