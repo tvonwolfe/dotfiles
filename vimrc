@@ -81,7 +81,7 @@ call plug#end()
 
 let g:mkdp_open_to_the_world = 1
 
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 
 let g:floaterm_autoclose = 2 " always auto-close floating terminal
 
@@ -368,6 +368,7 @@ endif
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 
+" Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -403,8 +404,12 @@ nmap <silent> gr <Plug>(coc-references)
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    call CocAction('doHover')
+ if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 
