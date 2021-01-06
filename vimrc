@@ -58,6 +58,8 @@ Plug 'glippi/yarn-vim' " Yarn integration in Vim.
 Plug 'tpope/vim-rvm' " Use RVM from within Vim.
 Plug 'kkvh/vim-docker-tools' " Docker integration for Vim.
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " Live markdown-rendering preview in the browser
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 
 
 " Neovim-only plugins
