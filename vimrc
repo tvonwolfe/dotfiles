@@ -88,20 +88,6 @@ let g:floaterm_autoclose = 2 " always auto-close floating terminal
 
 let g:indentLine_char = '│'
 
-let g:gutentags_exclude_project_root = ['/usr/local', '~/.vim']
-
-let g:gutentags_ctags_exclude = ['bundle.js', '.gif', '.jpg', '.ico', 
-      \'.zip,', '.map', '.tar.gz', '.pdf', 'dist', 'bin', 'node_modules',
-      \ 'output', 'docs']
-
-let g:gutentags_cache_dir = '~/.vim/ctagscache/'
-
-let g:gutentags_project_root = ['node_modules', 'Makefile', 'Gemfile', 
-      \ 'pom.xml', 'package.json']
-
-let g:gutentags_ctags_extra_args = ['--tag-relative=yes',  '--fields=+ailmnS']
-
-
 let g:lightline = {
       \ 'active': {
       \   'left': [
