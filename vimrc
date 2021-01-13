@@ -41,7 +41,6 @@ Plug 'tpope/vim-repeat' " enable repetition of plugin maps with '.'
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'tpope/vim-fugitive' " vim fugitive for git
 Plug 'sheerun/vim-polyglot' " Multiple language packs for Vim.
-Plug 'ludovicchabant/vim-gutentags' " gutentags for tagfile generation
 Plug 'voldikss/vim-floaterm' " Floating terminal window
 Plug 'tpope/vim-liquid', { 'for': 'liquid' } " plugin for liquid templates.
 Plug 'tpope/vim-rails' " Ruby on Rails plugin
@@ -60,7 +59,7 @@ Plug 'kkvh/vim-docker-tools' " Docker integration for Vim.
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " Live markdown-rendering preview in the browser
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
-
+Plug 'kassio/neoterm'
 
 " Neovim-only plugins
 if g:is_nvim
@@ -333,11 +332,6 @@ endif
 
 " Italicize comments
 highlight Comment gui=italic cterm=italic
-
-" Set markdown syntax highlighting for any .md file
-augroup MD
-  autocmd BufNewFile,BufRead *.md setf markdown
-augroup end
 
 " Don't write backup file if vim is being called by "crontab -e"
 augroup CRON
