@@ -43,6 +43,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " code-completion via LSP.
 Plug 'vim-utils/vim-man' " look up man pages without leaving vim
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }} "fzf binary
 Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
+Plug 'junegunn/gv.vim' " git commit browsing made easy
+Plug 'AndrewRadev/tagalong.vim' " auto-update matching HTML tags
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
 Plug 'tpope/vim-repeat' " enable repetition of plugin maps with '.'
@@ -54,6 +56,8 @@ Plug 'voldikss/vim-floaterm' " Floating terminal window
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 Plug 'glippi/yarn-vim' " Yarn integration in Vim.
 Plug 'kkvh/vim-docker-tools' " Docker integration for Vim.
+Plug 'tpope/vim-projectionist'
+Plug 'justinmk/vim-sneak' " quick navigation
 
 " Neovim-only plugins:
 if g:is_nvim
@@ -80,6 +84,8 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " syntax highligh
 " Ruby/Rails
 Plug 'tpope/vim-rails' " rails integration
 Plug 'tpope/vim-rvm' " rvm wrapper for vim.
+Plug 'tpope/vim-bundler' " ruby bundler integration
+Plug 'tpope/vim-rake' " rake integration
 Plug 'kana/vim-textobj-user' " dependency for textobj-rubyblock
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' } " add support for Ruby code blocks as vim text objects
 
