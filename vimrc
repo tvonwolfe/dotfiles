@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim & Nvim shared config
+" vim & nvim shared config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:is_nvim = has('nvim')
 let g:is_vim8 = v:version >= 800 ? 1 : 0
@@ -12,11 +12,14 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   silent !mkdir ~/.vim/swapfiles
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  autocmd vimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
 
+"""""""""""""""""""""""""
+" Styling
+"""""""""""""""""""""""""
 " Themes
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'arcticicestudio/nord-vim'
@@ -25,51 +28,68 @@ Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox' 
 Plug 'mhartington/oceanic-next'
 
-" Plugins
+" Aesthetic customization
 Plug 'itchyny/lightline.vim' " lightline plugin
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " NERDTree plugin
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'} " file tree
 Plug 'Yggdroot/indentLine' " plugin for indentation guides
+Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
+
+"""""""""""""""""""""""""
+" Functionality
+"""""""""""""""""""""""""
+" General QOL improvements:
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " NERDTree plugin
+Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'} " Git integration for NERDTree.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " code-completion via LSP.
-Plug 'vim-utils/vim-man' " look up man pages without leaving Vim
+Plug 'vim-utils/vim-man' " look up man pages without leaving vim
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }} "fzf binary
 Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
-Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
 Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
 Plug 'tpope/vim-repeat' " enable repetition of plugin maps with '.'
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'tpope/vim-fugitive' " vim fugitive for git
 Plug 'sheerun/vim-polyglot' " Multiple language packs for Vim.
+Plug 'ludovicchabant/vim-gutentags' " gutentags for tagfile generation
 Plug 'voldikss/vim-floaterm' " Floating terminal window
-Plug 'tpope/vim-liquid', { 'for': 'liquid' } " plugin for liquid templates.
-Plug 'tpope/vim-rails' " Ruby on Rails plugin
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'tpope/vim-salve', { 'for': 'clojure' }
-Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
-Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' }
-Plug 'tpope/vim-jdaddy', { 'for': 'json' }
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
-Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " highlight colors.
-Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " Syntax highlighting for CSS/SCSS
-Plug 'shmup/vim-sql-syntax' " Better SQL syntax highlighting
 Plug 'glippi/yarn-vim' " Yarn integration in Vim.
-Plug 'tpope/vim-rvm' " Use RVM from within Vim.
 Plug 'kkvh/vim-docker-tools' " Docker integration for Vim.
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' } " Live markdown-rendering preview in the browser
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
-Plug 'kassio/neoterm'
 
-" Neovim-only plugins
+" Neovim-only plugins:
 if g:is_nvim
   " These need Neovim 0.5, which hasn't officially released yet.
   " Plug 'nvim-treesitter/nvim-treesitter' " Better syntax highlighting
-  " Plug 'nvim-lua/popup.nvim' " Dep for octo.vim
-  " Plug 'nvim-lua/plenary.nvim' " Dep for octo.vim
-  " Plug 'nvim-telescope/telescope.nvim' " Dep for octo.vim
-  " Plug 'pwntester/octo.nvim' " GitHub CLI integration
 endif
+
+" Language/framework-specific:
+
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install', 'for': 'markdown' } " Live markdown-rendering preview in the browser
+
+" JSON
+Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' } " navigate JSON files via object keys.
+Plug 'tpope/vim-jdaddy', { 'for': 'json' } " support for JSON text objects
+
+" SQL
+Plug 'shmup/vim-sql-syntax' " better SQL syntax highlighting
+
+" CSS/SCSS
+Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " highlight colors.
+Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " syntax highlighting for CSS/SCSS
+
+" Ruby/Rails
+Plug 'tpope/vim-rails' " rails integration
+Plug 'tpope/vim-rvm' " rvm wrapper for vim.
+Plug 'kana/vim-textobj-user' " dependency for textobj-rubyblock
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' } " add support for Ruby code blocks as vim text objects
+
+" Clojure
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-salve', { 'for': 'clojure' }
+Plug 'guns/vim-clojure-highlight', { 'for': 'clojure' }
+
+" Liquid
+Plug 'tpope/vim-liquid', { 'for': 'liquid' } " plugin for liquid templates
 
 " All Plugins must be added before the following line
 " To ignore plugin indent changes, instead use:
@@ -77,9 +97,8 @@ filetype plugin indent on  " required
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGIN CONFIG
+" PLUGIN CONFIGURATION
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 let g:mkdp_open_to_the_world = 1
 
 let g:mkdp_auto_start = 0
@@ -89,24 +108,24 @@ let g:floaterm_autoclose = 2 " always auto-close floating terminal
 let g:indentLine_char = '│'
 
 let g:lightline = {
-      \ 'active': {
-      \   'left': [
-      \     [ 'mode', 'paste' ],
-      \     [ 'fugitive', 'filename' ]
-      \   ],
-      \   'right': [
-      \     [ 'lineinfo' ],
-      \     [ 'percent' ],
-      \     [ 'filetype' ]
-      \   ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightlineFugitive',
-      \   'readonly': 'LightlineReadonly',
-      \   'filename': 'LightlineFilename',
-      \   'modified': 'LightlineModified'
-      \ }
-    \ }
+  \ 'active': {
+    \ 'left': [
+      \ [ 'mode', 'paste' ],
+      \ [ 'fugitive', 'filename' ]
+    \ ],
+    \ 'right': [
+      \ [ 'lineinfo' ],
+      \ [ 'percent' ],
+      \ [ 'filetype' ]
+    \ ]
+  \ },
+  \ 'component_function': {
+      \ 'fugitive': 'LightlineFugitive',
+      \ 'readonly': 'LightlineReadonly',
+      \ 'filename': 'LightlineFilename',
+      \ 'modified': 'LightlineModified'
+  \ }
+\ }
 
 function! LightlineModified()
   if &filetype == "help"
@@ -160,42 +179,46 @@ let g:closetag_filetypes='html,xhtml,jsx,xml,javascript,javascriptreact,eruby,li
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" don't put anything in the header when printing a hardcopy
+set printheader=\  
 
-set printheader=\ 
+" set paper type to U.S. Letter
 set printoptions=paper:letter
-set updatetime=300
+
+" keep the signcolumn open all the time
 set signcolumn=yes
+
+" don't abandon buffers when they're left
 set hidden
 
+" enable plugins for specific file types
 filetype plugin on
 
 " Enable true color support
 set termguicolors
 
-" Indicate more visibly which line the cursor is on.
+" indicate more visibly which line the cursor is on
 set cursorline
 
-" Don't show last command
+" don't show last command
 set noshowcmd
 
-" Don't show completion messages like 'match 1 of 2'
+" don't show completion messages like 'match 1 of 2'
 set shortmess+=c
 
 " SQL highlighting in PHP strings.
 let php_sql_query = 1
 
-set modelines=0         " CVE-2007-2438
-
-set cursorline
-
-" set the git diff window to vertical split.
+" use a vertical split when performing diffs
 set diffopt+=vertical
 
 if !g:is_nvim 
-  set nocompatible        " Use Vim defaults instead of 100% vi compatibility
+  " No backwards compatibility with vi
+  set nocompatible
 endif
 
-set backspace=indent,eol,start         " proper backspacing
+" proper backspacing
+set backspace=indent,eol,start
 
 " Syntax highlighting.
 syntax on
@@ -203,84 +226,92 @@ syntax on
 " keep lines limited to 80 characters in width.
 set textwidth=80
 
+" better formatting options. 'tcqj' is the default, this adds:
+" r - auto-intsert the comment leader after hitting Enter in insert mode
+" o - auto-insert the comment leader after hitting 'o' or 'O' in normal mode
+" n - recognize numbered lists
+" w - trailing whitespace means a paragraph continues on the next line, while a 
+"     line that ends with a non-whitespace character means the paragraph ends.
 set formatoptions=tcqjronw
 
 " UTF-8 text encoding.
 set encoding=utf-8
 
+" put swapfiles here, so they're all collected in one place and there aren't 
+" issues with version control systems.
 set directory=$HOME/.vim/swapfiles//
 
-" Show line numbers.
+" Show line numbers
 set number
 
-" Show relative line numbers too.
+" Show relative line numbers too
 set relativenumber
 
-" wildmenu on.
+" wildmenu on
 set wildmenu
 
-" Turn on auto indenting.
+" Turn on auto indenting
 set autoindent
 
-" Turn on smart indenting.
+" Turn on smart indenting
 set smartindent
 
 " Set default indentation
 set shiftwidth=2
 
-" Set default tabstop.
+" Set default tabstop
 set tabstop=2
 
-" Insert spaces rather than a tab character.
+" Insert spaces rather than a tab character
 set expandtab
 
 " Turn on smart tabbing so that tabs will tab over to the correct tab based on
-" where in the code we are.
+" where in the code we are
 set smarttab
 
-" Set background to dark for lighter colors in terminal.
+" Set background to dark for lighter colors in terminal
 set background=dark
 
-" Highlight search results.
+" Highlight search results
 set hlsearch
 
 " Highlight search results as they are found, for each character/change made
-" to the search until pressing return key.
+" to the search until pressing return key
 set incsearch
 
 " ignore case when searching
 set ignorecase
 
-" Don't ignore case when using caps.
+" Don't ignore case when using caps
 set smartcase 
 
-" Auto-save when switching buffers.
+" Auto-save when switching buffers
 set autowrite
 
-" set active buffer to bottom one when doing splits.
+" set active buffer to bottom one when doing splits
 set splitbelow
 
-" set active buffer to right one when doing vertical splits.
+" set active buffer to right one when doing vertical splits
 set splitright
 
-" don't wrap lines.
+" don't wrap lines
 set nowrap
 
-" show statusline.
+" show statusline
 set laststatus=2
 
-" don't show mode in statusline, lightline shows it.
+" don't show mode in statusline, lightline shows it
 set noshowmode
 
 " speed up terminal timeout. lightline mode transitions can be laggy without it.
 set ttimeoutlen=50
 
-" Make floating winow slightly transparent.
+" Make floating windows slightly transparent
 if g:is_nvim
   set winbl=10
 endif
 
-" auto-reload a file if change was detected outside of vim.
+" auto-reload a file if change was detected outside of vim
 set autoread
 
 " colorscheme settings
@@ -293,12 +324,12 @@ try
     let g:lightline.colorscheme = 'onedark'
   endif
 catch 
-  " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme.
+  " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme
   colorscheme slate
 endtry
 
 if has('gui_running') || exists('g:GuiLoaded')
-  " various settings for GVim.
+  " various settings for gvim
   set guioptions-=T
   set guioptions-=m
   try 
@@ -329,13 +360,13 @@ augroup CHPASS
   autocmd BufWrite /private/etc/pw.* set nowritebackup nobackup
 augroup end
 
-" Disable indentation guides for man page buffers.
+" Disable indentation guides for man page buffers
 augroup MAN_PAGE
   autocmd FileType man IndentLinesDisable
 augroup end
 
 if g:is_nvim
-  " settings for terminal buffers.
+  " settings for terminal buffers
   augroup TERM
     autocmd TermOpen * setlocal nonumber norelativenumber 
     autocmd BufEnter term://* startinsert
@@ -350,7 +381,7 @@ endif
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 
-" Use tab for trigger completion with characters ahead and navigate.
+" Use tab for trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -413,7 +444,7 @@ endfunction
 " open a fzf search with Ctrl+P
 nnoremap <C-p> :call GFilesFallback()<CR>
 
-" Search for visual selection by pressing //.
+" Search for visual selection by pressing //
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
 " allows saving of files that weren't open with write permissions.
@@ -422,15 +453,15 @@ cmap w!! w !sudo tee %
 " % matching of HTML tags
 runtime macros/matchit.vim
 
-" Ctrl+\ to open a terminal window. 
+" Ctrl+\ to open a terminal window.
 map <C-\> :FloatermToggle<CR>
 
-" Yank into system clipboard.
+" Yank into system clipboard
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+yg_
 nnoremap <leader>yy "+yy
 
-" Paste from system clipboard.
+" Paste from system clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
