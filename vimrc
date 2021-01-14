@@ -51,7 +51,6 @@ Plug 'tpope/vim-repeat' " enable repetition of plugin maps with '.'
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'tpope/vim-fugitive' " vim fugitive for git
 Plug 'sheerun/vim-polyglot' " Multiple language packs for Vim.
-Plug 'ludovicchabant/vim-gutentags' " gutentags for tagfile generation
 Plug 'voldikss/vim-floaterm' " Floating terminal window
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 Plug 'glippi/yarn-vim' " Yarn integration in Vim.
