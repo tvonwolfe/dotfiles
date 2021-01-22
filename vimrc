@@ -338,7 +338,9 @@ if has('gui_running')
   set guioptions-=T
   set guioptions-=m
   try 
-    set guifont=MesloLGMDZ\ Nerd\ Font\ Mono:h11
+    if !(has('nvim') && has('mac'))
+      set guifont=MesloLGMDZ\ Nerd\ Font\ Mono:h11
+    end
   catch
     echo "Custom font not installed."
   endtry
