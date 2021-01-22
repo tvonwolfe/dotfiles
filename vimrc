@@ -37,8 +37,6 @@ Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 " Functionality
 """""""""""""""""""""""""
 " General QOL improvements:
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'} " NERDTree plugin
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'} " Git integration for NERDTree.
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " code-completion via LSP.
 Plug 'vim-utils/vim-man' " look up man pages without leaving vim
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }} "fzf binary
@@ -165,19 +163,6 @@ function! LightlineFilename()
        \ expand('%:t') : '[No Name]') . ('' != LightlineModified() ? 
        \ ' ' . LightlineModified() : '')
 endfunction
-
-" set the width of the NERDTree pane.
-let g:NERDTreeWinSize=40
-
-" Show hidden files/directories
-let g:NERDTreeShowHidden = 1
-
-" Remove bookmarks/help text from NERDTree
-let g:NERDTreeMinimalUI = 1
-
-" Ignore certain files in NERDTree
-let g:NERDTreeIgnore = ['^\.DS_Store$', '^tags$', '\.git$[[dir]]', 
-      \ '\.idea$[[dir]]', '\.sass-cache$']
 
 let g:closetag_filetypes='html,xhtml,jsx,xml,javascript,javascriptreact,eruby,liquid'
 
@@ -374,9 +359,8 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" open NERDTree window with <leader>+n
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
+" open explorer window
+nnoremap <space>e :CocCommand explorer<CR>
 
 " Use tab for trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>
