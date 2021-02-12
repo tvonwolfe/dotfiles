@@ -349,6 +349,10 @@ augroup MAN_PAGE
   autocmd FileType man IndentLinesDisable
 augroup end
 
+augroup JENKINS
+  autocmd BufNew,BufEnter *.jenkins set filetype=jenkinsfile
+augroup end
+
 if g:is_nvim
   " settings for terminal buffers
   augroup TERM
