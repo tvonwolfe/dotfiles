@@ -27,6 +27,7 @@ Plug 'sonph/onehalf', {'rtp': '.vim/'}
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox' 
 Plug 'mhartington/oceanic-next'
+Plug 'embark-theme/vim', { 'as': 'embark' }
 
 " Aesthetic customization
 Plug 'itchyny/lightline.vim' " lightline plugin
@@ -310,8 +311,10 @@ try
     colorscheme nord
     let g:lightline.colorscheme = 'nord'
   else
-    colorscheme onedark
-    let g:lightline.colorscheme = 'onedark'
+    " colorscheme onedark
+    " let g:lightline.colorscheme = 'onedark'
+    colorscheme embark
+    let g:lightline.colorscheme = 'embark'
   endif
 catch 
   " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme
