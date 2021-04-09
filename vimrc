@@ -241,6 +241,8 @@ set relativenumber
 " wildmenu on
 set wildmenu
 
+" automatically 
+
 " Turn on auto indenting
 set autoindent
 
@@ -311,10 +313,8 @@ try
     colorscheme nord
     let g:lightline.colorscheme = 'nord'
   else
-    " colorscheme onedark
-    " let g:lightline.colorscheme = 'onedark'
-    colorscheme embark
-    let g:lightline.colorscheme = 'embark'
+    colorscheme palenight
+    let g:lightline.colorscheme = 'palenight'
   endif
 catch 
   " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme
