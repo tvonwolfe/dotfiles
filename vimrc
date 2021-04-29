@@ -37,7 +37,8 @@ Plug 'ryanoasis/vim-devicons' " cool icons for filetypes
 """""""""""""""""""""""""
 " Functionality
 """""""""""""""""""""""""
-" General QOL improvements:
+" General QOL stuff:
+" ------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " code-completion via LSP.
 Plug 'vim-utils/vim-man' " look up man pages without leaving vim
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }} "fzf binary
@@ -49,7 +50,7 @@ Plug 'tpope/vim-surround' " easy quoting, parenthesizing, etc.
 Plug 'tpope/vim-repeat' " enable repetition of plugin maps with '.'
 Plug 'tpope/vim-commentary' " Better Vim commenting
 Plug 'tpope/vim-fugitive' " vim fugitive for git
-Plug 'sheerun/vim-polyglot' " Multiple language packs for Vim.
+Plug 'sheerun/vim-polyglot' " Multiple syntax highlighting language packs.
 Plug 'voldikss/vim-floaterm' " Floating terminal window
 Plug 'alvan/vim-closetag' " auto-close html/xml tags.
 Plug 'glippi/yarn-vim' " Yarn integration in Vim.
@@ -64,13 +65,14 @@ if g:is_nvim
 endif
 
 " Language/framework-specific:
+" ------------------
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install', 'for': 'markdown' } " Live markdown-rendering preview in the browser
 
 " JSON
 Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' } " navigate JSON files via object keys.
-Plug 'tpope/vim-jdaddy', { 'for': 'json' } " support for JSON text objects
+Plug 'tpope/vim-jdaddy', { 'for': 'json' } " supports JSON objects as vim text objects
 
 " SQL
 Plug 'shmup/vim-sql-syntax' " better SQL syntax highlighting
@@ -168,7 +170,7 @@ endfunction
 let g:closetag_filetypes='html,xhtml,jsx,xml,javascript,javascriptreact,eruby,liquid'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SETTINGS
+" GENERAL SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " don't put anything in the header when printing a hardcopy
 set printheader=\  
@@ -194,9 +196,6 @@ set cursorline
 " don't show last command
 set noshowcmd
 
-" don't show completion messages like 'match 1 of 2'
-set shortmess+=c
-
 " SQL highlighting in PHP strings.
 let php_sql_query = 1
 
@@ -214,11 +213,11 @@ set backspace=indent,eol,start
 " Syntax highlighting.
 syntax on
 
-" keep lines limited to 80 characters in width.
+" generally keep lines limited to 80 characters in width.
 set textwidth=80
 
-" better formatting options. 'tcqj' is the default, this adds:
-" r - auto-intsert the comment leader after hitting Enter in insert mode
+" nice-to-have formatting options. 'tcqj' is the default, this adds:
+" r - auto-insert the comment leader after hitting Enter in insert mode
 " o - auto-insert the comment leader after hitting 'o' or 'O' in normal mode
 " n - recognize numbered lists
 " w - trailing whitespace means a paragraph continues on the next line, while a 
@@ -241,8 +240,6 @@ set relativenumber
 " wildmenu on
 set wildmenu
 
-" automatically 
-
 " Turn on auto indenting
 set autoindent
 
@@ -255,14 +252,10 @@ set shiftwidth=2
 " Set default tabstop
 set tabstop=2
 
-" Insert spaces rather than a tab character
+" insert appropriate number of spaces for a <Tab> keypress
 set expandtab
 
-" Turn on smart tabbing so that tabs will tab over to the correct tab based on
-" where in the code we are
-set smarttab
-
-" Set background to dark for lighter colors in terminal
+" Set background to dark
 set background=dark
 
 " Highlight search results
@@ -309,20 +302,15 @@ set autoread
 
 " colorscheme settings
 try
-  if !has('mac')
-    colorscheme nord
-    let g:lightline.colorscheme = 'nord'
-  else
-    colorscheme palenight
-    let g:lightline.colorscheme = 'palenight'
-  endif
+  colorscheme palenight
+  let g:lightline.colorscheme = 'palenight'
 catch 
   " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme
   colorscheme slate
 endtry
 
 if has('gui_running')
-  " various settings for gvim
+  " settings for gVim
   set guioptions-=T
   set guioptions-=m
   try 
