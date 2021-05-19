@@ -3,6 +3,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:is_nvim = has('nvim')
 let g:is_vim8 = v:version >= 800 ? 1 : 0
+let g:is_mac = has('mac')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
@@ -57,6 +58,7 @@ Plug 'glippi/yarn-vim' " Yarn integration in Vim.
 Plug 'kkvh/vim-docker-tools' " Docker integration for Vim.
 Plug 'tpope/vim-projectionist'
 Plug 'justinmk/vim-sneak' " quick navigation
+Plug 'tpope/vim-dispatch' " asynchronous build and test dispatching
 
 " Neovim-only plugins:
 if g:is_nvim
@@ -88,6 +90,7 @@ Plug 'tpope/vim-bundler' " ruby bundler integration
 Plug 'tpope/vim-rake' " rake integration
 Plug 'kana/vim-textobj-user' " dependency for textobj-rubyblock
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' } " add support for Ruby code blocks as vim text objects
+Plug 'thoughtbot/vim-rspec'
 
 " Clojure
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
@@ -168,6 +171,12 @@ function! LightlineFilename()
 endfunction
 
 let g:closetag_filetypes='html,xhtml,jsx,xml,javascript,javascriptreact,eruby,liquid'
+
+if g:is_mac
+  let g:rspec_runner = 'os_x_iterm2'
+end
+
+let g:rspec_command = "Dispatch rspec {spec}"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL SETTINGS
@@ -314,7 +323,7 @@ if has('gui_running')
   set guioptions-=T
   set guioptions-=m
   try 
-    if !(has('nvim') && has('mac'))
+    if !(g:is_nvim && g:is_mac)
       set guifont=MesloLGMDZ\ Nerd\ Font\ Mono:h11
     end
   catch
@@ -356,8 +365,9 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = " " " map leader key to <Space>
 " open explorer window
-nnoremap <space>e :CocCommand explorer<CR>
+nnoremap <leader>e :CocCommand explorer<CR>
 
 " Use tab for trigger completion with characters ahead and navigate
 inoremap <silent><expr> <TAB>
@@ -448,3 +458,9 @@ nnoremap <leader>P "+P
 " close all buffers without exiting
 command! Close bufdo bd
 nnoremap <leader>c :Close<CR>
+
+" vim-rspec mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
