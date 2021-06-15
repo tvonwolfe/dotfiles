@@ -2,8 +2,8 @@
 " vim & nvim shared config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:is_nvim = has('nvim')
-let g:is_vim8 = v:version >= 800 ? 1 : 0
 let g:is_mac = has('mac')
+let g:is_vim8 = v:version >= 800 ? 1 : 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
@@ -366,6 +366,7 @@ endif
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = " " " map leader key to <Space>
+
 " open explorer window
 nnoremap <leader>e :CocCommand explorer<CR>
 
