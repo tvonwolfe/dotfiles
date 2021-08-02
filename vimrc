@@ -62,8 +62,13 @@ Plug 'tpope/vim-dispatch' " asynchronous build and test dispatching
 
 " Neovim-only plugins:
 if g:is_nvim
-  " These need Neovim 0.5, which hasn't officially released yet.
-  " Plug 'nvim-treesitter/nvim-treesitter' " Better syntax highlighting
+  Plug 'neovim/nvim-lspconfig' " LSP config plugin
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' } " Better syntax highlighting
+  Plug 'ray-x/lsp_signature.nvim' " LSP-driven code completion helper
+  Plug 'nanotee/sqls.nvim' " SQL client and query execution plugin
+  Plug 'norcalli/nvim-colorizer.lua' " Performant color code highlighting
+
+  autocmd BufReadPost,FileReadPost lua require "lsp_signature".on_attach()
 endif
 
 " Language/framework-specific:
@@ -80,7 +85,6 @@ Plug 'tpope/vim-jdaddy', { 'for': 'json' } " supports JSON objects as vim text o
 Plug 'shmup/vim-sql-syntax' " better SQL syntax highlighting
 
 " CSS/SCSS
-Plug 'ap/vim-css-color', { 'for': [ 'css', 'scss' ] } " highlight colors.
 Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " syntax highlighting for CSS/SCSS
 
 " Ruby/Rails
@@ -303,7 +307,7 @@ set ttimeoutlen=50
 
 " Make floating windows slightly transparent
 if g:is_nvim
-  set winbl=10
+  set winbl=15
 endif
 
 " auto-reload a file if change was detected outside of vim
@@ -316,6 +320,7 @@ try
 catch 
   " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme
   colorscheme slate
+  echo "colorscheme not found"
 endtry
 
 if has('gui_running')
@@ -465,3 +470,6 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+
+" search within project
+nnoremap <leader>f :Rg<CR>
