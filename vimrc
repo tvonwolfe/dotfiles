@@ -23,11 +23,8 @@ call plug#begin('~/.vim/plugged')
 """""""""""""""""""""""""
 " Themes
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'sonph/onehalf', {'rtp': '.vim/'}
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox' 
-Plug 'mhartington/oceanic-next'
 Plug 'embark-theme/vim', { 'as': 'embark' }
 
 " Aesthetic customization
@@ -59,6 +56,7 @@ Plug 'kkvh/vim-docker-tools' " Docker integration for Vim.
 Plug 'tpope/vim-projectionist'
 Plug 'justinmk/vim-sneak' " quick navigation
 Plug 'tpope/vim-dispatch' " asynchronous build and test dispatching
+Plug 'AndrewRadev/splitjoin.vim' " easily convert between single & multi line statements.
 
 " Neovim-only plugins:
 if g:is_nvim
