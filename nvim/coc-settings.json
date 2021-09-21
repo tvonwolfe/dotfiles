@@ -1,0 +1,17 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [ 
+    "ruby",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "java",
+    "html",
+    "css",
+    "scss",
+    "xml",
+    "markdown"
+  ],
+  "solargraph.formatting": true
+}
