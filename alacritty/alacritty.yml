@@ -1,0 +1,88 @@
+env:
+  TERM: alacritty
+  LANG: en_US.UTF-8
+  LC_CTYPE: en_US.UTF-8
+  SHELL: zsh
+font:
+  normal:
+    family: MesloLGMDZ Nerd Font Mono
+    style: Regular
+  size: 9
+  use_thin_strokes: true
+
+window:
+  dimensions:
+    columns: 90
+    lines: 40
+
+schemes:
+  palenight: &palenight
+  # Base16 Material Palenight 256 - alacritty color config
+  # Nate Peterson
+  # Default colors
+    primary:
+      background: '0x292d3e'
+      foreground: '0x959dcb'
+
+    # Colors the cursor will use if `custom_cursor_colors` is true
+    cursor:
+      text: '0x292d3e'
+      cursor: '0x959dcb'
+
+    # Normal colors
+    normal:
+      black:   '0x292d3e'
+      red:     '0xf07178'
+      green:   '0xc3e88d'
+      yellow:  '0xffcb6b'
+      blue:    '0x82aaff'
+      magenta: '0xc792ea'
+      cyan:    '0x89ddff'
+      white:   '0x959dcb'
+
+    # Bright colors
+    bright:
+      black:   '0x676e95'
+      red:     '0xf07178'
+      green:   '0xc3e88d'
+      yellow:  '0xffcb6b'
+      blue:    '0x82aaff'
+      magenta: '0xc792ea'
+      cyan:    '0x89ddff'
+      white:   '0xffffff'
+
+    indexed_colors:
+      - { index: 16, color: '0xf78c6c' }
+      - { index: 17, color: '0xff5370' }
+      - { index: 18, color: '0x444267' }
+      - { index: 19, color: '0x32374d' }
+      - { index: 20, color: '0x8796b0' }
+      - { index: 21, color: '0x959dcb' }
+
+  embark: &embark
+    primary:
+      background: '0x1e1c31'
+      foreground: '0xcbe3e7'
+    cursor:
+      text: '0x1e1c31'
+      cursor: '0xa1efd3'
+    normal:
+      black: '0x1e1c31'
+      red: '0xf48fb1'
+      green: '0xa1efd3'
+      yellow: '0xffe6b3'
+      blue: '0x91ddff'
+      magenta: '0xd4bfff'
+      cyan: '0x87dfeb'
+      white: '0xcbe3e7'
+    bright:
+      black: '0x585273'
+      red: '0xf02e6e'
+      green: '0x62d196'
+      yellow: '0xf2b482'
+      blue: '0x65b2ff'
+      magenta: '0xa37acc'
+      cyan: '0x63f2f1'
+      white: '0x8a889d'
+
+colors: *embark
