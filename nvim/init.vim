@@ -101,7 +101,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:mkdp_open_to_the_world = 1
 
-let g:mkdp_auto_start = 0
+let g:mkdp_auto_start = 1
 
 let g:floaterm_autoclose = 2 " always auto-close floating terminal
 
@@ -183,6 +183,9 @@ set signcolumn=yes
 
 " don't abandon buffers when they're left
 set hidden
+
+" turn on spellcheck
+set spell
 
 " enable plugins for specific file types
 filetype plugin on
@@ -339,7 +342,7 @@ augroup end
 
 " settings for terminal buffers
 augroup TERM
-  autocmd TermOpen * setlocal nonumber norelativenumber 
+  autocmd TermOpen * setlocal nonumber norelativenumber nospell
   autocmd BufEnter term://* startinsert
   autocmd BufLeave term://* stopinsert
 augroup end
@@ -450,3 +453,9 @@ map <Leader>sa :call RunAllSpecs()<CR>
 
 " search within project
 nnoremap <leader>f :Rg<CR>
+
+" search keys and show object path in a JSON file.
+augroup JSON
+  au FileType json noremap <buffer> <silent> <leader>d :call jsonpath#echo()<CR>
+  au FileType json noremap <buffer> <silent> <leader>g :call jsonpath#goto()<CR>
+augroup end
