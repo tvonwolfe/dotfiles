@@ -184,9 +184,6 @@ set signcolumn=yes
 " don't abandon buffers when they're left
 set hidden
 
-" turn on spellcheck
-set spell
-
 " enable plugins for specific file types
 filetype plugin on
 
@@ -331,11 +328,6 @@ augroup CHPASS
   autocmd BufWrite /private/etc/pw.* set nowritebackup nobackup
 augroup end
 
-" Disable indentation guides for man page buffers
-augroup MAN_PAGE
-  autocmd FileType man IndentLinesDisable
-augroup end
-
 augroup JENKINS
   autocmd BufNew,BufEnter *.jenkins set filetype=jenkinsfile
 augroup end
@@ -453,9 +445,3 @@ map <Leader>sa :call RunAllSpecs()<CR>
 
 " search within project
 nnoremap <leader>f :Rg<CR>
-
-" search keys and show object path in a JSON file.
-augroup JSON
-  au FileType json noremap <buffer> <silent> <leader>d :call jsonpath#echo()<CR>
-  au FileType json noremap <buffer> <silent> <leader>g :call jsonpath#goto()<CR>
-augroup end
