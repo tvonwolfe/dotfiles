@@ -61,7 +61,7 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' } " Better syntax hi
 Plug 'ray-x/lsp_signature.nvim' " LSP-driven code completion helper
 Plug 'nanotee/sqls.nvim' " SQL client and query execution plugin
 Plug 'norcalli/nvim-colorizer.lua' " Performant color code highlighting
-autocmd BufReadPost,FileReadPost lua require "lsp_signature".on_attach()
+Plug 'folke/lsp-colors.nvim'
 
 " Language/framework-specific:
 " ------------------
