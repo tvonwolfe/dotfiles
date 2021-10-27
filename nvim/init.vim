@@ -302,18 +302,16 @@ catch
   echo "colorscheme not found"
 endtry
 
-if has('gui_running')
-  " settings for gui-based editor
-  set guioptions-=T
-  set guioptions-=m
-  try 
-    if !(g:is_mac)
-      set guifont=MesloLGMDZ\ Nerd\ Font\ Mono:h11
-    end
-  catch
-    echo "Custom font not installed."
-  endtry
-endif
+" settings for gui-based editor
+set guioptions-=T
+set guioptions-=m
+try 
+  if (g:is_mac)
+    set guifont=MesloLGMDZ\ Nerd\ Font\ Mono:h11
+  end
+catch
+  echo "Custom font not installed."
+endtry
 
 " Italicize comments
 highlight Comment gui=italic cterm=italic
