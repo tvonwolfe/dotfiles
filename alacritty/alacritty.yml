@@ -85,4 +85,4 @@ schemes:
       cyan: '0x63f2f1'
       white: '0x8a889d'
 
-colors: *embark
+colors: *palenight
