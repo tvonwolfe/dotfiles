@@ -1,4 +1,10 @@
 {
+  "languageserver": {
+    "lua": {
+      "command":"lua-lsp",
+      "filetypes": ["lua"]
+    }
+  },
   "coc.preferences.formatOnSaveFiletypes": [ 
     "ruby",
     "javascript",

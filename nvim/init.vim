@@ -22,6 +22,7 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox' 
 Plug 'embark-theme/vim', { 'as': 'embark' }
+Plug 'arcticicestudio/nord-vim'
 
 " Aesthetic customization
 Plug 'itchyny/lightline.vim' " lightline plugin
@@ -99,6 +100,22 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN CONFIGURATION
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+
 let g:mkdp_open_to_the_world = 1
 
 let g:mkdp_auto_start = 1
@@ -294,8 +311,14 @@ set autoread
 
 " colorscheme settings
 try
-  colorscheme embark
-  let g:lightline.colorscheme = 'embark'
+  if g:is_mac
+    colorscheme gruvbox
+    let g:gruvbox_contrast_dark = 'hard'
+    let g:lightline.colorscheme = 'gruvbox'
+  else
+    colorscheme palenight
+    let g:lightline.colorscheme = 'palenight'
+  endif
 catch 
   " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme
   colorscheme slate
@@ -443,3 +466,10 @@ map <Leader>sa :call RunAllSpecs()<CR>
 
 " search within project
 nnoremap <leader>f :Rg<CR>
+
+" Git shortcuts
+nnoremap <leader>gp :Git pull<CR>
+nnoremap <leader>gP :Git push<CR>
+nnoremap <leader>gc :Git commit -m ""<left>
+nnoremap <leader>ga :Git add %<CR>
+nnoremap <leader>gA :Git add -A<CR>
