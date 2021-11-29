@@ -81,13 +81,13 @@ Plug 'shmup/vim-sql-syntax' " better SQL syntax highlighting
 Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " syntax highlighting for CSS/SCSS
 
 " Ruby/Rails
-Plug 'tpope/vim-rails' " rails integration
-Plug 'tpope/vim-rvm' " rvm wrapper for vim.
-Plug 'tpope/vim-bundler' " ruby bundler integration
-Plug 'tpope/vim-rake' " rake integration
-Plug 'kana/vim-textobj-user' " dependency for textobj-rubyblock
+Plug 'tpope/vim-rails', { 'for': 'ruby' } " rails integration
+Plug 'tpope/vim-rvm', { 'for': 'ruby' } " rvm wrapper for vim.
+Plug 'tpope/vim-bundler', { 'for': 'ruby' } " ruby bundler integration
+Plug 'tpope/vim-rake', { 'for': 'ruby' } " rake integration
+Plug 'kana/vim-textobj-user', { 'for': [ 'ruby' ] } " dependency for textobj-rubyblock
 Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' } " add support for Ruby code blocks as vim text objects
-Plug 'thoughtbot/vim-rspec'
+Plug 'thoughtbot/vim-rspec', { 'for': 'ruby' } " RSpec integration
 
 " Liquid
 Plug 'tpope/vim-liquid', { 'for': 'liquid' } " plugin for liquid templates
@@ -313,8 +313,8 @@ set autoread
 try
   if g:is_mac
     colorscheme gruvbox
-    let g:gruvbox_contrast_dark = 'hard'
     let g:lightline.colorscheme = 'gruvbox'
+    let g:gruvbox_contrast_dark = 'hard'
   else
     colorscheme palenight
     let g:lightline.colorscheme = 'palenight'
