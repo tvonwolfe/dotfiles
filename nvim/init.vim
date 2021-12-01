@@ -53,6 +53,7 @@ Plug 'vim-autoformat/vim-autoformat' " automatically format files using the appr
 Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' } " navigate JSON files via object keys.
 Plug 'tpope/vim-jdaddy', { 'for': 'json' } " supports JSON objects as vim text objects
 Plug 'Yggdroot/indentLine' " plugin for indentation guides
+Plug 'airblade/vim-gitgutter'
 
 " neovim-only stuff
 " ------------------
