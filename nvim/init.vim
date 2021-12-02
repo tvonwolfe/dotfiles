@@ -54,6 +54,7 @@ Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' } " navigate JSON files via objec
 Plug 'tpope/vim-jdaddy', { 'for': 'json' } " supports JSON objects as vim text objects
 Plug 'Yggdroot/indentLine' " plugin for indentation guides
 Plug 'airblade/vim-gitgutter'
+Plug 'akinsho/toggleterm.nvim'
 
 " neovim-only stuff
 " ------------------
@@ -109,13 +110,21 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+}
+
 require('lualine').setup {
   options = {
     component_separators = '',
     section_separators = { left = '', right = '' },
   },
-  }
 }
+
+function _G.set_terminal_keymaps()
+  local opts = { noremap = true }
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+end
+
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 EOF
 
 let g:python3_host_prog = system("which python3")
@@ -296,13 +305,6 @@ augroup JENKINS
   autocmd BufNew,BufEnter *.jenkins set filetype=jenkinsfile
 augroup end
 
-" settings for terminal buffers
-augroup TERM
-  autocmd TermOpen * setlocal nonumber norelativenumber nospell
-  autocmd BufEnter term://* startinsert
-  autocmd BufLeave term://* stopinsert
-augroup end
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -416,3 +418,6 @@ nnoremap <leader>gP :Git push<CR>
 nnoremap <leader>gc :Git commit -m ""<left>
 nnoremap <leader>ga :Git add %<CR>
 nnoremap <leader>gA :Git add -A<CR>
+
+" ToggleTerm shortcuts
+nnoremap <leader>t :ToggleTerm<CR>
