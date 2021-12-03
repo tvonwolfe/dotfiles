@@ -124,7 +124,7 @@ function _G.set_terminal_keymaps()
   vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
 end
 
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+vim.cmd('autocmd! TermOpen term://*toggleterm* lua set_terminal_keymaps()')
 EOF
 
 let g:python3_host_prog = system("which python3")
