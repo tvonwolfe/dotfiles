@@ -418,6 +418,9 @@ nnoremap <leader>gP :Git push<CR>
 nnoremap <leader>gc :Git commit -m ""<left>
 nnoremap <leader>ga :Git add %<CR>
 nnoremap <leader>gA :Git add -A<CR>
+nnoremap <leader>ggn :GitGutterNextHunk<CR>
+nnoremap <leader>ggp :GitGutterPrevHunk<CR>
+nnoremap <leader>ggP :GitGutterPreviewHunk<CR>
 
 " ToggleTerm shortcuts
 nnoremap <leader>t :ToggleTerm<CR>
