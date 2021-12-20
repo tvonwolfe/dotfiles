@@ -119,12 +119,18 @@ require('lualine').setup {
   },
 }
 
-function _G.set_terminal_keymaps()
+function _G.setup_terminal()
   local opts = { noremap = true }
   vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
 end
 
-vim.cmd('autocmd! TermOpen term://*toggleterm* lua set_terminal_keymaps()')
+function _G.setup_float_term()
+  local opts = { noremap = true }
+  vim.api.nvim_buf_set_keymap(0, 't', '<C-\\>', [[<C-\><C-n>:FloatermToggle<CR>]], opts)
+end
+
+vim.cmd('autocmd! TermOpen term://*toggleterm* lua setup_terminal()')
+vim.cmd('autocmd! TermOpen term://*zsh* lua setup_float_term()')
 EOF
 
 let g:python3_host_prog = system("which python3")
@@ -413,6 +419,7 @@ map <Leader>sa :call RunAllSpecs()<CR>
 nnoremap <leader>f :Rg<CR>
 
 " Git shortcuts
+nnoremap <leader>gi :Git<CR>
 nnoremap <leader>gp :Git pull<CR>
 nnoremap <leader>gP :Git push<CR>
 nnoremap <leader>gc :Git commit -m ""<left>
