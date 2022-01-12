@@ -19,10 +19,10 @@ call plug#begin('$HOME/.config/nvim/plugged')
 """""""""""""""""""""""""
 " Themes
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox' 
 Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'arcticicestudio/nord-vim'
+Plug 'marko-cerovac/material.nvim'
+Plug 'sainnhe/gruvbox-material'
 
 """""""""""""""""""""""""
 " Functionality
@@ -52,7 +52,7 @@ Plug 'AndrewRadev/splitjoin.vim' " easily convert between single & multi line st
 Plug 'vim-autoformat/vim-autoformat' " automatically format files using the appropriate tool
 Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' } " navigate JSON files via object keys.
 Plug 'tpope/vim-jdaddy', { 'for': 'json' } " supports JSON objects as vim text objects
-Plug 'Yggdroot/indentLine' " plugin for indentation guides
+Plug 'lukas-reineke/indent-blankline.nvim' " indent guides
 Plug 'airblade/vim-gitgutter'
 Plug 'akinsho/toggleterm.nvim'
 
@@ -112,12 +112,56 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+local function interpreter_version()
+  local str = vim.fn['rvm#statusline_ft_ruby']()
+  return str.match(str, '%[ruby%-(%d+.%d+.%d+)%]')
+end
+
 require('lualine').setup {
   options = {
+    theme = 'palenight',
     component_separators = '',
-    section_separators = { left = '', right = '' },
+    section_separators = { left = '', right = '' },
   },
+  sections = { lualine_x = { 'filetype', interpreter_version } }
 }
+
+vim.opt.list = true
+require('indent_blankline').setup {
+  space_char_blankline = " ",
+  show_current_context = true,
+  show_current_context_start = true
+}
+
+require('material').setup({
+
+	contrast = true, -- Enable contrast for sidebars, floating windows and popup menus like Nvim-Tree
+	borders = true, -- Enable borders between verticaly split windows
+
+	popup_menu = "dark", -- Popup menu style ( can be: 'dark', 'light', 'colorful' or 'stealth' )
+
+	italics = {
+		comments = true, -- Enable italic comments
+	},
+
+	contrast_windows = { -- Specify which windows get the contrasted (darker) background
+		"terminal", -- Darker terminal background
+		"qf" -- Darker qf list background
+	},
+
+	text_contrast = {
+		lighter = false, -- Enable higher contrast text for lighter style
+		darker = false -- Enable higher contrast text for darker style
+	},
+
+	disable = {
+		background = false, -- Prevent the theme from setting the background (NeoVim then uses your teminal background)
+		term_colors = false, -- Prevent the theme from setting terminal colors
+		eob_lines = false -- Hide the end-of-buffer lines
+	},
+
+	custom_highlights = {} -- Overwrite highlights with your own
+})
 
 function _G.setup_terminal()
   local opts = { noremap = true }
@@ -140,8 +184,6 @@ let g:mkdp_open_to_the_world = 1
 let g:mkdp_auto_start = 1
 
 let g:floaterm_autoclose = 2 " always auto-close floating terminal
-
-let g:indentLine_char = '│'
 
 let g:closetag_filetypes='html,xhtml,jsx,xml,javascript,javascriptreact,eruby,liquid'
 
@@ -276,7 +318,8 @@ set autoread
 
 " colorscheme settings
 try
-  colorscheme palenight
+  let g:material_style = 'palenight'
+  colorscheme material
 catch 
   " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme
   colorscheme slate
