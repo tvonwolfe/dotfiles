@@ -137,7 +137,7 @@ require('material').setup({
 
 	contrast = {
     floating_windows = true,
-    popup_menu = true
+    popup_menu = false
   }, -- Enable contrast for sidebars, floating windows and popup menus like Nvim-Tree
 	italics = {
 		comments = true, -- Enable italic comments
@@ -151,7 +151,6 @@ require('material').setup({
 		term_colors = false, -- Prevent the theme from setting terminal colors
 		eob_lines = false -- Hide the end-of-buffer lines
 	},
-
 	custom_highlights = {} -- Overwrite highlights with your own
 })
 
