@@ -136,14 +136,13 @@ require('indent_blankline').setup {
 require('material').setup({
 
 	contrast = {
-    floating_windows = true,
+    floating_windows = false,
     popup_menu = false
   }, -- Enable contrast for sidebars, floating windows and popup menus like Nvim-Tree
 	italics = {
 		comments = true, -- Enable italic comments
 	},
 	contrast_filetypes = { -- Specify which windows get the contrasted (darker) background
-		"terminal", -- Darker terminal background
 		"qf" -- Darker qf list background
 	},
 	disable = {
