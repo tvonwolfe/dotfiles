@@ -60,6 +60,7 @@ Plug 'akinsho/toggleterm.nvim'
 " ------------------
 Plug 'neovim/nvim-lspconfig' " LSP config plugin
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' } " Better syntax highlighting
+Plug 'SmiteshP/nvim-gps'
 Plug 'ray-x/lsp_signature.nvim' " LSP-driven code completion helper
 Plug 'nanotee/sqls.nvim' " SQL client and query execution plugin
 Plug 'norcalli/nvim-colorizer.lua' " Performant color code highlighting
@@ -99,7 +100,7 @@ call plug#end()
 " PLUGIN CONFIGURATION
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   highlight = {
@@ -112,19 +113,50 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+local gps = require('nvim-gps')
+gps.setup()
+
 local function interpreter_version()
   local str = vim.fn['rvm#statusline_ft_ruby']()
   return str.match(str, '%[ruby%-(%d+.%d+.%d+)%]')
 end
 
-require('lualine').setup {
+local function gps_with_filename()
+  local str = vim.fn.expand("%:t")
+
+  if (gps.is_available())
+  then
+    local gps_location = gps.get_location()
+    if (gps_location:gsub("%s+","") == "")
+      then
+      return str
+    end
+    str = str .. ' > ' .. gps.get_location()
+  end
+
+  if (str:len() == 0)
+    then
+    return '[No Name]'
+  end
+
+  return str
+end
+
+require('lualine').setup ({
   options = {
     theme = 'palenight',
     component_separators = '',
     section_separators = { left = '', right = '' },
-  },
-  sections = { lualine_x = { 'filetype', interpreter_version } }
-}
+    },
+  sections = {
+    lualine_c = { 
+      { gps_with_filename }
+    },
+    lualine_x = {
+      'filetype', interpreter_version 
+    }
+  }
+})
 
 vim.opt.list = true
 require('indent_blankline').setup {
@@ -134,7 +166,6 @@ require('indent_blankline').setup {
 }
 
 require('material').setup({
-
 	contrast = {
     floating_windows = false,
     popup_menu = false
@@ -219,9 +250,6 @@ set diffopt+=vertical
 " proper backspacing
 set backspace=indent,eol,start
 
-" Syntax highlighting.
-syntax on
-
 " generally keep lines limited to 80 characters in width.
 set textwidth=80
 
@@ -295,11 +323,8 @@ set nowrap
 " show statusline
 set laststatus=2
 
-" don't show mode in statusline, lightline shows it
+" don't show mode in statusline, lualine shows it
 set noshowmode
-
-" speed up terminal timeout. lightline mode transitions can be laggy without it.
-set ttimeoutlen=50
 
 set winbl=15
 
@@ -347,7 +372,8 @@ augroup end
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = " " " map leader key to <Space>
+" map leader key to <Space>
+let mapleader = " "
 
 " open explorer window
 nnoremap <leader>e :CocCommand explorer<CR>
