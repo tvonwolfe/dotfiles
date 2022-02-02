@@ -23,6 +23,7 @@ Plug 'embark-theme/vim', { 'as': 'embark' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'marko-cerovac/material.nvim'
 Plug 'sainnhe/gruvbox-material'
+Plug 'bluz71/vim-nightfly-guicolors'
 
 """""""""""""""""""""""""
 " Functionality
@@ -144,7 +145,7 @@ end
 
 require('lualine').setup ({
   options = {
-    theme = 'palenight',
+    theme = 'nightfly',
     component_separators = '',
     section_separators = { left = '', right = '' },
     },
@@ -184,18 +185,20 @@ require('material').setup({
 	custom_highlights = {} -- Overwrite highlights with your own
 })
 
-function _G.setup_terminal()
+function _G.setup_toggle_term()
   local opts = { noremap = true }
   vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
 end
 
-function _G.setup_float_term()
+function _G.setup_term()
   local opts = { noremap = true }
   vim.api.nvim_buf_set_keymap(0, 't', '<C-\\>', [[<C-\><C-n>:FloatermToggle<CR>]], opts)
+  vim.api.nvim_win_set_option(0, 'number', false)
+  vim.api.nvim_win_set_option(0, 'relativenumber', false)
 end
 
-vim.cmd('autocmd! TermOpen term://*toggleterm* lua setup_terminal()')
-vim.cmd('autocmd! TermOpen term://*zsh* lua setup_float_term()')
+vim.cmd('autocmd! TermOpen term://*toggleterm* lua setup_toggle_term()')
+vim.cmd('autocmd! TermOpen term://*zsh* lua setup_term()')
 EOF
 
 let g:python3_host_prog = system("which python3")
@@ -333,8 +336,8 @@ set autoread
 
 " colorscheme settings
 try
-  let g:material_style = 'palenight'
-  colorscheme material
+  " let g:material_style = 'palenight'
+  colorscheme nightfly
 catch 
   " if custom colorschemes aren't installed yet, fall back to the built-in slate colorscheme
   colorscheme slate
