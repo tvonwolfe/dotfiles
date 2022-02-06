@@ -88,9 +88,9 @@ schemes:
   nightfly: &nightfly
     draw_bold_text_with_bright_colors: true
     primary:
-    background:        '#011627'
-    foreground:        '#acb4c2'
-    bright_foreground: '#eeeeee'
+      background:        '#011627'
+      foreground:        '#acb4c2'
+      bright_foreground: '#eeeeee'
 
     # Cursor colors
     cursor:
@@ -124,4 +124,4 @@ schemes:
       cyan:    '#7fdbca'
       white:   '#d6deeb'
 
-colors: *palenight
+colors: *nightfly
