@@ -81,8 +81,8 @@ Plug 'shmup/vim-sql-syntax' " better SQL syntax highlighting
 Plug 'cakebaker/scss-syntax.vim', { 'for': [ 'css', 'scss' ] } " syntax highlighting for CSS/SCSS
 
 " Ruby/Rails
+Plug 'tpope/vim-rvm' " rvm wrapper for vim.
 Plug 'tpope/vim-rails', { 'for': 'ruby' } " rails integration
-Plug 'tpope/vim-rvm', { 'for': 'ruby' } " rvm wrapper for vim.
 Plug 'tpope/vim-bundler', { 'for': 'ruby' } " ruby bundler integration
 Plug 'tpope/vim-rake', { 'for': 'ruby' } " rake integration
 Plug 'kana/vim-textobj-user', { 'for': [ 'ruby' ] } " dependency for textobj-rubyblock
