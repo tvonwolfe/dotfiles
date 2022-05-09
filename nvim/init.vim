@@ -32,8 +32,8 @@ Plug 'bluz71/vim-nightfly-guicolors'
 " ------------------
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " code-completion via LSP.
 Plug 'vim-utils/vim-man' " look up man pages without leaving vim
-Plug 'junegunn/fzf', {'do': { -> fzf#install() }} "fzf binary
-Plug 'junegunn/fzf.vim' " fuzzy file finder plugin
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'junegunn/gv.vim' " git commit browsing made easy
 Plug 'AndrewRadev/tagalong.vim' " auto-update matching HTML tags
 Plug 'jiangmiao/auto-pairs' " auto-pairs on braces, quotes, etc.
@@ -428,22 +428,6 @@ endfunction
 
 nmap <leader>rn <Plug>(coc-rename)
 
-" If we're in a git repository, only search for files not being ignored.
-" Otherwise, fall back to a regular file search.
-function! GFilesFallback()
-  let output = system('git rev-parse --show-toplevel')
-  let prefix = get(g:, 'fzf_command_prefix', '')
-  if v:shell_error == 0
-    exec "normal :" . prefix . "GFiles\<CR>"
-  else
-    exec "normal :" . prefix . "Files\<CR>"
-  endif
-  return 0
-endfunction
-
-" open a fzf search with Ctrl+P
-nnoremap <C-p> :call GFilesFallback()<CR>
-
 " Search for visual selection by pressing //
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
@@ -477,9 +461,6 @@ map <Leader>sn :call RunNearestSpec()<CR>
 map <Leader>sl :call RunLastSpec()<CR>
 map <Leader>sa :call RunAllSpecs()<CR>
 
-" search within project
-nnoremap <leader>f :Rg<CR>
-
 " Git shortcuts
 nnoremap <leader>gi :Git<CR>
 nnoremap <leader>gp :Git pull<CR>
@@ -496,3 +477,8 @@ nnoremap <leader>dt :DockerToolsToggle<CR>
 
 " ToggleTerm shortcuts
 nnoremap <leader>t :ToggleTerm<CR>
+
+nnoremap <leader>ff <cmd>Telescope find_files<CR>
+nnoremap <leader>fg <cmd>Telescope live_grep<CR>
+nnoremap <leader>fb <cmd>Telescope buffers<CR>
+nnoremap <leader>fh <cmd>Telescope help_tags<CR>
