@@ -462,7 +462,6 @@ map <Leader>sl :call RunLastSpec()<CR>
 map <Leader>sa :call RunAllSpecs()<CR>
 
 " Git shortcuts
-nnoremap <leader>gi :Git<CR>
 nnoremap <leader>gp :Git pull<CR>
 nnoremap <leader>gP :Git push<CR>
 nnoremap <leader>gc :Git commit -m ""<left>
