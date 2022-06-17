@@ -2,11 +2,11 @@
   "codeLens.enable": true,
   "languageserver": {
     "lua": {
-      "command":"lua-lsp",
+      "command": "lua-lsp",
       "filetypes": ["lua"]
     }
   },
-  "coc.preferences.formatOnSaveFiletypes": [ 
+  "coc.preferences.formatOnSaveFiletypes": [
     "ruby",
     "javascript",
     "javascriptreact",
@@ -22,5 +22,6 @@
   ],
   "solargraph.formatting": true,
   "solargraph.diagnostics": true,
+  "solargraph.useBundler": true,
   "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
 }
