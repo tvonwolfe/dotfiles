@@ -54,8 +54,10 @@ Plug 'vim-autoformat/vim-autoformat' " automatically format files using the appr
 Plug 'mogelbrod/vim-jsonpath', { 'for': 'json' } " navigate JSON files via object keys.
 Plug 'tpope/vim-jdaddy', { 'for': 'json' } " supports JSON objects as vim text objects
 Plug 'lukas-reineke/indent-blankline.nvim' " indent guides
-Plug 'airblade/vim-gitgutter'
-Plug 'akinsho/toggleterm.nvim'
+Plug 'airblade/vim-gitgutter' " show git diff symbols in the side gutter
+Plug 'akinsho/toggleterm.nvim' " quick terminal access
+Plug 'szw/vim-maximizer' " maximize window splits
+Plug 'AndrewRadev/sideways.vim' " easily move function args left and right
 
 " neovim-only stuff
 " ------------------
@@ -404,10 +406,9 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call ShowDocumentation()<CR>
@@ -474,6 +475,14 @@ nnoremap <leader>dt :DockerToolsToggle<CR>
 " ToggleTerm shortcuts
 nnoremap <leader>t :ToggleTerm<CR>
 
+" vim-maximizer shortcut
+nnoremap <silent><C-w>m :MaximizerToggle<CR>
+
+"sideways.vim shortcuts
+nnoremap <silent><C-h> :SidewaysLeft<CR>
+nnoremap <silent><C-l> :SidewaysRight<CR>
+
+" Telescope shortcuts
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
 nnoremap <leader>fg <cmd>Telescope live_grep<CR>
 nnoremap <leader>fb <cmd>Telescope buffers<CR>
