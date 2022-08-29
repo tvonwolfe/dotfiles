@@ -1,1 +1,1 @@
-source $HOME/.vim/ftplugin/scss.vim
+source $HOME/.config/nvim/ftplugin/scss.vim

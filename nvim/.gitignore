@@ -1,3 +1,5 @@
+!lua/
 plugged/
 autoload/
 .netrwhist
+*lovevery*

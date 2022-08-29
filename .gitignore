@@ -1,4 +1,5 @@
 *
-!nvim/
-!neofetch/
-!alacritty/
+!nvim/**
+!neofetch/**
+!alacritty/**
+!tmux/**
