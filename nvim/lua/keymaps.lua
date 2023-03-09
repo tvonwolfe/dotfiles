@@ -51,8 +51,8 @@ nmap('<leader>gc', '<cmd>Git commit<CR>')
 nmap('<C-w>m', '<cmd>MaximizerToggle<CR>')
 
 -- sideways.vim
-nmap('<C-]>', '<cmd>SidewaysLeft<CR>')
-nmap('<C-[>', '<cmd>SidewaysRight<CR>')
+nmap('<C-n>', '<cmd>SidewaysLeft<CR>')
+nmap('<C-m>', '<cmd>SidewaysRight<CR>')
 
 -- toggleterm
 nmap('<leader>t', '<cmd>ToggleTerm<CR>')
