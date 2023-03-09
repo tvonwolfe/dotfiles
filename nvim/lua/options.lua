@@ -4,9 +4,6 @@ local home = os.getenv('HOME')
 
 opts = vim.opt
 
--- hide command line unless needed
-opts.cmdheight = 0
-
 -- keep the signcolumn open all the time
 opts.signcolumn = 'yes'
 
