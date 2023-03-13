@@ -60,12 +60,10 @@ nmap('<leader>t', '<cmd>ToggleTerm<CR>')
 nmap('<leader>fu', '<cmd>CellularAutomaton make_it_rain<CR>')
 
 -- Telescope
-local status, telescope_builtins = pcall(require, 'telescope.builtin')
+local telescope_builtins_ok, telescope_builtins = pcall(require, 'telescope.builtin')
 
-if status then
+if telescope_builtins_ok then
   nmap('<leader>ff', telescope_builtins.find_files)
-  nmap('<leader>fs', telescope_builtins.lsp_document_symbols)
-  nmap('<leader>fw', telescope_builtins.lsp_workspace_symbols)
   nmap('<leader>fg', telescope_builtins.live_grep)
   nmap('<leader>fb', telescope_builtins.buffers)
   nmap('<leader>fh', telescope_builtins.help_tags)
@@ -125,17 +123,18 @@ nmap('<leader>sc', cancel_spec_run)
 
 nvim_config.on_attach = function(client, buffnr)
   local bufopts = { noremap = true, silent = true, buffer = buffnr }
-  nmap('gd', vim.lsp.buf.definition, bufopts)
   nmap('K', vim.lsp.buf.hover, bufopts)
-  nmap('gh', vim.lsp.buf.signature_help, bufopts)
-  nmap('ca', vim.lsp.buf.code_action, bufopts)
-  nmap('gc', vim.lsp.buf.incoming_calls, bufopts)
-  nmap('gr', vim.lsp.buf.references, bufopts)
-  nmap('rn', vim.lsp.buf.rename, bufopts)
-  -- nmap('gs', vim.lsp.buf.document_symbol, bufopts)
-  nmap('gw', vim.lsp.buf.workspace_symbol, bufopts)
+  nmap('<leader>gh', vim.lsp.buf.signature_help, bufopts)
+  nmap('<leader>ca', vim.lsp.buf.code_action, bufopts)
+  nmap('<leader>rn', vim.lsp.buf.rename, bufopts)
   nmap('[d', vim.diagnostic.goto_prev, bufopts)
   nmap(']d', vim.diagnostic.goto_next, bufopts)
-  nmap('<leader>ds', vim.diagnostic.show, bufopts)
-  nmap('<leader>dh', vim.diagnostic.hide, bufopts)
+
+  if telescope_builtins_ok then
+    nmap('gc', telescope_builtins.lsp_incoming_calls, bufopts)
+    nmap('gr', telescope_builtins.lsp_references, bufopts)
+    nmap('gd', telescope_builtins.lsp_definitions, bufopts)
+    nmap('<leader>fs', telescope_builtins.lsp_document_symbols)
+    nmap('<leader>fw', telescope_builtins.lsp_workspace_symbols)
+  end
 end
