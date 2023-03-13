@@ -1,4 +1,5 @@
 local result, mason = pcall(require, 'mason')
+local neodev = pcall(require, 'neodev')
 
 if result then
   local mason_lsp_config = require 'mason-lspconfig'
@@ -21,7 +22,7 @@ if result then
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
-      require("lspconfig")[server_name].setup {
+      local setup_args = {
         capabilities = capabilities,
         single_file_support = true,
         on_attach = function(client, bufnr)
@@ -29,6 +30,7 @@ if result then
           lsp_format.on_attach(client)
         end
       }
+      require("lspconfig")[server_name].setup(setup_args)
     end,
     -- Next, you can provide a dedicated handler for specific servers.
     -- For example, a handler override for the `rust_analyzer`:

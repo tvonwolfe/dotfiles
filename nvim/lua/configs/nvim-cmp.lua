@@ -27,6 +27,7 @@ cmp.setup {
     expand = function(args) luasnip.lsp_expand(args.body) end
   },
   sources = {
+    { name = 'nvim_lua' },
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'path' },
@@ -37,7 +38,7 @@ cmp.setup {
   },
   confirmation = { completeopt = 'menu,menuone,noinsert' },
   mapping = cmp.mapping.preset.insert({
-        ['<Tab>'] = cmp.mapping(function(fallback)
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expandable() then
@@ -50,7 +51,7 @@ cmp.setup {
         fallback()
       end
     end, { "i", "s" }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -59,9 +60,9 @@ cmp.setup {
         fallback()
       end
     end, { "i", "s" }),
-        ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "c", "i" }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { "c", "i" }),
-        ['<CR>'] = cmp.mapping.confirm({ select = false })
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "c", "i" }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { "c", "i" }),
+    ['<CR>'] = cmp.mapping.confirm({ select = false })
   }),
   experimental = {
     ghost_text = true
