@@ -7,6 +7,7 @@ MODES = {
 
 local vim = vim
 local fn = vim.fn
+local neotest = require('neotest')
 
 local function map(mode, shortcut, command, bufopts)
   bufopts = bufopts or { remap = false, silent = true }
@@ -82,32 +83,32 @@ nmap('<leader>n', '<cmd>NvimTreeToggle<CR>')
 -- Neotest keymaps
 -----------------------------------------------------------------------
 local function run_current_spec_file()
-  require('neotest').run.run(vim.fn.expand('%'))
+  neotest.run.run(vim.fn.expand('%'))
   -- fn.RunCurrentSpecFile()
 end
 
 local function run_nearest_spec()
-  require('neotest').run.run()
+  neotest.run.run()
   -- fn.RunNearestSpec()
 end
 
 local function run_last_spec()
-  fn.RunLastSpec()
+  neotest.run.run_last()
+  -- fn.RunLastSpec()
 end
 
 local function run_all_specs()
-  local neotest = require('neotest')
   neotest.summary.open()
   neotest.run.run(vim.fn.getcwd())
   -- fn.RunAllSpecs()
 end
 
 local function open_spec_summary()
-  require('neotest').summary.toggle()
+  neotest.summary.toggle()
 end
 
 local function cancel_spec_run()
-  require('neotest').run.stop()
+  neotest.run.stop()
 end
 
 nmap('<leader>sf', run_current_spec_file)
@@ -121,7 +122,7 @@ nmap('<leader>sc', cancel_spec_run)
 -- LSP keymaps
 -----------------------------------------------------------------------
 
-nvim_config.on_attach = function(client, buffnr)
+local function standard_on_attach(client, buffnr)
   local bufopts = { noremap = true, silent = true, buffer = buffnr }
   nmap('K', vim.lsp.buf.hover, bufopts)
   nmap('<leader>gh', vim.lsp.buf.signature_help, bufopts)
@@ -129,12 +130,21 @@ nvim_config.on_attach = function(client, buffnr)
   nmap('<leader>rn', vim.lsp.buf.rename, bufopts)
   nmap('[d', vim.diagnostic.goto_prev, bufopts)
   nmap(']d', vim.diagnostic.goto_next, bufopts)
+end
+
+local function telescope_on_attach(client, buffnr)
+  local bufopts = { noremap = true, silent = true, buffer = buffnr }
+  nmap('gc', telescope_builtins.lsp_incoming_calls, bufopts)
+  nmap('gr', telescope_builtins.lsp_references, bufopts)
+  nmap('gd', telescope_builtins.lsp_definitions, bufopts)
+  nmap('<leader>fs', telescope_builtins.lsp_document_symbols)
+  nmap('<leader>fw', telescope_builtins.lsp_workspace_symbols)
+end
+
+nvim_config.on_attach = function(client, buffnr)
+  standard_on_attach(client, buffnr)
 
   if telescope_builtins_ok then
-    nmap('gc', telescope_builtins.lsp_incoming_calls, bufopts)
-    nmap('gr', telescope_builtins.lsp_references, bufopts)
-    nmap('gd', telescope_builtins.lsp_definitions, bufopts)
-    nmap('<leader>fs', telescope_builtins.lsp_document_symbols)
-    nmap('<leader>fw', telescope_builtins.lsp_workspace_symbols)
+    telescope_on_attach(client, buffnr)
   end
 end
