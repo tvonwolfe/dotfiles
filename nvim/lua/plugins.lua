@@ -156,6 +156,12 @@ return require('packer').startup(function(use)
   end
   }
 
+  -- csv syntax highlighting
+  use {
+    'cameron-wags/rainbow_csv.nvim',
+    config = function() require 'rainbow_csv'.setup() end,
+  }
+
   ------------------------------------------------------------------------------
   -- nvim-telescope & related
   ------------------------------------------------------------------------------
