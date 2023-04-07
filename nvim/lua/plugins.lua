@@ -223,6 +223,8 @@ return require('packer').startup(function(use)
   -- ruby language files for vim
   use { 'vim-ruby/vim-ruby' }
 
+  use { 'kana/vim-textobj-user' } -- dependency for textobj-rubyblock
+
   -- rvm wrapper for vim.
   use 'tpope/vim-rvm'
 
@@ -240,6 +242,12 @@ return require('packer').startup(function(use)
 
   -- add support for ruby code blocks as vim text objects
   use { 'nelstrom/vim-textobj-rubyblock', ft = 'ruby' }
+
+  use {
+    'thoughtbot/vim-rspec',
+    config = function() require 'configs.vim-rspec' end,
+    ft='ruby',
+  }
 
   --------------------------------------
   -- liquid
@@ -279,8 +287,6 @@ return require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = function() require 'configs.nvim-tree' end
   }
-
-  use { 'kana/vim-textobj-user' } -- dependency for textobj-rubyblock
 
   ------------------------------------------------------------------------------
   -- lsp stuff
@@ -344,15 +350,17 @@ return require('packer').startup(function(use)
   ------------------------------------------------------------------------------
   -- neotest is an integrated test viewer/executer with hooks into lsp stuff
   -- also language agnostic so can add handlers for other languages/frameworks
-  use {
-    'nvim-neotest/neotest',
-    requires = {
-      'antoinemadec/FixCursorHold.nvim',
-      'nvim-neotest/neotest-plenary',
-      'olimorris/neotest-rspec',
-    },
-    config = function() require 'configs.neotest' end
-  }
+  -- TODO: un-comment this at some point when neotest works for debugging
+  -- Ruby/Rails code
+  -- use {
+  --   'nvim-neotest/neotest',
+  --   requires = {
+  --     'antoinemadec/FixCursorHold.nvim',
+  --     'nvim-neotest/neotest-plenary',
+  --     'olimorris/neotest-rspec',
+  --   },
+  --   config = function() require 'configs.neotest' end
+  -- }
 
   if packer_bootstrap then
     require('packer').sync()

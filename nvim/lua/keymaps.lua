@@ -7,7 +7,7 @@ MODES = {
 
 local vim = vim
 local fn = vim.fn
-local neotest = require('neotest')
+-- local neotest = require('neotest')
 
 local function map(mode, shortcut, command, bufopts)
   bufopts = bufopts or { remap = false, silent = true }
@@ -80,43 +80,43 @@ nmap('<leader>xx', '<cmd>TroubleToggle<CR>')
 nmap('<leader>n', '<cmd>NvimTreeToggle<CR>')
 
 -----------------------------------------------------------------------
--- Neotest keymaps
+-- Spec keymaps
 -----------------------------------------------------------------------
 local function run_current_spec_file()
-  neotest.run.run(vim.fn.expand('%'))
-  -- fn.RunCurrentSpecFile()
+  -- neotest.run.run(vim.fn.expand('%'))
+  fn.RunCurrentSpecFile()
 end
 
 local function run_nearest_spec()
-  neotest.run.run()
-  -- fn.RunNearestSpec()
+  -- neotest.run.run()
+  fn.RunNearestSpec()
 end
 
 local function run_last_spec()
-  neotest.run.run_last()
-  -- fn.RunLastSpec()
+  -- neotest.run.run_last()
+  fn.RunLastSpec()
 end
 
 local function run_all_specs()
-  neotest.summary.open()
-  neotest.run.run(vim.fn.getcwd())
-  -- fn.RunAllSpecs()
+  -- neotest.summary.open()
+  -- neotest.run.run(vim.fn.getcwd())
+  fn.RunAllSpecs()
 end
 
-local function open_spec_summary()
-  neotest.summary.toggle()
-end
+-- local function open_spec_summary()
+--   neotest.summary.toggle()
+-- end
 
-local function cancel_spec_run()
-  neotest.run.stop()
-end
+-- local function cancel_spec_run()
+--   neotest.run.stop()
+-- end
 
 nmap('<leader>sf', run_current_spec_file)
 nmap('<leader>sn', run_nearest_spec)
 nmap('<leader>sa', run_all_specs)
 nmap('<leader>sl', run_last_spec)
-nmap('<leader>ss', open_spec_summary)
-nmap('<leader>sc', cancel_spec_run)
+-- nmap('<leader>ss', open_spec_summary)
+-- nmap('<leader>sc', cancel_spec_run)
 
 -----------------------------------------------------------------------
 -- LSP keymaps
