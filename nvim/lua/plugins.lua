@@ -71,6 +71,12 @@ return require('packer').startup(function(use)
     config = function() require 'configs.autopairs' end,
   }
 
+  -- work with different variants of a word
+  -- (plural, singular, tableize, capitalize, etc.)
+  use {
+    'tpope/vim-abolish'
+  }
+
   -- easy quoting, parenthesizing, etc.
   use 'tpope/vim-surround'
 
@@ -246,7 +252,7 @@ return require('packer').startup(function(use)
   use {
     'thoughtbot/vim-rspec',
     config = function() require 'configs.vim-rspec' end,
-    ft='ruby',
+    ft = 'ruby',
   }
 
   --------------------------------------
