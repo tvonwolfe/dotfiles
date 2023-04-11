@@ -108,8 +108,12 @@ return require('packer').startup(function(use)
   -- easy project management from within vim
   use 'tpope/vim-projectionist'
 
-  -- db stuff for vim
-  use 'tpope/vim-dadbod'
+  -- db stuff
+  use {
+    'kristijanhusak/vim-dadbod-ui',
+    requires = { 'tpope/vim-dadbod' },
+  }
+
 
   -- wrappers to common unix file commands
   use 'tpope/vim-eunuch'
