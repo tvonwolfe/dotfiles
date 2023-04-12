@@ -1,4 +1,7 @@
-local vim = vim
-vim.cmd('autocmd! TermOpen * set nonumber norelativenumber nocursorline|startinsert')
+local cmd = vim.cmd
 
-vim.cmd [[cabbrev wq execute "lua vim.lsp.buf.format()" <bar> wq]]
+cmd 'autocmd! TermOpen * set nonumber norelativenumber nocursorline|startinsert'
+
+cmd [[cabbrev wq execute "lua vim.lsp.buf.format()" <bar> wq]]
+
+cmd 'autocmd! VimResized * wincmd ='
