@@ -95,8 +95,9 @@ return require('packer').startup(function(use)
   -- better syntax highlighting
   use {
     requires = {
-      'windwp/nvim-ts-autotag',         -- auto-close html/xml/jsx tags.
-      'RRethy/nvim-treesitter-endwise', -- wisely add `end` to code blocks in languages that use that keyword.
+      'windwp/nvim-ts-autotag',                 -- auto-close html/xml/jsx tags.
+      'RRethy/nvim-treesitter-endwise',         -- wisely add `end` to code blocks in languages that use that keyword.
+      'nvim-treesitter/nvim-treesitter-context' -- show context within files
     },
     'nvim-treesitter/nvim-treesitter',
     config = function() require 'configs.treesitter' end,
