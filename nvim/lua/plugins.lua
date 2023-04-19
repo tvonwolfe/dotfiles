@@ -167,10 +167,15 @@ return require('packer').startup(function(use)
   end
   }
 
-  -- csv syntax highlighting
   use {
-    'cameron-wags/rainbow_csv.nvim',
-    config = function() require 'rainbow_csv'.setup() end,
+    'norcalli/nvim-colorizer.lua', -- performant color code highlighting
+    config = function() require 'configs.colorizer' end
+  }
+
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function() require 'configs.nvim-tree' end
   }
 
   ------------------------------------------------------------------------------
@@ -263,13 +268,15 @@ return require('packer').startup(function(use)
   --------------------------------------
   -- liquid
   --------------------------------------
-  use { 'tpope/vim-liquid', ft = 'liquid' } -- syntax for liquid templates
+  -- syntax for liquid templates
+  use { 'tpope/vim-liquid', ft = 'liquid' }
 
   --------------------------------------
   -- helm charts
   --------------------------------------
+  -- syntax highlighting for helm charts
   use {
-    'towolf/vim-helm' -- syntax highlighting for helm charts
+    'towolf/vim-helm'
   }
 
   --------------------------------------
@@ -281,22 +288,20 @@ return require('packer').startup(function(use)
   -- supports json objects as vim text objects
   use { 'tpope/vim-jdaddy', ft = 'json' }
 
-  use 'nanotee/sqls.nvim' -- sql client and query execution plugin
+  --------------------------------------
+  -- sql
+  --------------------------------------
 
-  use {
-    'norcalli/nvim-colorizer.lua', -- performant color code highlighting
-    config = function() require 'configs.colorizer' end
-  }
+  -- sql client and query execution plugin
+  use 'nanotee/sqls.nvim'
 
+  --------------------------------------
+  -- csv
+  --------------------------------------
+  -- csv syntax highlighting
   use {
-    'folke/lsp-colors.nvim',
-    config = function() require 'configs.lsp-colors' end
-  }
-
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function() require 'configs.nvim-tree' end
+    'cameron-wags/rainbow_csv.nvim',
+    config = function() require 'rainbow_csv'.setup() end,
   }
 
   ------------------------------------------------------------------------------
@@ -355,6 +360,10 @@ return require('packer').startup(function(use)
   -- helpful lsp stuff for neovim & lua
   use 'folke/neodev.nvim'
 
+  use {
+    'folke/lsp-colors.nvim',
+    config = function() require 'configs.lsp-colors' end
+  }
 
   ------------------------------------------------------------------------------
   -- test/spec plugins
