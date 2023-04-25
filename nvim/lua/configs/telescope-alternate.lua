@@ -13,5 +13,4 @@ telescope_alternate.setup {
     { 'src/scripts/**/*.ts', { { 'spec/**/[1].spec.ts', 'Test' } } },
   },
   presets = { 'rails', 'rspec' },
-  open_only_one_with = 'vertical_split',
 }
