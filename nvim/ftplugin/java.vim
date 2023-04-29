@@ -1,4 +1,4 @@
-set makeprg=mvn
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+setlocal makeprg=mvn
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal softtabstop=4
