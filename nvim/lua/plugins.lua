@@ -21,12 +21,6 @@ return require('packer').startup(function(use)
   ------------------------------------------------------------------------------
   -- themes
   ------------------------------------------------------------------------------
-  use 'drewtempelmeyer/palenight.vim'
-  use { 'embark-theme/vim', as = 'embark' }
-  use 'arcticicestudio/nord-vim'
-  use 'marko-cerovac/material.nvim'
-  use 'sainnhe/gruvbox-material'
-  use 'bluz71/vim-nightfly-guicolors'
   use 'folke/tokyonight.nvim'
 
   ------------------------------------------------------------------------------
@@ -37,10 +31,6 @@ return require('packer').startup(function(use)
   ------------------------------------------------------------------------------
   -- general quality of life stuff
   ------------------------------------------------------------------------------
-
-  -- floating terminal window
-  -- delete this? not using it anymore
-  use 'voldikss/vim-floaterm'
 
   -- seamless nav between vim & tmux panes
   use {
@@ -103,9 +93,6 @@ return require('packer').startup(function(use)
     config = function() require 'configs.treesitter' end,
   }
 
-  -- yarn integration in vim.
-  use 'glippi/yarn-vim'
-
   -- easy project management from within vim
   use 'tpope/vim-projectionist'
 
@@ -115,27 +102,17 @@ return require('packer').startup(function(use)
     requires = { 'tpope/vim-dadbod' },
   }
 
-
   -- wrappers to common unix file commands
   use 'tpope/vim-eunuch'
 
   -- dotenv stuff for vim
   use 'tpope/vim-dotenv'
 
-  -- quick navigation
-  use 'justinmk/vim-sneak'
-
   -- asynchronous build and test dispatching
   use 'tpope/vim-dispatch'
 
   -- easily convert between single & multi line statements.
   use 'AndrewRadev/splitjoin.vim'
-
-  -- automatically format files using the appropriate tool
-  use 'vim-autoformat/vim-autoformat'
-
-  -- kubectl wrapper for vim
-  use 'rottencandy/vimkubectl'
 
   -- indent guides
   use {
@@ -158,12 +135,6 @@ return require('packer').startup(function(use)
   -- more powerful <c-a> & <c-x>
   use { 'nat-418/boole.nvim', config = function()
     require 'configs.boole'
-  end
-  }
-
-  -- dim code symbols that have no usages
-  use { 'zbirenbaum/neodim', config = function()
-    require 'neodim'.setup({})
   end
   }
 
@@ -237,12 +208,16 @@ return require('packer').startup(function(use)
   -- ruby/rails
   --------------------------------------
   -- ruby language files for vim
-  use { 'vim-ruby/vim-ruby' }
-
-  use { 'kana/vim-textobj-user' } -- dependency for textobj-rubyblock
+  use {
+    'vim-ruby/vim-ruby',
+    ft = 'ruby'
+  }
 
   -- rvm wrapper for vim.
-  use 'tpope/vim-rvm'
+  use {
+    'tpope/vim-rvm',
+    ft = 'ruby'
+  }
 
   -- rails integration
   use {
@@ -251,13 +226,25 @@ return require('packer').startup(function(use)
   }
 
   -- ruby bundler integration
-  use { 'tpope/vim-bundler', ft = 'ruby' }
+  use {
+    'tpope/vim-bundler',
+    ft = 'ruby',
+  }
 
   -- rake integration
-  use { 'tpope/vim-rake', ft = 'ruby' }
+  use {
+    'tpope/vim-rake',
+    ft = 'ruby',
+  }
 
   -- add support for ruby code blocks as vim text objects
-  use { 'nelstrom/vim-textobj-rubyblock', ft = 'ruby' }
+  use {
+    'nelstrom/vim-textobj-rubyblock',
+    requires = {
+      'kana/vim-textobj-user',
+    },
+    ft = 'ruby',
+  }
 
   use {
     'thoughtbot/vim-rspec',
@@ -269,31 +256,34 @@ return require('packer').startup(function(use)
   -- liquid
   --------------------------------------
   -- syntax for liquid templates
-  use { 'tpope/vim-liquid', ft = 'liquid' }
+  use {
+    'tpope/vim-liquid',
+    ft = 'liquid',
+  }
 
   --------------------------------------
   -- helm charts
   --------------------------------------
   -- syntax highlighting for helm charts
   use {
-    'towolf/vim-helm'
+    'towolf/vim-helm',
+    ft = 'helm'
   }
 
   --------------------------------------
   -- json
   --------------------------------------
   -- navigate json files via object keys.
-  use { 'mogelbrod/vim-jsonpath', ft = 'json' }
+  use {
+    'mogelbrod/vim-jsonpath',
+    ft = 'json',
+  }
 
   -- supports json objects as vim text objects
-  use { 'tpope/vim-jdaddy', ft = 'json' }
-
-  --------------------------------------
-  -- sql
-  --------------------------------------
-
-  -- sql client and query execution plugin
-  use 'nanotee/sqls.nvim'
+  use {
+    'tpope/vim-jdaddy',
+    ft = 'json',
+  }
 
   --------------------------------------
   -- csv
@@ -313,21 +303,16 @@ return require('packer').startup(function(use)
     config = function() require 'configs.lsp-signature' end
   }
 
-  use { 'hrsh7th/cmp-buffer' }
-
-  use { 'hrsh7th/cmp-path' }
-
-  use { 'hrsh7th/cmp-nvim-lsp' }
-
-  use { 'hrsh7th/cmp-nvim-lsp-signature-help' }
-
-  use { 'hrsh7th/cmp-nvim-lua' }
-
   use {
     'hrsh7th/nvim-cmp',
     requires = {
       'L3MON4D3/LuaSnip',
-      'onsails/lspkind.nvim'
+      'onsails/lspkind.nvim',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer'
     },
     config = function() require 'configs.nvim-cmp' end
   }
@@ -335,16 +320,6 @@ return require('packer').startup(function(use)
   use {
     'lukas-reineke/lsp-format.nvim',
     config = function() require 'configs.lsp-format' end
-  }
-
-  use {
-    'mfussenegger/nvim-dap',
-    config = function() require 'configs.nvim-dap' end
-  }
-
-  use {
-    'suketa/nvim-dap-ruby',
-    config = function() require 'configs.dap-ruby' end
   }
 
   use {
