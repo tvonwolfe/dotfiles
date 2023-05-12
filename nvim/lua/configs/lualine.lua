@@ -1,3 +1,4 @@
+local vim = vim
 local lualine = require 'lualine'
 
 local get_ruby_version = function()

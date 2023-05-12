@@ -2,7 +2,7 @@
 local vim = vim
 local home = os.getenv('HOME')
 
-opts = vim.opt
+local opts = vim.opt
 
 -- keep the signcolumn open all the time
 opts.signcolumn = 'yes'
