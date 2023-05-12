@@ -111,9 +111,6 @@ opts.list = true
 --     noinsert = do not insert text for a match until it's selected
 opts.completeopt = { 'menu', 'menuone', 'noinsert' }
 
--- use python 3 executable found with the `which` command
-vim.g.python3_host_prog = os.execute('which python3')
-
 -- symbols to use for file diagnostics
 local signs = { Error = "", Warn = "", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
