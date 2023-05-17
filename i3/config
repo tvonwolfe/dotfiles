@@ -17,6 +17,9 @@ font pango:monospace 8
 
 exec --no-startup-id feh --bg-scale --zoom fill ~/Pictures/desktop.jpeg
 
+# caps lock as super key
+exec setxkbmap -option caps:super
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -57,6 +60,8 @@ floating_modifier $mod
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
+
+bindsym $mod+Shift+P exec shutdown now
 
 # start a terminal
 bindsym $mod+Return exec kitty
