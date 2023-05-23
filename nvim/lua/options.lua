@@ -7,9 +7,6 @@ local opts = vim.opt
 -- keep the signcolumn open all the time
 opts.signcolumn = 'yes'
 
--- don't abandon buffers when they're left
-opts.hidden = true
-
 -- enable true color support in the terminal
 opts.termguicolors = true
 

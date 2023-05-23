@@ -56,10 +56,7 @@ return require('packer').startup(function(use)
   }
 
   -- auto-pairs on braces, quotes, etc.
-  use {
-    'windwp/nvim-autopairs',
-    config = function() require 'configs.autopairs' end,
-  }
+  use 'cohama/lexima.vim'
 
   -- work with different variants of a word
   -- (plural, singular, tableize, capitalize, etc.)
@@ -118,12 +115,6 @@ return require('packer').startup(function(use)
   use {
     'lukas-reineke/indent-blankline.nvim',
     config = function() require 'configs.indent-blankline' end,
-  }
-
-  -- quick terminal access
-  use {
-    'akinsho/toggleterm.nvim',
-    config = function() require 'configs.toggleterm' end
   }
 
   -- maximize window splits
@@ -332,13 +323,13 @@ return require('packer').startup(function(use)
 
   use { 'folke/trouble.nvim', config = function() require 'configs.trouble' end }
 
-  -- helpful lsp stuff for neovim & lua
-  use 'folke/neodev.nvim'
-
   use {
     'folke/lsp-colors.nvim',
     config = function() require 'configs.lsp-colors' end
   }
+
+  -- helpful lsp stuff for neovim & lua
+  use 'folke/neodev.nvim'
 
   ------------------------------------------------------------------------------
   -- test/spec plugins
