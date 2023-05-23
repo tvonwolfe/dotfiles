@@ -56,8 +56,10 @@ return require('packer').startup(function(use)
   }
 
   -- auto-pairs on braces, quotes, etc.
-  use 'cohama/lexima.vim'
-
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require 'configs.autopairs' end,
+  }
   -- work with different variants of a word
   -- (plural, singular, tableize, capitalize, etc.)
   use {
