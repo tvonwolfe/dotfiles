@@ -7,6 +7,7 @@ MODES = {
 
 local vim = vim
 local fn = vim.fn
+
 -- local neotest = require('neotest')
 
 local function map(mode, shortcut, command, bufopts)
@@ -78,6 +79,13 @@ tmap('<esc>', [[<C-\><C-n>]])
 nmap('<leader>xx', '<cmd>TroubleToggle document_diagnostics<CR>')
 
 nmap('<leader>n', '<cmd>NvimTreeToggle<CR>')
+
+-- Todos
+local todo_comments_ok, todo_comments = pcall(require, 'todo-comments')
+if todo_comments_ok then
+  nmap(']t', todo_comments.jump_next, { desc = 'Next todo comment' })
+  nmap('[t', todo_comments.jump_prev, { desc = 'Previous todo comment' })
+end
 
 -----------------------------------------------------------------------
 -- Spec keymaps

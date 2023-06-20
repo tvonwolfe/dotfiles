@@ -81,15 +81,22 @@ return require('packer').startup(function(use)
     config = function() require 'configs.illuminate' end,
   }
 
-  -- better syntax highlighting
+  -- better syntax highlighting and formatting via treesitter
   use {
     requires = {
-      'windwp/nvim-ts-autotag',                 -- auto-close html/xml/jsx tags.
-      'RRethy/nvim-treesitter-endwise',         -- wisely add `end` to code blocks in languages that use that keyword.
-      'nvim-treesitter/nvim-treesitter-context' -- show context within files
+      'windwp/nvim-ts-autotag',                  -- auto-close html/xml/jsx tags.
+      'RRethy/nvim-treesitter-endwise',          -- wisely add `end` to code blocks in languages that use that keyword.
+      'nvim-treesitter/nvim-treesitter-context', -- show context within files
+      'yioneko/nvim-yati'
     },
     'nvim-treesitter/nvim-treesitter',
     config = function() require 'configs.treesitter' end,
+  }
+
+  use {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    after = 'nvim-treesitter',
+    requires = 'nvim-treesitter/nvim-treesitter',
   }
 
   -- easy project management from within vim
@@ -324,6 +331,7 @@ return require('packer').startup(function(use)
   require 'configs.mason-lspconfig'
 
   use { 'folke/trouble.nvim', config = function() require 'configs.trouble' end }
+  use { 'folke/todo-comments.nvim', config = function() require 'configs.todo-comments' end }
 
   use {
     'folke/lsp-colors.nvim',
