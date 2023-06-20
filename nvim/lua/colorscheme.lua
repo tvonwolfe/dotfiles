@@ -41,6 +41,6 @@ local function toggle()
 end
 
 return {
-  set_colorscheme_from_environment = set_from_environment,
+  set_from_environment = set_from_environment,
   toggle_colorscheme = toggle,
 }
