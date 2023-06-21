@@ -1,46 +1,52 @@
 local vim = vim
 
-DEFAULT_COLORSCHEME = 'tokyonight-storm'
-
-COLORSCHEMES = {
-  dark = DEFAULT_COLORSCHEME,
-  light = 'tokyonight-day'
-}
-
-local function fetch_colorscheme(theme)
-  local colorscheme = COLORSCHEMES[theme]
-  if colorscheme == nil then
-    colorscheme = DEFAULT_COLORSCHEME
-  end
-  return colorscheme
-end
-
-local function get_from_config_file()
-  local filename = os.getenv('HOME') .. '/.flip'
-  local f = assert(io.open(filename, 'r'))
-  local contents = assert(f:read("*all"))
-  f:close()
-
-  local theme = string.gsub(contents, "%s+", "")
-
-  return theme
-end
+local colorscheme = {}
+local options = {}
+local state = nil
 
 local function set_colorscheme(theme)
-  pcall(vim.cmd, 'colorscheme ' .. theme)
+  local status, _result = pcall(vim.cmd, 'colorscheme ' .. theme)
+
+  if not status then
+    print("ERROR: Couldn't set colorscheme to " .. theme)
+  end
+
+  return status
 end
 
-local function set_from_environment()
-  local theme = get_from_config_file()
-  set_colorscheme(fetch_colorscheme(theme))
+local toggle = function()
+  if state == 'default' then
+    set_colorscheme(options.alternate or options.default)
+    state = 'alternate'
+  else
+    set_colorscheme(options.default)
+    state = 'default'
+  end
+
+  if options.toggle_callback then
+    options.toggle_callback(vim.opt.background._value)
+  end
 end
 
-local function toggle()
-  local _ = os.execute('flip')
-  set_colorscheme(fetch_colorscheme(get_from_config_file()))
+local function set_initial_state()
+  if options.on_startup then
+    state = options.on_startup()
+  else
+    state = 'default'
+  end
 end
 
-return {
-  set_from_environment = set_from_environment,
-  toggle_colorscheme = toggle,
-}
+function colorscheme.setup(opts)
+  options = vim.tbl_deep_extend("force", {}, options, opts or {})
+  set_initial_state()
+
+  local status = set_colorscheme(options[state])
+
+  if (not status) and opts.fallback ~= nil then
+    set_colorscheme(options.fallback)
+  end
+end
+
+vim.api.nvim_create_user_command('ToggleColorscheme', toggle, {})
+
+return colorscheme

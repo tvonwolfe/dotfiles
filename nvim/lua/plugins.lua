@@ -22,6 +22,9 @@ return require('packer').startup(function(use)
   -- themes
   ------------------------------------------------------------------------------
   use 'folke/tokyonight.nvim'
+  use 'sainnhe/everforest'
+  use 'bluz71/vim-nightfly-colors'
+  use 'embark-theme/vim'
 
   ------------------------------------------------------------------------------
   -- whimsical stuff
@@ -331,7 +334,7 @@ return require('packer').startup(function(use)
   require 'configs.mason-lspconfig'
 
   use { 'folke/trouble.nvim', config = function() require 'configs.trouble' end }
-  use { 'folke/todo-comments.nvim', config = function() require 'configs.todo-comments' end }
+  -- use { 'folke/todo-comments.nvim', config = function() require 'configs.todo-comments' end }
 
   use {
     'folke/lsp-colors.nvim',
