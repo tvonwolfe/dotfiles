@@ -336,11 +336,6 @@ return require('packer').startup(function(use)
   use { 'folke/trouble.nvim', config = function() require 'configs.trouble' end }
   -- use { 'folke/todo-comments.nvim', config = function() require 'configs.todo-comments' end }
 
-  use {
-    'folke/lsp-colors.nvim',
-    config = function() require 'configs.lsp-colors' end
-  }
-
   -- helpful lsp stuff for neovim & lua
   use 'folke/neodev.nvim'
 
