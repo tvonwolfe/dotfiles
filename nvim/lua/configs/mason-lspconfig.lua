@@ -14,8 +14,8 @@ if result then
   mason_lsp_config.setup {
     ensure_installed = {
       'solargraph',
-      'typescript-language-server',
-      'lua-language-server',
+      'tsserver',
+      'lua_ls',
     }
   }
 
