@@ -322,7 +322,7 @@ return require('packer').startup(function(use)
 
   use {
     'lukas-reineke/lsp-format.nvim',
-    config = function() require 'configs.lsp-format' end
+    config = function() require 'configs.lspformat' end
   }
 
   use {

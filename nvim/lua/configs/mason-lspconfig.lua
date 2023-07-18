@@ -34,10 +34,5 @@ if result then
       }
       require("lspconfig")[server_name].setup(setup_args)
     end,
-    -- Next, you can provide a dedicated handler for specific servers.
-    -- For example, a handler override for the `rust_analyzer`:
-    ["rust_analyzer"] = function()
-      require("rust-tools").setup {}
-    end
   }
 end
