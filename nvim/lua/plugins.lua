@@ -326,12 +326,9 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
-    'simrat39/rust-tools.nvim',
+    config = function() require 'configs.lsp-config' end
   }
-  require 'configs.mason-lspconfig'
 
   use { 'folke/trouble.nvim', config = function() require 'configs.trouble' end }
   -- use { 'folke/todo-comments.nvim', config = function() require 'configs.todo-comments' end }
