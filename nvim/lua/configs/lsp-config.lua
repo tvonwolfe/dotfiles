@@ -1,6 +1,6 @@
 local lsp = vim.lsp
 local lspconfig = require 'lspconfig'
-local neodev = pcall(require, 'neodev')
+pcall(require, 'neodev')
 local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 local nvim_lsp_protocol = lsp.protocol
 local capabilities = cmp_nvim_lsp.default_capabilities(nvim_lsp_protocol.make_client_capabilities())
@@ -22,6 +22,8 @@ local servers = {
   'solargraph',
   'tsserver',
   'lua_ls',
+  'html',
+  'cssls'
 }
 
 for _, server in ipairs(servers) do
