@@ -5,6 +5,7 @@ local cmp_nvim_lsp = require 'cmp_nvim_lsp'
 local nvim_lsp_protocol = lsp.protocol
 local capabilities = cmp_nvim_lsp.default_capabilities(nvim_lsp_protocol.make_client_capabilities())
 local lsp_format = require 'lsp-format'
+lsp_format.setup()
 
 local function default_handler(server_name)
   local setup_args = {
