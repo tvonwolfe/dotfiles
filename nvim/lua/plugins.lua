@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
   use 'sainnhe/everforest'
   use 'bluz71/vim-nightfly-colors'
   use 'embark-theme/vim'
+  use { "catppuccin/nvim", as = "catppuccin" }
 
   ------------------------------------------------------------------------------
   -- whimsical stuff
