@@ -24,7 +24,8 @@ local servers = {
   'tsserver',
   'lua_ls',
   'html',
-  'cssls'
+  'cssls',
+  'jsonls'
 }
 
 for _, server in ipairs(servers) do
