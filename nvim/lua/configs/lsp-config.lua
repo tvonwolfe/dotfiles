@@ -25,7 +25,8 @@ local servers = {
   'lua_ls',
   'html',
   'cssls',
-  'jsonls'
+  'jsonls',
+  'marksman',
 }
 
 for _, server in ipairs(servers) do
