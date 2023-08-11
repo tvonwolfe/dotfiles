@@ -56,10 +56,15 @@ nmap('<C-w>m', '<cmd>MaximizerToggle<CR>')
 nmap('<C-n>', '<cmd>SidewaysLeft<CR>')
 nmap('<C-m>', '<cmd>SidewaysRight<CR>')
 
--- toggleterm
-nmap('<leader>t', '<cmd>ToggleTerm<CR>')
-
 nmap('<leader>fu', '<cmd>CellularAutomaton make_it_rain<CR>')
+
+-- jump between git change hunks
+local gitsigns_ok, gitsigns = pcall(require, 'gitsigns')
+
+if gitsigns_ok then
+  nmap('[g', gitsigns.prev_hunk)
+  nmap(']g', gitsigns.next_hunk)
+end
 
 -- Telescope
 local telescope_builtins_ok, telescope_builtins = pcall(require, 'telescope.builtin')
