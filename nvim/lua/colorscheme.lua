@@ -2,7 +2,8 @@ local vim = vim
 local M = {}
 
 local defaults = {
-  default = 'dark',
+  dark = 'default',
+  light = 'morning',
   on_toggle = function(background) end,
 }
 
@@ -28,7 +29,7 @@ M.options = {}
 
 local toggle = function()
   local theme = flip(vim.o.background)
-  local colorscheme = M.options[theme] or M.options[M.options.default]
+  local colorscheme = M.options[theme] or M.options.dark
   set_colorscheme(colorscheme)
   vim.opt.background = theme
 
