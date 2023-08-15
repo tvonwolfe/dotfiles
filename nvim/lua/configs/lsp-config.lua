@@ -20,13 +20,14 @@ local function default_handler(server_name)
 end
 
 local servers = {
-  'solargraph',
-  'tsserver',
-  'lua_ls',
-  'html',
   'cssls',
+  'html',
   'jsonls',
+  'lua_ls',
   'marksman',
+  'solargraph',
+  'terraformls',
+  'tsserver',
 }
 
 for _, server in ipairs(servers) do
