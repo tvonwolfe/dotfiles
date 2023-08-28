@@ -312,12 +312,6 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'zbirenbaum/neodim',
-    event = 'LspAttach',
-    config = function() require 'neodim'.setup() end,
-  }
-
-  use {
     'hrsh7th/nvim-cmp',
     requires = {
       'L3MON4D3/LuaSnip',
