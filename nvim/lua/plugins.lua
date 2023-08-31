@@ -42,6 +42,9 @@ return require('packer').startup(function(use)
     config = function() require 'configs.vim-tmux-navigator' end
   }
 
+  -- tmux command integration
+  use 'tpope/vim-tbone'
+
   -- load plugins quickfast
   use 'lewis6991/impatient.nvim'
 
