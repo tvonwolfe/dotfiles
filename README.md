@@ -8,3 +8,6 @@ This repo contains my personal config files for:
 - tmux
 - neofetch
 
+## License
+This repo is licensed with the Unlicense license. I claim no rights to the code 
+within.
