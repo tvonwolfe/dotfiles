@@ -9,5 +9,4 @@ This repo contains my personal config files for:
 - neofetch
 
 ## License
-This repo is licensed with the Unlicense license. I claim no rights to the code 
-within.
+This repo uses the Unlicense. I claim no rights to the code within.
