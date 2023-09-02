@@ -26,6 +26,7 @@ local servers = {
   'lua_ls',
   'marksman',
   'solargraph',
+  'tailwindcss',
   'terraformls',
   'tsserver',
 }
