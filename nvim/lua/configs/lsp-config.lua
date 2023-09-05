@@ -13,7 +13,7 @@ local function default_handler(server_name)
     single_file_support = true,
     on_attach = function(client, bufnr)
       nvim_config.on_attach(client, bufnr)
-      lsp_format.on_attach(client)
+      -- lsp_format.on_attach(client)
     end
   }
   lspconfig[server_name].setup(setup_args)
