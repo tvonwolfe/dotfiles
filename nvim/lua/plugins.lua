@@ -231,10 +231,7 @@ return require('packer').startup(function(use)
   }
 
   -- rails integration
-  use {
-    'tpope/vim-rails',
-    ft = 'ruby',
-  }
+  use 'tpope/vim-rails'
 
   -- ruby bundler integration
   use {
