@@ -48,11 +48,6 @@ return require('packer').startup(function(use)
   -- load plugins quickfast
   use 'lewis6991/impatient.nvim'
 
-  use {
-    'rmagatti/auto-session',
-    config = function() require 'configs.auto-session' end,
-  }
-
   -- look up man pages without leaving vim
   use 'vim-utils/vim-man'
 
@@ -91,9 +86,8 @@ return require('packer').startup(function(use)
   -- better syntax highlighting and formatting via treesitter
   use {
     requires = {
-      'windwp/nvim-ts-autotag',                  -- auto-close html/xml/jsx tags.
-      'RRethy/nvim-treesitter-endwise',          -- wisely add `end` to code blocks in languages that use that keyword.
-      'nvim-treesitter/nvim-treesitter-context', -- show context within files
+      'windwp/nvim-ts-autotag',         -- auto-close html/xml/jsx tags.
+      'RRethy/nvim-treesitter-endwise', -- wisely add `end` to code blocks in languages that use that keyword.
       'yioneko/nvim-yati'
     },
     'nvim-treesitter/nvim-treesitter',
