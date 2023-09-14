@@ -20,6 +20,7 @@ local function default_handler(server_name)
 end
 
 local servers = {
+  'clangd',
   'cssls',
   'html',
   'jsonls',
