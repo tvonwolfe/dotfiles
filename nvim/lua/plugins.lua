@@ -331,6 +331,7 @@ return require('packer').startup(function(use)
   -- helpful lsp stuff for neovim & lua
   use 'folke/neodev.nvim'
 
+  use 'aznhe21/actions-preview.nvim'
   ------------------------------------------------------------------------------
   -- test/spec plugins
   ------------------------------------------------------------------------------

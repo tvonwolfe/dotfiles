@@ -135,15 +135,20 @@ nmap('<leader>sl', run_last_spec)
 -- LSP keymaps
 -----------------------------------------------------------------------
 
+local action_preview_ok, action_preview = pcall(require, 'actions-preview')
+
 local function standard_on_attach(client, buffnr)
   local bufopts = { noremap = true, silent = true, buffer = buffnr }
+  local code_action = action_preview.code_actions or vim.lsp.buf.code_action
+
   nmap('K', vim.lsp.buf.hover, bufopts)
   nmap('<leader>gh', vim.lsp.buf.signature_help, bufopts)
-  nmap('<leader>ca', vim.lsp.buf.code_action, bufopts)
+  nmap('<leader>ca', code_action, bufopts)
   nmap('<leader>rn', vim.lsp.buf.rename, bufopts)
   nmap('[d', vim.diagnostic.goto_prev, bufopts)
   nmap(']d', vim.diagnostic.goto_next, bufopts)
 end
+
 
 local function telescope_on_attach(client, buffnr)
   local bufopts = { noremap = true, silent = true, buffer = buffnr }
