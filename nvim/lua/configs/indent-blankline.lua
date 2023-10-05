@@ -1,4 +1,5 @@
-local indent_blankline = require 'indent_blankline'
+local indent_blankline = require 'ibl'
+
 indent_blankline.setup {
-  show_current_context = true,
+  exclude = { filetypes = { 'text', 'markdown' } }
 }
