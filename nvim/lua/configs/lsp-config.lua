@@ -7,7 +7,7 @@ local capabilities = cmp_nvim_lsp.default_capabilities(nvim_lsp_protocol.make_cl
 local lsp_format = require 'lsp-format'
 lsp_format.setup()
 
-local function default_handler(server_name)
+local function default_handler(server_name, cmd)
   local setup_args = {
     capabilities = capabilities,
     single_file_support = true,
@@ -16,12 +16,18 @@ local function default_handler(server_name)
       -- lsp_format.on_attach(client)
     end
   }
+
+  if cmd then
+    setup_args.cmd = { cmd }
+  end
+
   lspconfig[server_name].setup(setup_args)
 end
 
 local servers = {
   'clangd',
   'cssls',
+  { 'elixirls', cmd = os.getenv("HOME") .. "/.local/bin/elixir-ls/language_server.sh" },
   'html',
   'jsonls',
   'lua_ls',
@@ -33,5 +39,15 @@ local servers = {
 }
 
 for _, server in ipairs(servers) do
-  default_handler(server)
+  local cmd = nil
+  local server_name = nil
+
+  if type(server) == 'table' then
+    server_name = server[1]
+    cmd = server.cmd
+  else
+    server_name = server
+  end
+
+  default_handler(server_name, cmd)
 end
