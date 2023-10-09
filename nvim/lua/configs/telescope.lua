@@ -1,4 +1,6 @@
-local telescope = require 'telescope'
+local telescope_ok, telescope = pcall(require, 'telescope')
+if not telescope_ok then return end
+
 telescope.setup {
   defaults = {
     winblend = 15
@@ -33,3 +35,4 @@ telescope.setup {
 
 telescope.load_extension('fzf')
 telescope.load_extension('telescope-alternate')
+telescope.load_extension('persisted')

@@ -42,6 +42,11 @@ return require('packer').startup(function(use)
     config = function() require 'configs.vim-tmux-navigator' end
   }
 
+  use {
+    'olimorris/persisted.nvim',
+    config = function() require 'configs.persisted' end
+  }
+
   -- tmux command integration
   use 'tpope/vim-tbone'
 
