@@ -1,3 +1,2 @@
-" Disable indentation guides for man page buffers
-IndentBlanklineDisable
+" Disable vim-illuminate for man page buffers
 IlluminatePauseBuf
