@@ -1,5 +1,4 @@
 local cmp = require 'cmp'
-local vim = vim
 local lspkind_status_ok, lspkind = pcall(require, 'lspkind')
 local snip_status_ok, luasnip = pcall(require, 'luasnip')
 

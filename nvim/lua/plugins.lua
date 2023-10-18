@@ -1,4 +1,3 @@
-local vim = vim
 local fn = vim.fn
 local cmd = vim.cmd
 

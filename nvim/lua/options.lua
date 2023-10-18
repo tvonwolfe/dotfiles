@@ -1,5 +1,4 @@
 -- nvim options config
-local vim = vim
 local home = os.getenv('HOME')
 
 local opts = vim.opt

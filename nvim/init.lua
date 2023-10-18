@@ -1,5 +1,3 @@
-local vim = vim
-
 pcall(require, 'impatient')
 
 vim.g.loaded_netrw = 1

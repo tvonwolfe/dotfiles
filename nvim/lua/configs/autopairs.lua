@@ -1,6 +1,5 @@
 local autopairs = require 'nvim-autopairs'
 local Rule      = require 'nvim-autopairs.rule'
-local vim       = vim
 
 autopairs.setup()
 

@@ -5,8 +5,8 @@ MODES = {
   terminal = 't',
 }
 
-local vim = vim
 local fn = vim.fn
+local cmd = vim.cmd
 
 -- local neotest = require('neotest')
 
@@ -27,7 +27,7 @@ local function tmap(shortcut, command, bufopts)
   map(MODES.terminal, shortcut, command, bufopts)
 end
 
-vim.cmd('noremap <C-b> :noh<CR>:call clearmatches()<CR>')
+cmd('noremap <C-b> :noh<CR>:call clearmatches()<CR>')
 
 vim.g.mapleader = ' '
 
@@ -136,17 +136,25 @@ nmap('<leader>sl', run_last_spec)
 -----------------------------------------------------------------------
 
 local action_preview_ok, action_preview = pcall(require, 'actions-preview')
+local lsp_buf = vim.lsp.buf
+local diagnostic = vim.diagnostic
+
+local function get_code_action()
+  if action_preview_ok then return action_preview.code_actions end
+
+  return lsp_buf.code_action
+end
 
 local function standard_on_attach(client, buffnr)
   local bufopts = { noremap = true, silent = true, buffer = buffnr }
-  local code_action = action_preview.code_actions or vim.lsp.buf.code_action
+  local code_action = get_code_action()
 
-  nmap('K', vim.lsp.buf.hover, bufopts)
-  nmap('<leader>gh', vim.lsp.buf.signature_help, bufopts)
+  nmap('K', lsp_buf.hover, bufopts)
+  nmap('<leader>gh', lsp_buf.signature_help, bufopts)
   nmap('<leader>ca', code_action, bufopts)
-  nmap('<leader>rn', vim.lsp.buf.rename, bufopts)
-  nmap('[d', vim.diagnostic.goto_prev, bufopts)
-  nmap(']d', vim.diagnostic.goto_next, bufopts)
+  nmap('<leader>rn', lsp_buf.rename, bufopts)
+  nmap('[d', diagnostic.goto_prev, bufopts)
+  nmap(']d', diagnostic.goto_next, bufopts)
 end
 
 
