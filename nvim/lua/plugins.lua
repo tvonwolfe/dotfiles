@@ -180,9 +180,20 @@ return require('packer').startup(function(use)
 
   -- jump between alternate/related files (e.g. from implementation to spec)
   -- quickly
+  -- use {
+  --   'otavioschwanck/telescope-alternate.nvim',
+  --   config = function() require 'configs.telescope-alternate' end,
+  -- }
+  --
   use {
-    'otavioschwanck/telescope-alternate.nvim',
-    config = function() require 'configs.telescope-alternate' end,
+    'rgroli/other.nvim',
+    config = function() require('other-nvim').setup({ mappings = { 'rails' }, rememberBuffers = false }) end
+  }
+
+  use {
+    'serenevoid/kiwi.nvim',
+    config = function() require 'configs.kiwi' end,
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
   ------------------------------------------------------------------------------
