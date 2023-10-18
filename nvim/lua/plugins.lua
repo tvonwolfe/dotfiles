@@ -336,9 +336,15 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'neovim/nvim-lspconfig',
-    requires = 'lukas-reineke/lsp-format.nvim',
-    config = function() require 'configs.lsp-config' end
+    'williamboman/mason.nvim',
+    requires = {
+      'williamboman/mason-lspconfig.nvim',
+      'lukas-reineke/lsp-format.nvim',
+      'neovim/nvim-lspconfig',
+    },
+    config = function()
+      require 'configs.mason'
+    end
   }
 
   use { 'folke/trouble.nvim', config = function() require 'configs.trouble' end }
