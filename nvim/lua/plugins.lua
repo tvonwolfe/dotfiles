@@ -147,15 +147,25 @@ return require('packer').startup(function(use)
   end
   }
 
+  -- performant color code highlighting
   use {
-    'norcalli/nvim-colorizer.lua', -- performant color code highlighting
+    'norcalli/nvim-colorizer.lua',
     config = function() require 'configs.colorizer' end
   }
 
+  -- file explorer
   use {
     'kyazdani42/nvim-tree.lua',
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = function() require 'configs.nvim-tree' end
+  }
+
+  -- use tab to move cursor out of enclosing braces, brackets, etc
+  use {
+    'abecodes/tabout.nvim',
+    wants = { 'nvim-treesitter' },
+    after = { 'nvim-cmp' },
+    config = function() require('tabout').setup() end
   }
 
   ------------------------------------------------------------------------------
@@ -340,6 +350,8 @@ return require('packer').startup(function(use)
       'williamboman/mason-lspconfig.nvim',
       'lukas-reineke/lsp-format.nvim',
       'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-lint',
+      'mhartington/formatter.nvim'
     },
     config = function()
       require 'configs.mason'
