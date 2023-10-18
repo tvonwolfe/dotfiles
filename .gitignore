@@ -1,5 +1,6 @@
 *
 !nvim
+!nvim/**
 !solargraph
 !kitty
 !kitty/**
