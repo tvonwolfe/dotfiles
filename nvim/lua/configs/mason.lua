@@ -42,11 +42,3 @@ mason_lsp_config.setup_handlers {
     nvim_lsp_config[server_name].setup(setup_args)
   end,
 }
-
-local lint_ok, lint = pcall(require, 'lint')
-if not lint_ok then return end
-
-lint.linters_by_ft = {
-  markdown = { 'markdownlint' },
-  eruby = { 'erb-lint' }
-}

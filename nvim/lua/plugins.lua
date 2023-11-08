@@ -11,7 +11,6 @@ local ensure_packer = function()
   return false
 end
 
-
 local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   -- packer can manage itself
@@ -141,7 +140,7 @@ return require('packer').startup(function(use)
   -- easily move function args left and right
   use 'AndrewRadev/sideways.vim'
 
-  -- more powerful <c-a> & <c-x>
+  -- more powerful <c-a> & <c-x> for incrementing/decrementing/toggling values
   use { 'nat-418/boole.nvim', config = function()
     require 'configs.boole'
   end
@@ -166,6 +165,11 @@ return require('packer').startup(function(use)
     wants = { 'nvim-treesitter' },
     after = { 'nvim-cmp' },
     config = function() require('tabout').setup() end
+  }
+
+  use {
+    'chrisgrieser/nvim-origami',
+    config = function() require('origami').setup({}) end
   }
 
   ------------------------------------------------------------------------------
@@ -350,8 +354,6 @@ return require('packer').startup(function(use)
       'williamboman/mason-lspconfig.nvim',
       'lukas-reineke/lsp-format.nvim',
       'neovim/nvim-lspconfig',
-      'mfussenegger/nvim-lint',
-      'mhartington/formatter.nvim'
     },
     config = function()
       require 'configs.mason'
