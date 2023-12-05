@@ -4,6 +4,9 @@ local defaults = {
   dark = 'default',
   light = 'morning',
   on_toggle = function(_) end,
+  bg_detect_fn = function()
+    return 'dark'
+  end,
 }
 
 local function set_colorscheme(theme)
@@ -16,8 +19,8 @@ local function set_colorscheme(theme)
   return colorscheme_set_ok
 end
 
-local function get_bg(background)
-  if background == 'dark' then
+local function default_bg_detect_fn()
+  if vim.o.background == 'dark' then
     return 'light'
   else
     return 'dark'
@@ -27,22 +30,23 @@ end
 M.options = {}
 
 local toggle = function()
-  local background = get_bg(vim.o.background)
-  local colorscheme = M.options[background] or M.options.dark
-
-  if not set_colorscheme(colorscheme) then return end
-
-  vim.opt.background = background
-
   if M.options.on_toggle then
     M.options.on_toggle(vim.o.background)
   end
+
+  local background = M.options.bg_detect_fn() or 'dark'
+  local colorscheme = M.options[background] or M.options.dark
+
+  vim.opt.background = background
+  if not set_colorscheme(colorscheme) then return end
 end
 
 function M.setup(opts)
   M.options = vim.tbl_deep_extend("force", {}, defaults, opts or {})
 
-  local status = set_colorscheme(M.options[vim.o.background])
+  local background = M.options.bg_detect_fn()
+  local status = set_colorscheme(M.options[background])
+  vim.opt.background = background
 
   if (not status) and M.options.fallback ~= nil then
     set_colorscheme(M.options.fallback)
