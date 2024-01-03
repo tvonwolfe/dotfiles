@@ -172,6 +172,12 @@ return require('packer').startup(function(use)
     config = function() require('origami').setup({}) end
   }
 
+  use {
+    'm-demare/hlargs.nvim',
+    after = { 'nvim-treesitter' },
+    config = function() require('hlargs').setup() end
+  }
+
   ------------------------------------------------------------------------------
   -- nvim-telescope & related
   ------------------------------------------------------------------------------
@@ -367,6 +373,12 @@ return require('packer').startup(function(use)
   use 'folke/neodev.nvim'
 
   use 'aznhe21/actions-preview.nvim'
+
+  use {
+    'yorickpeterse/nvim-pqf',
+    config = function() require 'configs.pqf' end
+  }
+
   ------------------------------------------------------------------------------
   -- test/spec plugins
   ------------------------------------------------------------------------------

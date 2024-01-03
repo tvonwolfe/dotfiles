@@ -21,7 +21,6 @@ mason_lsp_config.setup {
     'jsonls',
     'lua_ls',
     'marksman',
-    'solargraph',
     'tsserver',
   }
 }
