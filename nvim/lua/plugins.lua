@@ -186,7 +186,7 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
-      'nvim-lua/plenary.nvim'
+      'nvim-lua/plenary.nvim',
     },
     config = function() require 'configs.telescope' end,
   }
@@ -213,6 +213,16 @@ return require('packer').startup(function(use)
     'serenevoid/kiwi.nvim',
     config = function() require 'configs.kiwi' end,
     requires = { { 'nvim-lua/plenary.nvim' } }
+  }
+
+  use {
+    'yorickpeterse/nvim-pqf',
+    config = function() require 'configs.pqf' end
+  }
+
+  use {
+    'dnlhc/glance.nvim',
+    config = function() require 'configs.glance' end
   }
 
   ------------------------------------------------------------------------------
@@ -373,11 +383,6 @@ return require('packer').startup(function(use)
   use 'folke/neodev.nvim'
 
   use 'aznhe21/actions-preview.nvim'
-
-  use {
-    'yorickpeterse/nvim-pqf',
-    config = function() require 'configs.pqf' end
-  }
 
   ------------------------------------------------------------------------------
   -- test/spec plugins

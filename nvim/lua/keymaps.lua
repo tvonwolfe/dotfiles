@@ -66,8 +66,9 @@ if gitsigns_ok then
   nmap(']g', gitsigns.next_hunk)
 end
 
--- Telescope
+-- Telescope & Glance
 local telescope_builtins_ok, telescope_builtins = pcall(require, 'telescope.builtin')
+local glance_ok, glance = pcall(require, 'glance')
 
 if telescope_builtins_ok then
   nmap('<leader>ff', telescope_builtins.find_files)
@@ -161,10 +162,14 @@ end
 local function telescope_on_attach(client, buffnr)
   local bufopts = { noremap = true, silent = true, buffer = buffnr }
   nmap('gc', telescope_builtins.lsp_incoming_calls, bufopts)
-  nmap('gr', telescope_builtins.lsp_references, bufopts)
-  nmap('gd', telescope_builtins.lsp_definitions, bufopts)
   nmap('<leader>fs', telescope_builtins.lsp_document_symbols)
   nmap('<leader>fw', telescope_builtins.lsp_workspace_symbols)
+end
+
+local function glance_on_attach(client, buffnr)
+  local bufopts = { noremap = true, silent = true, buffer = buffnr }
+  nmap('gr', '<CMD>Glance references<CR>', bufopts)
+  nmap('gd', '<CMD>Glance definitions<CR>', bufopts)
 end
 
 nvim_config.on_attach = function(client, buffnr)
@@ -172,5 +177,9 @@ nvim_config.on_attach = function(client, buffnr)
 
   if telescope_builtins_ok then
     telescope_on_attach(client, buffnr)
+  end
+
+  if glance_ok then
+    glance_on_attach(client, buffnr)
   end
 end
