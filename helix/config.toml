@@ -1,0 +1,10 @@
+theme = 'catppuccin_mocha'
+
+[editor]
+line-number = 'relative'
+mouse = true
+cursorline = true
+color-modes = true
+
+[editor.statusline]
+right = ["version-control", "diagnostics", "selections", "position"]
