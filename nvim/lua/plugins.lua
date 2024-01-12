@@ -31,6 +31,11 @@ return require('packer').startup(function(use)
   use 'eandrju/cellular-automaton.nvim'
 
   ------------------------------------------------------------------------------
+  -- for writing
+  ------------------------------------------------------------------------------
+  use 'folke/zen-mode.nvim'
+
+  ------------------------------------------------------------------------------
   -- general quality of life stuff
   ------------------------------------------------------------------------------
 
@@ -213,11 +218,6 @@ return require('packer').startup(function(use)
     'serenevoid/kiwi.nvim',
     config = function() require 'configs.kiwi' end,
     requires = { { 'nvim-lua/plenary.nvim' } }
-  }
-
-  use {
-    'yorickpeterse/nvim-pqf',
-    config = function() require 'configs.pqf' end
   }
 
   use {
