@@ -33,49 +33,16 @@ return require('packer').startup(function(use)
   ------------------------------------------------------------------------------
   -- for writing
   ------------------------------------------------------------------------------
+  -- zen mode to block out the distractions
   use 'folke/zen-mode.nvim'
 
   ------------------------------------------------------------------------------
   -- general quality of life stuff
   ------------------------------------------------------------------------------
 
-  -- seamless nav between vim & tmux panes
-  use {
-    'christoomey/vim-tmux-navigator',
-    config = function() require 'configs.vim-tmux-navigator' end
-  }
-
-  use {
-    'olimorris/persisted.nvim',
-    config = function() require 'configs.persisted' end
-  }
-
-  -- tmux command integration
-  use 'tpope/vim-tbone'
-
-  -- load plugins quickfast
-  use 'lewis6991/impatient.nvim'
-
-  -- look up man pages without leaving vim
-  use 'vim-utils/vim-man'
-
-  -- status line
-  use {
-    'nvim-lualine/lualine.nvim',
-    config = function() require 'configs.lualine' end,
-  }
-
-  -- auto-pairs on braces, quotes, etc.
-  use {
-    'windwp/nvim-autopairs',
-    config = function() require 'configs.autopairs' end,
-  }
-  -- work with different variants of a word
-  -- (plural, singular, tableize, capitalize, etc.)
-  use {
-    'tpope/vim-abolish'
-  }
-
+  --------------------------------------
+  -- movement/motions/keymaps plugins
+  --------------------------------------
   -- easy quoting, parenthesizing, etc.
   use 'tpope/vim-surround'
 
@@ -85,7 +52,51 @@ return require('packer').startup(function(use)
   -- better vim commenting
   use 'tpope/vim-commentary'
 
-  -- illuminate other instances of a symbol/word
+  -- easily convert between single & multi line statements.
+  use 'AndrewRadev/splitjoin.vim'
+
+  -- maximize window splits
+  use 'szw/vim-maximizer'
+
+  -- easily move function args left and right
+  use 'AndrewRadev/sideways.vim'
+
+  -- more powerful <c-a> & <c-x> for incrementing/decrementing/toggling values
+  use {
+    'nat-418/boole.nvim',
+    config = function() require 'configs.boole' end
+  }
+
+  -- use tab to move cursor out of enclosing braces, brackets, etc
+  use {
+    'abecodes/tabout.nvim',
+    wants = { 'nvim-treesitter' },
+    after = { 'nvim-cmp' },
+    config = function() require('tabout').setup() end
+  }
+
+  -- easily fold code blocks
+  use {
+    'chrisgrieser/nvim-origami',
+    config = function() require('origami').setup({}) end
+  }
+
+  -- seamless nav between vim & tmux panes
+  use {
+    'christoomey/vim-tmux-navigator',
+    config = function() require 'configs.vim-tmux-navigator' end
+  }
+
+  --------------------------------------
+  -- vim ui stuff
+  --------------------------------------
+  -- status line
+  use {
+    'nvim-lualine/lualine.nvim',
+    config = function() require 'configs.lualine' end,
+  }
+
+  -- highlight other instances of a symbol/word
   use {
     'RRethy/vim-illuminate',
     config = function() require 'configs.illuminate' end,
@@ -112,43 +123,10 @@ return require('packer').startup(function(use)
     requires = 'nvim-treesitter/nvim-treesitter',
   }
 
-  -- easy project management from within vim
-  use 'tpope/vim-projectionist'
-
-  -- db stuff
-  use {
-    'kristijanhusak/vim-dadbod-ui',
-    requires = { 'tpope/vim-dadbod' },
-  }
-
-  -- wrappers to common unix file commands
-  use 'tpope/vim-eunuch'
-
-  -- dotenv stuff for vim
-  use 'tpope/vim-dotenv'
-
-  -- asynchronous build and test dispatching
-  use 'tpope/vim-dispatch'
-
-  -- easily convert between single & multi line statements.
-  use 'AndrewRadev/splitjoin.vim'
-
   -- indent guides
   use {
     'lukas-reineke/indent-blankline.nvim',
     config = function() require 'configs.indent-blankline' end,
-  }
-
-  -- maximize window splits
-  use 'szw/vim-maximizer'
-
-  -- easily move function args left and right
-  use 'AndrewRadev/sideways.vim'
-
-  -- more powerful <c-a> & <c-x> for incrementing/decrementing/toggling values
-  use { 'nat-418/boole.nvim', config = function()
-    require 'configs.boole'
-  end
   }
 
   -- performant color code highlighting
@@ -164,23 +142,74 @@ return require('packer').startup(function(use)
     config = function() require 'configs.nvim-tree' end
   }
 
-  -- use tab to move cursor out of enclosing braces, brackets, etc
-  use {
-    'abecodes/tabout.nvim',
-    wants = { 'nvim-treesitter' },
-    after = { 'nvim-cmp' },
-    config = function() require('tabout').setup() end
-  }
-
-  use {
-    'chrisgrieser/nvim-origami',
-    config = function() require('origami').setup({}) end
-  }
-
   use {
     'm-demare/hlargs.nvim',
     after = { 'nvim-treesitter' },
     config = function() require('hlargs').setup() end
+  }
+
+  -- asynchronous build and test dispatching
+  use 'tpope/vim-dispatch'
+
+  -- manage docker stuff from vim
+  use 'kkvh/vim-docker-tools'
+
+  --------------------------------------
+  -- everything else
+  --------------------------------------
+  -- persisted sessions
+  use {
+    'olimorris/persisted.nvim',
+    config = function() require 'configs.persisted' end
+  }
+
+  -- tmux command integration
+  use 'tpope/vim-tbone'
+
+  -- load plugins quickfast
+  use 'lewis6991/impatient.nvim'
+
+  -- look up man pages without leaving vim
+  use 'vim-utils/vim-man'
+
+  -- auto-pairs on braces, quotes, etc.
+  use {
+    'windwp/nvim-autopairs',
+    config = function() require 'configs.autopairs' end,
+  }
+
+  -- work with different variants of a word
+  -- (plural, singular, tableize, capitalize, etc.)
+  use {
+    'tpope/vim-abolish'
+  }
+
+  -- easy project management from within vim
+  use 'tpope/vim-projectionist'
+
+  -- db ui for vim
+  use {
+    'kristijanhusak/vim-dadbod-ui',
+    requires = { 'tpope/vim-dadbod' },
+  }
+
+  -- wrappers to common unix file commands
+  use 'tpope/vim-eunuch'
+
+  -- dotenv stuff for vim
+  use 'tpope/vim-dotenv'
+
+  ------------------------------------------------------------------------------
+  -- ai stuff
+  ------------------------------------------------------------------------------
+  use {
+    "jackMort/ChatGPT.nvim",
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    },
+    config = function() require("chatgpt").setup() end
   }
 
   ------------------------------------------------------------------------------
@@ -208,21 +237,17 @@ return require('packer').startup(function(use)
   --   'otavioschwanck/telescope-alternate.nvim',
   --   config = function() require 'configs.telescope-alternate' end,
   -- }
-  --
+
   use {
     'rgroli/other.nvim',
     config = function() require('other-nvim').setup({ mappings = { 'rails' }, rememberBuffers = false }) end
   }
 
+  -- personal wiki
   use {
     'serenevoid/kiwi.nvim',
     config = function() require 'configs.kiwi' end,
     requires = { { 'nvim-lua/plenary.nvim' } }
-  }
-
-  use {
-    'dnlhc/glance.nvim',
-    config = function() require 'configs.glance' end
   }
 
   ------------------------------------------------------------------------------
@@ -377,12 +402,17 @@ return require('packer').startup(function(use)
   }
 
   use { 'folke/trouble.nvim', config = function() require 'configs.trouble' end }
-  -- use { 'folke/todo-comments.nvim', config = function() require 'configs.todo-comments' end }
 
   -- helpful lsp stuff for neovim & lua
   use 'folke/neodev.nvim'
 
   use 'aznhe21/actions-preview.nvim'
+
+  -- vs-code-style ui to view references/definitions
+  use {
+    'dnlhc/glance.nvim',
+    config = function() require 'configs.glance' end
+  }
 
   ------------------------------------------------------------------------------
   -- test/spec plugins
