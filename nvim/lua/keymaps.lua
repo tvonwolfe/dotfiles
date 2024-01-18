@@ -58,6 +58,9 @@ nmap('<C-m>', '<cmd>SidewaysRight<CR>')
 
 nmap('<leader>fu', '<cmd>CellularAutomaton make_it_rain<CR>')
 
+-- docker tools
+nmap('<leader>dt', '<cmd>DockerToolsToggle<CR>')
+
 -- jump between git change hunks
 local gitsigns_ok, gitsigns = pcall(require, 'gitsigns')
 
