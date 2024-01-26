@@ -366,6 +366,13 @@ return require('packer').startup(function(use)
     config = function() require 'rainbow_csv'.setup() end,
   }
 
+  --------------------------------------
+  -- kitty
+  --------------------------------------
+  -- kitty config file syntax highlighting
+  use "fladson/vim-kitty"
+
+
   ------------------------------------------------------------------------------
   -- lsp stuff
   ------------------------------------------------------------------------------
