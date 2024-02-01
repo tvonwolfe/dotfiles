@@ -31,8 +31,8 @@ cmd('noremap <C-b> :noh<CR>:call clearmatches()<CR>')
 
 vim.g.mapleader = ' '
 
--- figure this guy out
-vmap('//', "y/<C-R><CR><CR>")
+-- search for other instances of visual selection
+vmap('//', "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>")
 
 vmap('<leader>y', '"+y')
 nmap('<leader>Y', '+yg_')
