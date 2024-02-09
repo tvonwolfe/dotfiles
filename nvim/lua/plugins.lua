@@ -216,6 +216,12 @@ return require('packer').startup(function(use)
   -- nvim-telescope & related
   ------------------------------------------------------------------------------
 
+  -- use fzf for telescope
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make'
+  }
+
   -- find stuff
   use {
     'nvim-telescope/telescope.nvim',
@@ -223,12 +229,6 @@ return require('packer').startup(function(use)
       'nvim-lua/plenary.nvim',
     },
     config = function() require 'configs.telescope' end,
-  }
-
-  -- use fzf for telescope
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'make',
   }
 
   -- jump between alternate/related files (e.g. from implementation to spec)
