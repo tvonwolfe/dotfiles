@@ -75,11 +75,11 @@ return require('packer').startup(function(use)
     config = function() require('tabout').setup() end
   }
 
-  -- easily fold code blocks
-  use {
-    'chrisgrieser/nvim-origami',
-    config = function() require('origami').setup({}) end
-  }
+  -- -- easily fold code blocks
+  -- use {
+  --   'chrisgrieser/nvim-origami',
+  --   config = function() require('origami').setup({}) end
+  -- }
 
   -- seamless nav between vim & tmux panes
   use {
