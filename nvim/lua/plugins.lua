@@ -55,9 +55,6 @@ return require('packer').startup(function(use)
   -- easily convert between single & multi line statements.
   use 'AndrewRadev/splitjoin.vim'
 
-  -- maximize window splits
-  use 'szw/vim-maximizer'
-
   -- easily move function args left and right
   use 'AndrewRadev/sideways.vim'
 
@@ -158,10 +155,10 @@ return require('packer').startup(function(use)
   -- everything else
   --------------------------------------
   -- persisted sessions
-  use {
-    'olimorris/persisted.nvim',
-    config = function() require 'configs.persisted' end
-  }
+  -- use {
+  --   'olimorris/persisted.nvim',
+  --   config = function() require 'configs.persisted' end
+  -- }
 
   -- tmux command integration
   use 'tpope/vim-tbone'
@@ -412,8 +409,6 @@ return require('packer').startup(function(use)
 
   -- helpful lsp stuff for neovim & lua
   use 'folke/neodev.nvim'
-
-  use 'aznhe21/actions-preview.nvim'
 
   -- vs-code-style ui to view references/definitions
   use {
