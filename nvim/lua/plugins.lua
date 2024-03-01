@@ -379,10 +379,13 @@ return require('packer').startup(function(use)
     config = function() require 'configs.lsp-signature' end
   }
 
+  use 'rafamadriz/friendly-snippets'
+
   use {
     'hrsh7th/nvim-cmp',
     requires = {
       'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
       'onsails/lspkind.nvim',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp-signature-help',

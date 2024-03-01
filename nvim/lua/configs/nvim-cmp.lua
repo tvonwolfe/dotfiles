@@ -1,8 +1,11 @@
 local cmp = require 'cmp'
 local lspkind_status_ok, lspkind = pcall(require, 'lspkind')
 local snip_status_ok, luasnip = pcall(require, 'luasnip')
+local friendly_snippets_ok, friendly_snippets = pcall(require, 'luasnip.loaders.from_vscode')
 
 if not snip_status_ok then return end
+if not friendly_snippets_ok then return end
+friendly_snippets.lazy_load()
 
 local lspkind_formatting = lspkind_status_ok and lspkind.cmp_format({ mode = 'symbol_text' }) or nil
 
@@ -30,6 +33,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'path' },
+    { name = 'luasnip' },
   },
   window = {
     completion = cmp.config.window.bordered(),
