@@ -2,28 +2,24 @@
   font-family: JetBrainsMono Nerd Font;
   border: none;
   border-radius: 0;
-  /* font-size: 13px; */
   min-height: 0;
 }
 
 window#waybar {
-  /* background: transparent; */
-  /* background: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)); */
   background: rgba(0, 0, 0, 0.4);
   color: white;
 }
-
-/*
-#workspaces {
-    padding: 0 5px;
-}
-*/
 
 #workspaces button {
   padding: 0 5px;
   background: transparent;
   color: white;
   border-top: 2px solid transparent;
+}
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
 }
 
 #workspaces button.focused {
