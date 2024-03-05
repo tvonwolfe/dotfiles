@@ -44,7 +44,10 @@ return require('packer').startup(function(use)
   -- movement/motions/keymaps plugins
   --------------------------------------
   -- easy quoting, parenthesizing, etc.
-  use 'tpope/vim-surround'
+  use {
+    'kylechui/nvim-surround',
+    config = function() require('nvim-surround').setup() end
+  }
 
   -- enable repetition of plugin maps with '.'
   use 'tpope/vim-repeat'
