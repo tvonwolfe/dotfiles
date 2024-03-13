@@ -31,7 +31,6 @@ treesitter.setup {
   },
   yati = {
     enable = true,
-    default_lazy = true,
   },
   textobjects = {
     select = {
