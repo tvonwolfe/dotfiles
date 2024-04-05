@@ -23,8 +23,8 @@ end
 
 colorscheme.setup {
   fallback = 'slate',
-  dark = 'everforest',
-  light = 'everforest',
+  dark = 'tokyonight-storm',
+  light = 'tokyonight-day',
   on_toggle = on_toggle,
   bg_detect_fn = read_bg,
 }
