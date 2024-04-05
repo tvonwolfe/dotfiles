@@ -19,12 +19,13 @@ return require('packer').startup(function(use)
   ------------------------------------------------------------------------------
   -- themes
   ------------------------------------------------------------------------------
-  use 'folke/tokyonight.nvim'
-  use 'sainnhe/everforest'
-  use 'comfysage/evergarden'
-  use 'pauchiner/pastelnight.nvim'
   use 'bluz71/vim-nightfly-colors'
+  use 'comfysage/evergarden'
+  use 'ellisonleao/gruvbox.nvim'
   use 'embark-theme/vim'
+  use 'folke/tokyonight.nvim'
+  use 'pauchiner/pastelnight.nvim'
+  use 'sainnhe/everforest'
   use { "catppuccin/nvim", as = "catppuccin" }
 
   ------------------------------------------------------------------------------
