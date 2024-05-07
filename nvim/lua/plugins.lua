@@ -145,6 +145,7 @@ return require('packer').startup(function(use)
     config = function() require 'configs.nvim-tree' end
   }
 
+  -- highlight function/method arguments using treesitter
   use {
     'm-demare/hlargs.nvim',
     after = { 'nvim-treesitter' },
@@ -156,6 +157,15 @@ return require('packer').startup(function(use)
 
   -- manage docker stuff from vim
   use 'kkvh/vim-docker-tools'
+
+  -- scrollbars with decoration (git, LSP diagnostics, etc.)
+  -- use {
+  --   'lewis6991/satellite.nvim',
+  --   config = function()
+  --     if vim.version().minor < 10 then return end
+  --     require('satellite').setup()
+  --   end
+  -- }
 
   --------------------------------------
   -- everything else
@@ -285,12 +295,6 @@ return require('packer').startup(function(use)
   --------------------------------------
   -- ruby/rails
   --------------------------------------
-  -- ruby language files for vim
-  use {
-    'vim-ruby/vim-ruby',
-    ft = 'ruby'
-  }
-
   -- rvm wrapper for vim.
   use {
     'tpope/vim-rvm',
@@ -300,27 +304,8 @@ return require('packer').startup(function(use)
   -- rails integration
   use 'tpope/vim-rails'
 
-  -- ruby bundler integration
-  use {
-    'tpope/vim-bundler',
-    ft = 'ruby',
-  }
 
-  -- rake integration
-  use {
-    'tpope/vim-rake',
-    ft = 'ruby',
-  }
-
-  -- add support for ruby code blocks as vim text objects
-  use {
-    'nelstrom/vim-textobj-rubyblock',
-    requires = {
-      'kana/vim-textobj-user',
-    },
-    ft = 'ruby',
-  }
-
+  -- uses Dispatch to run tests asynchronously
   use {
     'thoughtbot/vim-rspec',
     config = function() require 'configs.vim-rspec' end,
@@ -403,14 +388,12 @@ return require('packer').startup(function(use)
   }
 
   use {
-    'williamboman/mason.nvim',
+    'neovim/nvim-lspconfig',
     requires = {
-      'williamboman/mason-lspconfig.nvim',
       'lukas-reineke/lsp-format.nvim',
-      'neovim/nvim-lspconfig',
     },
     config = function()
-      require 'configs.mason'
+      require 'configs.lspconfig'
     end
   }
 

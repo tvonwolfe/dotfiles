@@ -3,6 +3,8 @@ local home = os.getenv('HOME')
 
 local opts = vim.opt
 
+vim.g.loaded_ruby_provider = 0
+
 -- keep the signcolumn open all the time
 opts.signcolumn = 'yes'
 
