@@ -96,6 +96,7 @@ return require('packer').startup(function(use)
   -- status line
   use {
     'nvim-lualine/lualine.nvim',
+    requires = { 'linrongbin16/lsp-progress.nvim' },
     config = function() require 'configs.lualine' end,
   }
 
@@ -108,8 +109,9 @@ return require('packer').startup(function(use)
   -- better syntax highlighting and formatting via treesitter
   use {
     requires = {
-      'windwp/nvim-ts-autotag',         -- auto-close html/xml/jsx tags.
-      'RRethy/nvim-treesitter-endwise', -- wisely add `end` to code blocks in languages that use that keyword.
+      'windwp/nvim-ts-autotag',                  -- auto-close html/xml/jsx tags.
+      'RRethy/nvim-treesitter-endwise',          -- wisely add `end` to code blocks in languages that use that keyword.
+      'nvim-treesitter/nvim-treesitter-context', -- show code context
       'yioneko/nvim-yati'
     },
     'nvim-treesitter/nvim-treesitter',
@@ -304,6 +306,8 @@ return require('packer').startup(function(use)
   -- rails integration
   use 'tpope/vim-rails'
 
+  -- Bundler integration
+  use 'tpope/vim-bundler'
 
   -- uses Dispatch to run tests asynchronously
   use {

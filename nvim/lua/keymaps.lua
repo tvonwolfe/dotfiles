@@ -97,6 +97,17 @@ if todo_comments_ok then
 end
 
 -----------------------------------------------------------------------
+-- Context keymaps
+-----------------------------------------------------------------------
+local function jump_to_context()
+  local context_ok, context = pcall(require, 'treesitter-context')
+  if not context_ok then return end
+
+  context.go_to_context(vim.v.count1)
+end
+nmap("[c", jump_to_context)
+
+-----------------------------------------------------------------------
 -- Spec keymaps
 -----------------------------------------------------------------------
 local function run_current_spec_file()
