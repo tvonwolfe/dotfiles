@@ -55,9 +55,6 @@ return require('packer').startup(function(use)
   -- enable repetition of plugin maps with '.'
   use 'tpope/vim-repeat'
 
-  -- better vim commenting
-  use 'tpope/vim-commentary'
-
   -- easily convert between single & multi line statements.
   use 'AndrewRadev/splitjoin.vim'
 
