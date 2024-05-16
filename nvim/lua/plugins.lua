@@ -161,13 +161,12 @@ return require('packer').startup(function(use)
   use 'kkvh/vim-docker-tools'
 
   -- scrollbars with decoration (git, LSP diagnostics, etc.)
-  -- use {
-  --   'lewis6991/satellite.nvim',
-  --   config = function()
-  --     if vim.version().minor < 10 then return end
-  --     require('satellite').setup()
-  --   end
-  -- }
+  use {
+    'lewis6991/satellite.nvim',
+    config = function()
+      require('satellite').setup()
+    end
+  }
 
   --------------------------------------
   -- everything else
