@@ -23,9 +23,6 @@ treesitter.setup {
   endwise = {
     enable = true,
   },
-  autotag = {
-    enable = true,
-  },
   indent = {
     enable = false,
   },

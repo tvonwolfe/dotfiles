@@ -69,9 +69,29 @@ if gitsigns_ok then
   nmap(']g', gitsigns.next_hunk)
 end
 
+local dap_ok, dap = pcall(require, 'dap')
+if dap_ok then
+  local widgets = require('dap.ui.widgets')
+  nmap('<leader>db', dap.toggle_breakpoint)
+  nmap('<leader>dl', dap.run_last)
+  nmap('<leader>dr', dap.repl.toggle)
+  nmap('<F5>', dap.continue)
+  nmap('<F8>', dap.step_over)
+  nmap('<F9>', dap.step_into)
+  nmap('<F10>', dap.step_out)
+  nmap('<leader>df', function()
+    widgets.centered_float(widgets.frames)
+  end)
+  nmap('<leader>ds', function()
+    widgets.centered_float(widgets.scopes)
+  end)
+  nmap('<leader>dp', widgets.preview)
+  nmap('<leader>dh', widgets.hover)
+end
+
 -- Telescope & Glance
 local telescope_builtins_ok, telescope_builtins = pcall(require, 'telescope.builtin')
-local glance_ok, glance = pcall(require, 'glance')
+local glance_ok, _glance = pcall(require, 'glance')
 
 if telescope_builtins_ok then
   nmap('<leader>ff', telescope_builtins.find_files)

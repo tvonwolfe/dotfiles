@@ -21,7 +21,10 @@ return require('packer').startup(function(use)
   ------------------------------------------------------------------------------
   use 'bluz71/vim-nightfly-colors'
   use 'comfysage/evergarden'
-  use 'ellisonleao/gruvbox.nvim'
+  use {
+    'ellisonleao/gruvbox.nvim',
+    config = function() require("gruvbox").setup({ contrast = "soft" }) end
+  }
   use 'embark-theme/vim'
   use 'folke/tokyonight.nvim'
   use 'pauchiner/pastelnight.nvim'
@@ -106,7 +109,6 @@ return require('packer').startup(function(use)
   -- better syntax highlighting and formatting via treesitter
   use {
     requires = {
-      'windwp/nvim-ts-autotag',                  -- auto-close html/xml/jsx tags.
       'RRethy/nvim-treesitter-endwise',          -- wisely add `end` to code blocks in languages that use that keyword.
       'nvim-treesitter/nvim-treesitter-context', -- show code context
       'yioneko/nvim-yati'
@@ -125,6 +127,12 @@ return require('packer').startup(function(use)
     requires = 'nvim-treesitter/nvim-treesitter',
   }
 
+  -- auto-close html/xml/jsx tags.
+  use {
+    'windwp/nvim-ts-autotag',
+    after = 'nvim-treesitter',
+    config = function() require 'configs.autotag' end,
+  }
   -- indent guides
   use {
     'lukas-reineke/indent-blankline.nvim',
@@ -360,6 +368,25 @@ return require('packer').startup(function(use)
   -- kitty config file syntax highlighting
   use "fladson/vim-kitty"
 
+
+  --------------------------------------
+  -- debugging
+  --------------------------------------
+  use {
+    'rcarriga/nvim-dap-ui',
+    requires = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio"
+    }, config = function()
+    require 'configs.dap'
+  end
+  }
+  -- use {
+  --   'mfussenegger/nvim-dap',
+  --   config = function()
+  --     require 'configs.dap'
+  --   end
+  -- }
 
   ------------------------------------------------------------------------------
   -- lsp stuff
