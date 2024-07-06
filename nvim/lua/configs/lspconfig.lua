@@ -17,9 +17,10 @@ local servers = {
   'jsonls',
   'lua_ls',
   'marksman',
+  'rust_analyzer',
+  'solargraph',
   'tailwindcss',
   'tsserver',
-  'solargraph'
 }
 
 for _, server_name in ipairs(servers) do
