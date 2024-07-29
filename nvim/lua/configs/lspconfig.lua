@@ -17,6 +17,7 @@ local servers = {
   'jsonls',
   'lua_ls',
   'marksman',
+  'markdown_oxide',
   'rust_analyzer',
   'solargraph',
   'tailwindcss',
@@ -24,6 +25,14 @@ local servers = {
 }
 
 for _, server_name in ipairs(servers) do
+  if server_name == 'markdown_oxide' then
+    capabilities.workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
+      },
+    }
+  end
+
   local setup_args = {
     capabilities = capabilities,
     single_file_support = true,
