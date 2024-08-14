@@ -30,6 +30,12 @@ return require('packer').startup(function(use)
   use 'pauchiner/pastelnight.nvim'
   use 'sainnhe/everforest'
   use { "catppuccin/nvim", as = "catppuccin" }
+  use 'tiagovla/tokyodark.nvim'
+  use 'Everblush/nvim'
+  use {
+    'zenbones-theme/zenbones.nvim',
+    requires = 'rktjmp/lush.nvim'
+  }
 
   ------------------------------------------------------------------------------
   -- whimsical stuff
@@ -127,6 +133,11 @@ return require('packer').startup(function(use)
     requires = 'nvim-treesitter/nvim-treesitter',
   }
 
+  use {
+    'm-demare/hlargs.nvim',
+    config = function() require('hlargs').setup() end
+  }
+
   -- auto-close html/xml/jsx tags.
   use {
     'windwp/nvim-ts-autotag',
@@ -150,13 +161,6 @@ return require('packer').startup(function(use)
     'kyazdani42/nvim-tree.lua',
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = function() require 'configs.nvim-tree' end
-  }
-
-  -- highlight function/method arguments using treesitter
-  use {
-    'm-demare/hlargs.nvim',
-    after = { 'nvim-treesitter' },
-    config = function() require('hlargs').setup() end
   }
 
   -- asynchronous build and test dispatching
