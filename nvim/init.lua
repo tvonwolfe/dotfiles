@@ -5,9 +5,9 @@ vim.g.loaded_netrwPlugin = 1
 
 _G.nvim_config = {}
 
+require 'plugins'
 require 'options'
 require 'keymaps'
-require 'plugins'
 require 'autocmds'
 require 'configs.colorscheme'
 pcall(require, 'lovevery')
