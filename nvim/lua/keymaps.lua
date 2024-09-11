@@ -107,7 +107,7 @@ tmap('<esc>', [[<C-\><C-n>]])
 
 nmap('<leader>xx', '<cmd>TroubleToggle document_diagnostics<CR>')
 
-nmap('<leader>n', '<cmd>NvimTreeToggle<CR>')
+nmap('<leader>t', '<cmd>NvimTreeToggle<CR>')
 
 -- Todos
 local todo_comments_ok, todo_comments = pcall(require, 'todo-comments')

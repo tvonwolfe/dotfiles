@@ -20,6 +20,7 @@ local servers = {
   'markdown_oxide',
   'rust_analyzer',
   'solargraph',
+  'ruby_lsp',
   'tailwindcss',
   'tsserver',
 }

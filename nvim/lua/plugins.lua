@@ -36,6 +36,7 @@ return require('packer').startup(function(use)
     'zenbones-theme/zenbones.nvim',
     requires = 'rktjmp/lush.nvim'
   }
+  use 'xero/miasma.nvim'
 
   ------------------------------------------------------------------------------
   -- whimsical stuff
