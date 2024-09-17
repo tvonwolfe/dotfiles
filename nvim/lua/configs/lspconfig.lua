@@ -22,7 +22,7 @@ local servers = {
   'solargraph',
   'ruby_lsp',
   'tailwindcss',
-  'tsserver',
+  'ts_ls',
 }
 
 for _, server_name in ipairs(servers) do

@@ -19,11 +19,6 @@ cmp.setup {
     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
     return true
   end,
-  confirm_opts = {
-    behavior = cmp.ConfirmBehavior.Replace,
-    select = false,
-  },
-  preselect = cmp.PreselectMode.None,
   formatting = { format = lspkind_formatting },
   snippet = {
     expand = function(args) luasnip.lsp_expand(args.body) end
@@ -45,7 +40,6 @@ cmp.setup {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  confirmation = { completeopt = 'menu,menuone,noinsert' },
   mapping = cmp.mapping.preset.insert({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -54,8 +48,6 @@ cmp.setup {
         luasnip.expand()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      elseif has_words_before() then
-        cmp.complete()
       else
         fallback()
       end

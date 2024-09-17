@@ -17,6 +17,12 @@ return require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim' }
 
   ------------------------------------------------------------------------------
+  -- work-specific stuff
+  ------------------------------------------------------------------------------
+  local work_ok, work = pcall(require, 'work')
+  if work_ok then work.setup_work_plugins(use) end
+
+  ------------------------------------------------------------------------------
   -- themes
   ------------------------------------------------------------------------------
   use 'bluz71/vim-nightfly-colors'
