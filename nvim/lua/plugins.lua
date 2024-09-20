@@ -402,12 +402,7 @@ return require('packer').startup(function(use)
   ------------------------------------------------------------------------------
   -- lsp stuff
   ------------------------------------------------------------------------------
-  -- lsp-driven code completion helper
-  use {
-    'ray-x/lsp_signature.nvim',
-    config = function() require 'configs.lsp-signature' end
-  }
-
+  -- snippets for common patterns in various languages
   use 'rafamadriz/friendly-snippets'
 
   use {

@@ -1,4 +1,5 @@
 local cmp = require 'cmp'
+local cmp_context = require 'cmp.config.context'
 local lspkind_status_ok, lspkind = pcall(require, 'lspkind')
 local snip_status_ok, luasnip = pcall(require, 'luasnip')
 local friendly_snippets_ok, friendly_snippets = pcall(require, 'luasnip.loaders.from_vscode')
@@ -17,7 +18,15 @@ end
 cmp.setup {
   enabled = function()
     if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-    return true
+
+    -- disable completion in comments
+    -- keep command mode completion enabled when cursor is in a comment
+    if vim.api.nvim_get_mode().mode == 'c' then
+      return true
+    else
+      return not cmp_context.in_treesitter_capture("comment")
+          and not cmp_context.in_syntax_group("Comment")
+    end
   end,
   formatting = { format = lspkind_formatting },
   snippet = {
@@ -32,6 +41,7 @@ cmp.setup {
         }
       }
     },
+    { name = 'nvim_lsp_signature_help' },
     { name = 'buffer' },
     { name = 'path' },
     { name = 'luasnip' },
