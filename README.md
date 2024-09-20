@@ -2,7 +2,7 @@
 
 This repo contains my personal config files for:
 - neovim
-- i3 (and i3status & rofi)
+- sway (and related programs)
 - kitty
 - solargraph (An LSP server for Ruby)
 - tmux
