@@ -43,6 +43,7 @@ return require('packer').startup(function(use)
     requires = 'rktjmp/lush.nvim'
   }
   use 'xero/miasma.nvim'
+  use 'diegoulloao/neofusion.nvim'
 
   ------------------------------------------------------------------------------
   -- whimsical stuff

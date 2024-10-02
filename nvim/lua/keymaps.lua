@@ -105,7 +105,7 @@ nmap('<leader>fa', '<cmd>Telescope telescope-alternate alternate_file<CR>')
 
 tmap('<esc>', [[<C-\><C-n>]])
 
-nmap('<leader>xx', '<cmd>TroubleToggle document_diagnostics<CR>')
+nmap('<leader>xx', '<cmd>Trouble diagnostics toggle<CR>')
 
 nmap('<leader>t', '<cmd>NvimTreeToggle<CR>')
 
