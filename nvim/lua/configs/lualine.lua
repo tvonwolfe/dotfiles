@@ -6,8 +6,9 @@ local function get_ruby_version()
   return str.match(str, '%[ruby%-(%d+.%d+.%d+)%]')
 end
 
-local function get_js_version()
-  return nil
+local function get_node_version()
+  local str = io.popen('node -v'):read('*a')
+  return str:gsub('[\n\r]', '')
 end
 
 local function get_lua_version()
@@ -17,9 +18,10 @@ end
 LANGUAGE_LUT = {
   eruby = get_ruby_version,
   ruby = get_ruby_version,
-  javascript = get_js_version,
-  javascriptreact = get_js_version,
-  lua = get_lua_version,
+  javascript = get_node_version,
+  javascriptreact = get_node_version,
+  typescript = get_node_version,
+  typescriptreact = get_node_version,
 }
 
 local function get_language_version_fn()

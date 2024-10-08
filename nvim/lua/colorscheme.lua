@@ -3,10 +3,8 @@ local M = {}
 local defaults = {
   dark = 'default',
   light = 'morning',
-  on_toggle = function(_) end,
-  bg_detect_fn = function()
-    return 'dark'
-  end,
+  on_toggle = nil,
+  bg_detect_fn = function() return vim.o.background end,
 }
 
 local function set_colorscheme(theme)
@@ -17,14 +15,6 @@ local function set_colorscheme(theme)
   end
 
   return colorscheme_set_ok
-end
-
-local function default_bg_detect_fn()
-  if vim.o.background == 'dark' then
-    return 'light'
-  else
-    return 'dark'
-  end
 end
 
 M.options = {}
