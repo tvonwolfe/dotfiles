@@ -8,12 +8,8 @@ if not snip_status_ok then return end
 if not friendly_snippets_ok then return end
 friendly_snippets.lazy_load()
 
-local lspkind_formatting = lspkind_status_ok and lspkind.cmp_format({ mode = 'symbol_text' }) or nil
-
-local function has_words_before()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-end
+local lspkind_formatting = lspkind_status_ok and
+    lspkind.cmp_format({ mode = 'symbol_text', symbol_map = { Copilot = '' } }) or nil
 
 cmp.setup {
   enabled = function()
@@ -45,6 +41,7 @@ cmp.setup {
     { name = 'buffer' },
     { name = 'path' },
     { name = 'luasnip' },
+    { name = 'copilot',                group_index = 2 },
   },
   window = {
     completion = cmp.config.window.bordered(),
