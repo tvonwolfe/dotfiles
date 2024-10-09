@@ -44,6 +44,7 @@ return require('packer').startup(function(use)
   }
   use 'xero/miasma.nvim'
   use 'diegoulloao/neofusion.nvim'
+  use 'rose-pine/neovim'
 
   ------------------------------------------------------------------------------
   -- whimsical stuff
@@ -141,10 +142,10 @@ return require('packer').startup(function(use)
     requires = 'nvim-treesitter/nvim-treesitter',
   }
 
-  use {
-    'm-demare/hlargs.nvim',
-    config = function() require('hlargs').setup() end
-  }
+  -- use {
+  --   'm-demare/hlargs.nvim',
+  --   config = function() require('hlargs').setup() end
+  -- }
 
   -- auto-close html/xml/jsx tags.
   use {

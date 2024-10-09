@@ -21,10 +21,22 @@ local function read_bg()
   return 'dark'
 end
 
+require('rose-pine').setup({
+  highlight_groups = {
+    Comment = { italic = true },
+    ["@keyword"] = { italic = true },
+    ["@variable"] = { italic = false },
+    ["@function"] = { italic = false },
+    ["@property"] = { italic = false },
+    ["@variable.parameter"] = { italic = false },
+    ["@parameter"] = { italic = false },
+  }
+})
+
 colorscheme.setup {
   fallback = 'slate',
-  dark = 'tokyonight-storm',
-  light = 'tokyonight-day',
+  dark = 'rose-pine-main',
+  light = 'rose-pine-dawn',
   on_toggle = on_toggle,
   bg_detect_fn = read_bg,
 }
