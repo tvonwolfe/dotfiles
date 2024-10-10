@@ -11,37 +11,51 @@ local capabilities = cmp_nvim_lsp.default_capabilities(nvim_lsp_protocol.make_cl
 
 lsp_format.setup()
 
+local default_setup_args = {
+  capabilities = capabilities,
+  single_file_support = true,
+  on_attach = function(client, bufnr)
+    nvim_config.on_attach(client, bufnr)
+    -- lsp_format.on_attach(client)
+  end
+}
+
 local servers = {
   'cssls',
   'html',
   'jsonls',
   'lua_ls',
   'marksman',
-  'markdown_oxide',
+  markdown_oxide = {
+    capabilities = vim.tbl_extend('force', capabilities, {
+      workspace = {
+        didChangeWatchedFiles = {
+          dynamicRegistration = true,
+        },
+      },
+    })
+  },
   'rust_analyzer',
   'solargraph',
-  'ruby_lsp',
+  ruby_lsp = {
+    init_options = {
+      indexing = {
+        includedPatterns = {
+          "**/spec/**/*.rb"
+        }
+      }
+    }
+  },
   'tailwindcss',
   'ts_ls',
 }
 
-for _, server_name in ipairs(servers) do
-  if server_name == 'markdown_oxide' then
-    capabilities.workspace = {
-      didChangeWatchedFiles = {
-        dynamicRegistration = true,
-      },
-    }
-  end
+for k, v in pairs(servers) do
+  local has_config = type(v) == "table"
+  local server_name = has_config and k or v
+  local additional_server_config = has_config and v or {}
 
-  local setup_args = {
-    capabilities = capabilities,
-    single_file_support = true,
-    on_attach = function(client, bufnr)
-      nvim_config.on_attach(client, bufnr)
-      -- lsp_format.on_attach(client)
-    end
-  }
+  local setup_args = vim.tbl_extend('force', default_setup_args, additional_server_config)
   nvim_lsp_config[server_name].setup(setup_args)
 end
 
