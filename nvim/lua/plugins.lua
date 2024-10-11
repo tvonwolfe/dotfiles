@@ -82,7 +82,7 @@ return require('packer').startup(function(use)
   -- more powerful <c-a> & <c-x> for incrementing/decrementing/toggling values
   use {
     'nat-418/boole.nvim',
-    config = function() require 'configs.boole' end
+    config = function() require 'plugins.boole' end
   }
 
   -- use tab to move cursor out of enclosing braces, brackets, etc
@@ -102,7 +102,7 @@ return require('packer').startup(function(use)
   -- seamless nav between vim & tmux panes
   use {
     'christoomey/vim-tmux-navigator',
-    config = function() require 'configs.vim-tmux-navigator' end
+    config = function() require 'plugins.vim-tmux-navigator' end
   }
 
   --------------------------------------
@@ -112,13 +112,13 @@ return require('packer').startup(function(use)
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'linrongbin16/lsp-progress.nvim' },
-    config = function() require 'configs.lualine' end,
+    config = function() require 'plugins.lualine' end,
   }
 
   -- highlight other instances of a symbol/word
   use {
     'RRethy/vim-illuminate',
-    config = function() require 'configs.illuminate' end,
+    config = function() require 'plugins.illuminate' end,
   }
 
   -- better syntax highlighting and formatting via treesitter
@@ -129,7 +129,7 @@ return require('packer').startup(function(use)
       'yioneko/nvim-yati'
     },
     'nvim-treesitter/nvim-treesitter',
-    config = function() require 'configs.treesitter' end,
+    config = function() require 'plugins.treesitter' end,
     run = function()
       local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
       ts_update()
@@ -151,25 +151,25 @@ return require('packer').startup(function(use)
   use {
     'windwp/nvim-ts-autotag',
     after = 'nvim-treesitter',
-    config = function() require 'configs.autotag' end,
+    config = function() require 'plugins.autotag' end,
   }
   -- indent guides
   use {
     'lukas-reineke/indent-blankline.nvim',
-    config = function() require 'configs.indent-blankline' end,
+    config = function() require 'plugins.indent-blankline' end,
   }
 
   -- performant color code highlighting
   use {
     'norcalli/nvim-colorizer.lua',
-    config = function() require 'configs.colorizer' end
+    config = function() require 'plugins.colorizer' end
   }
 
   -- file explorer
   use {
     'kyazdani42/nvim-tree.lua',
     requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function() require 'configs.nvim-tree' end
+    config = function() require 'plugins.nvim-tree' end
   }
 
   -- asynchronous build and test dispatching
@@ -192,7 +192,7 @@ return require('packer').startup(function(use)
   -- persisted sessions
   -- use {
   --   'olimorris/persisted.nvim',
-  --   config = function() require 'configs.persisted' end
+  --   config = function() require 'plugins.persisted' end
   -- }
 
   -- tmux command integration
@@ -207,7 +207,7 @@ return require('packer').startup(function(use)
   -- auto-pairs on braces, quotes, etc.
   use {
     'windwp/nvim-autopairs',
-    config = function() require 'configs.autopairs' end,
+    config = function() require 'plugins.autopairs' end,
   }
 
   -- work with different variants of a word
@@ -260,14 +260,14 @@ return require('packer').startup(function(use)
     requires = {
       'nvim-lua/plenary.nvim',
     },
-    config = function() require 'configs.telescope' end,
+    config = function() require 'plugins.telescope' end,
   }
 
   -- jump between alternate/related files (e.g. from implementation to spec)
   -- quickly
   -- use {
   --   'otavioschwanck/telescope-alternate.nvim',
-  --   config = function() require 'configs.telescope-alternate' end,
+  --   config = function() require 'plugins.telescope-alternate' end,
   -- }
 
   use {
@@ -278,7 +278,7 @@ return require('packer').startup(function(use)
   -- personal wiki
   use {
     'serenevoid/kiwi.nvim',
-    config = function() require 'configs.kiwi' end,
+    config = function() require 'plugins.kiwi' end,
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
 
@@ -294,7 +294,7 @@ return require('packer').startup(function(use)
 
   use {
     'lewis6991/gitsigns.nvim',
-    config = function() require 'configs.gitsigns' end
+    config = function() require 'plugins.gitsigns' end
   }
 
   ------------------------------------------------------------------------------
@@ -329,7 +329,7 @@ return require('packer').startup(function(use)
   -- uses Dispatch to run tests asynchronously
   use {
     'thoughtbot/vim-rspec',
-    config = function() require 'configs.vim-rspec' end,
+    config = function() require 'plugins.vim-rspec' end,
     ft = 'ruby',
   }
 
@@ -391,13 +391,13 @@ return require('packer').startup(function(use)
       "mfussenegger/nvim-dap",
       "nvim-neotest/nvim-nio"
     }, config = function()
-    require 'configs.dap'
+    require 'plugins.dap'
   end
   }
   -- use {
   --   'mfussenegger/nvim-dap',
   --   config = function()
-  --     require 'configs.dap'
+  --     require 'plugins.dap'
   --   end
   -- }
 
@@ -419,7 +419,7 @@ return require('packer').startup(function(use)
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer'
     },
-    config = function() require 'configs.nvim-cmp' end
+    config = function() require 'plugins.nvim-cmp' end
   }
 
   use {
@@ -428,11 +428,11 @@ return require('packer').startup(function(use)
       'lukas-reineke/lsp-format.nvim',
     },
     config = function()
-      require 'configs.lspconfig'
+      require 'plugins.lspconfig'
     end
   }
 
-  use { 'folke/trouble.nvim', config = function() require 'configs.trouble' end }
+  use { 'folke/trouble.nvim', config = function() require 'plugins.trouble' end }
 
   -- helpful lsp stuff for neovim & lua
   use 'folke/neodev.nvim'
@@ -440,7 +440,7 @@ return require('packer').startup(function(use)
   -- vs-code-style ui to view references/definitions
   use {
     'dnlhc/glance.nvim',
-    config = function() require 'configs.glance' end
+    config = function() require 'plugins.glance' end
   }
 
   ------------------------------------------------------------------------------
@@ -457,7 +457,7 @@ return require('packer').startup(function(use)
   --     'nvim-neotest/neotest-plenary',
   --     'olimorris/neotest-rspec',
   --   },
-  --   config = function() require 'configs.neotest' end
+  --   config = function() require 'plugins.neotest' end
   -- }
 
   if packer_bootstrap then
