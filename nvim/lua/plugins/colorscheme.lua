@@ -38,5 +38,5 @@ colorscheme.setup {
   dark = 'rose-pine-main',
   light = 'rose-pine-dawn',
   on_toggle = on_toggle,
-  bg_detect_fn = read_bg,
+  get_bg = read_bg,
 }

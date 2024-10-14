@@ -21,6 +21,9 @@ local default_setup_args = {
 }
 
 local servers = {
+  bashls = {
+    filetypes = { 'sh', 'zsh', 'bash' },
+  },
   'cssls',
   'html',
   'jsonls',
@@ -33,7 +36,7 @@ local servers = {
           dynamicRegistration = true,
         },
       },
-    })
+    }),
   },
   'rust_analyzer',
   'solargraph',
@@ -41,10 +44,10 @@ local servers = {
     init_options = {
       indexing = {
         includedPatterns = {
-          "**/spec/**/*.rb"
-        }
-      }
-    }
+          "**/spec/**/*.rb",
+        },
+      },
+    },
   },
   'tailwindcss',
   'ts_ls',
