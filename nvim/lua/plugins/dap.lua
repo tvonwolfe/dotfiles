@@ -1,4 +1,6 @@
 local dap = require('dap')
+local dapui = require('dapui')
+local dap_repl_highlights = require('nvim-dap-repl-highlights')
 
 dap.adapters.ruby = function(callback, config)
   callback {
@@ -52,3 +54,19 @@ dap.configurations.ruby = {
     script = "server",
   }
 }
+
+dap.listeners.before.attach.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+  dapui.close()
+end
+
+dapui.setup()
+dap_repl_highlights.setup()

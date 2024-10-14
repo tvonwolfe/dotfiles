@@ -5,10 +5,7 @@ MODES = {
   terminal = 't',
 }
 
-local fn = vim.fn
 local cmd = vim.cmd
-
--- local neotest = require('neotest')
 
 local function map(mode, shortcut, command, bufopts)
   bufopts = bufopts or { remap = false, silent = true }
@@ -70,22 +67,19 @@ if gitsigns_ok then
 end
 
 local dap_ok, dap = pcall(require, 'dap')
+
 if dap_ok then
   local widgets = require('dap.ui.widgets')
-  nmap('<leader>db', dap.toggle_breakpoint)
-  nmap('<leader>dl', dap.run_last)
-  nmap('<leader>dr', dap.repl.toggle)
+  nmap('<F3>', dap.clear_breakpoints)
+  nmap('<F4>', dap.toggle_breakpoint)
+
   nmap('<F5>', dap.continue)
+  nmap('<F6>', dap.run_last)
+
   nmap('<F8>', dap.step_over)
   nmap('<F9>', dap.step_into)
   nmap('<F10>', dap.step_out)
-  nmap('<leader>df', function()
-    widgets.centered_float(widgets.frames)
-  end)
-  nmap('<leader>ds', function()
-    widgets.centered_float(widgets.scopes)
-  end)
-  nmap('<leader>dp', widgets.preview)
+
   nmap('<leader>dh', widgets.hover)
 end
 
@@ -130,78 +124,70 @@ nmap("[c", jump_to_context)
 -----------------------------------------------------------------------
 -- Spec keymaps
 -----------------------------------------------------------------------
+local neotest = require('neotest')
+
 local function run_current_spec_file()
-  -- neotest.run.run(vim.fn.expand('%'))
-  fn.RunCurrentSpecFile()
+  neotest.run.run(vim.fn.expand('%'))
 end
 
 local function run_nearest_spec()
-  -- neotest.run.run()
-  fn.RunNearestSpec()
+  neotest.run.run()
+end
+
+local function debug_nearest_spec()
+  neotest.run.run({ strategy = 'dap' })
 end
 
 local function run_last_spec()
-  -- neotest.run.run_last()
-  fn.RunLastSpec()
+  neotest.run.run_last()
 end
 
 local function run_all_specs()
-  -- neotest.summary.open()
-  -- neotest.run.run(vim.fn.getcwd())
-  fn.RunAllSpecs()
+  neotest.summary.open()
+  neotest.run.run(vim.fn.getcwd())
 end
 
--- local function open_spec_summary()
---   neotest.summary.toggle()
--- end
+local function open_spec_summary()
+  neotest.summary.toggle()
+end
 
--- local function cancel_spec_run()
---   neotest.run.stop()
--- end
+local function cancel_spec_run()
+  neotest.run.stop()
+end
+
+local function watch_spec_file()
+  neotest.watch.toggle(vim.fn.expand('%'))
+end
 
 nmap('<leader>sf', run_current_spec_file)
 nmap('<leader>sn', run_nearest_spec)
 nmap('<leader>sa', run_all_specs)
 nmap('<leader>sl', run_last_spec)
--- nmap('<leader>ss', open_spec_summary)
--- nmap('<leader>sc', cancel_spec_run)
+nmap('<leader>ss', open_spec_summary)
+nmap('<leader>sc', cancel_spec_run)
+nmap('<leader>sd', debug_nearest_spec)
+nmap('<leader>sw', watch_spec_file)
 
 -----------------------------------------------------------------------
 -- LSP keymaps
 -----------------------------------------------------------------------
-
 local lsp_buf = vim.lsp.buf
 
-local function standard_on_attach(client, buffnr)
+nvim_config.on_attach = function(client, buffnr)
   local bufopts = { noremap = true, silent = true, buffer = buffnr }
 
   nmap('<leader>gh', lsp_buf.signature_help, bufopts)
   nmap('<leader>ca', lsp_buf.code_action, bufopts)
   nmap('<leader>rn', lsp_buf.rename, bufopts)
-end
-
-
-local function telescope_on_attach(client, buffnr)
-  local bufopts = { noremap = true, silent = true, buffer = buffnr }
-  nmap('gc', telescope_builtins.lsp_incoming_calls, bufopts)
-  nmap('<leader>fs', telescope_builtins.lsp_document_symbols)
-  nmap('<leader>fw', telescope_builtins.lsp_workspace_symbols)
-end
-
-local function glance_on_attach(client, buffnr)
-  local bufopts = { noremap = true, silent = true, buffer = buffnr }
-  nmap('gr', '<CMD>Glance references<CR>', bufopts)
-  nmap('gd', '<CMD>Glance definitions<CR>', bufopts)
-end
-
-nvim_config.on_attach = function(client, buffnr)
-  standard_on_attach(client, buffnr)
 
   if telescope_builtins_ok then
-    telescope_on_attach(client, buffnr)
+    nmap('gc', telescope_builtins.lsp_incoming_calls, bufopts)
+    nmap('<leader>fs', telescope_builtins.lsp_document_symbols)
+    nmap('<leader>fw', telescope_builtins.lsp_workspace_symbols)
   end
 
   if glance_ok then
-    glance_on_attach(client, buffnr)
+    nmap('gr', '<CMD>Glance references<CR>', bufopts)
+    nmap('gd', '<CMD>Glance definitions<CR>', bufopts)
   end
 end

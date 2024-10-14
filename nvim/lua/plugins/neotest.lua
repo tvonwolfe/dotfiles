@@ -1,21 +1,15 @@
--- TODO: un-comment this at some point when neotest works for debugging
--- Ruby/Rails code
+local neotest = require('neotest')
+local neotest_plenary = require('neotest-plenary')
+local neotest_rspec = require('neotest-rspec')
+local neotest_jest = require('neotest-jest')
 
--- local neotest = require('neotest')
--- local neotest_plenary = require('neotest-plenary')
--- local neotest_rspec = require('neotest-rspec')
-
--- neotest.setup {
---   adapters = {
---     neotest_plenary,
---     neotest_rspec
---   },
---   icons = {
---     running_animated = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
---     passed = "",
---     failed = "",
---     running = "",
---     unknown = "",
---     skipped = "",
---   }
--- }
+neotest.setup {
+  adapters = {
+    neotest_plenary,
+    neotest_rspec,
+    neotest_jest
+  },
+  icons = {
+    running_animated = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+  }
+}

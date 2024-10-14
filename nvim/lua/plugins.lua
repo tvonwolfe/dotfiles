@@ -186,6 +186,11 @@ return require('packer').startup(function(use)
     end
   }
 
+  use {
+    'rcarriga/nvim-notify',
+    config = function() require('plugins.notify') end
+  }
+
   --------------------------------------
   -- everything else
   --------------------------------------
@@ -326,13 +331,6 @@ return require('packer').startup(function(use)
   -- Bundler integration
   use 'tpope/vim-bundler'
 
-  -- uses Dispatch to run tests asynchronously
-  use {
-    'thoughtbot/vim-rspec',
-    config = function() require 'plugins.vim-rspec' end,
-    ft = 'ruby',
-  }
-
   --------------------------------------
   -- liquid
   --------------------------------------
@@ -386,20 +384,23 @@ return require('packer').startup(function(use)
   -- debugging
   --------------------------------------
   use {
-    'rcarriga/nvim-dap-ui',
-    requires = {
-      "mfussenegger/nvim-dap",
-      "nvim-neotest/nvim-nio"
-    }, config = function()
-    require 'plugins.dap'
-  end
+    "microsoft/vscode-js-debug",
+    opt = true,
+    run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
   }
-  -- use {
-  --   'mfussenegger/nvim-dap',
-  --   config = function()
-  --     require 'plugins.dap'
-  --   end
-  -- }
+
+  use {
+    "mfussenegger/nvim-dap",
+    requires = {
+      'rcarriga/nvim-dap-ui',
+      "nvim-neotest/nvim-nio",
+      'liadoz/nvim-dap-repl-highlights',
+      'mxsdev/nvim-dap-vscode-js'
+    },
+    config = function()
+      require 'plugins.dap'
+    end
+  }
 
   ------------------------------------------------------------------------------
   -- lsp stuff
@@ -435,7 +436,10 @@ return require('packer').startup(function(use)
   use { 'folke/trouble.nvim', config = function() require 'plugins.trouble' end }
 
   -- helpful lsp stuff for neovim & lua
-  use 'folke/neodev.nvim'
+  use {
+    'folke/neodev.nvim',
+    config = function() require('neodev').setup({ library = { plugins = { "nvim-dap-ui" }, types = true }, }) end
+  }
 
   -- vs-code-style ui to view references/definitions
   use {
@@ -448,17 +452,16 @@ return require('packer').startup(function(use)
   ------------------------------------------------------------------------------
   -- neotest is an integrated test viewer/executer with hooks into lsp stuff
   -- also language agnostic so can add handlers for other languages/frameworks
-  -- TODO: un-comment this at some point when neotest works for debugging
-  -- Ruby/Rails code
-  -- use {
-  --   'nvim-neotest/neotest',
-  --   requires = {
-  --     'antoinemadec/FixCursorHold.nvim',
-  --     'nvim-neotest/neotest-plenary',
-  --     'olimorris/neotest-rspec',
-  --   },
-  --   config = function() require 'plugins.neotest' end
-  -- }
+  use {
+    'nvim-neotest/neotest',
+    requires = {
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-neotest/neotest-plenary',
+      'olimorris/neotest-rspec',
+      'nvim-neotest/neotest-jest'
+    },
+    config = function() require 'plugins.neotest' end
+  }
 
   if packer_bootstrap then
     require('packer').sync()
