@@ -100,10 +100,7 @@ return require('packer').startup(function(use)
   -- }
 
   -- seamless nav between vim & tmux panes
-  use {
-    'christoomey/vim-tmux-navigator',
-    config = function() require 'plugins.vim-tmux-navigator' end
-  }
+  use 'christoomey/vim-tmux-navigator'
 
   --------------------------------------
   -- vim ui stuff

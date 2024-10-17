@@ -16,7 +16,7 @@ local default_setup_args = {
   single_file_support = true,
   on_attach = function(client, bufnr)
     nvim_config.on_attach(client, bufnr)
-    -- lsp_format.on_attach(client)
+    lsp_format.on_attach(client)
   end
 }
 

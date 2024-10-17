@@ -32,18 +32,23 @@ local toggle = function()
   set_colorscheme(colorscheme)
 end
 
-function M.setup(opts)
-  M.options = vim.tbl_deep_extend("force", {}, defaults, opts or {})
-
-  local background = M.options.get_bg() or 'dark'
-  local status = set_colorscheme(M.options[background])
-  vim.opt.background = background
+local set_colorscheme_from_bg = function()
+  local bg = M.options.get_bg() or 'dark'
+  local status = set_colorscheme(M.options[bg])
+  vim.opt.background = bg
 
   if (not status) and M.options.fallback ~= nil then
     set_colorscheme(M.options.fallback)
   end
+end
+
+function M.setup(opts)
+  M.options = vim.tbl_deep_extend("force", {}, defaults, opts or {})
+
+  set_colorscheme_from_bg()
 
   vim.api.nvim_create_user_command('ToggleColorscheme', toggle, {})
+  vim.api.nvim_create_user_command('DetectColorscheme', set_colorscheme_from_bg, {})
 end
 
 return M
