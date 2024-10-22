@@ -8,3 +8,6 @@ cmd "autocmd! TermClose * if !v:event.status | exe 'bdelete! '..expand('<abuf>')
 
 -- keep windows sized equally as vim is resized
 cmd 'autocmd! VimResized * wincmd ='
+
+-- format files on save if there's an lsp attached
+cmd [[autocmd! BufWritePre * lua vim.lsp.buf.format()]]
