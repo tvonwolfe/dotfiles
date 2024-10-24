@@ -93,6 +93,7 @@ if telescope_builtins_ok then
   nmap('<leader>fb', telescope_builtins.buffers)
   nmap('<leader>fh', telescope_builtins.help_tags)
   nmap('<leader>fm', telescope_builtins.man_pages)
+  nmap('<leader>bh', telescope_builtins.git_bcommits)
 end
 
 nmap('<leader>fa', '<cmd>Telescope telescope-alternate alternate_file<CR>')
@@ -184,6 +185,7 @@ nvim_config.on_attach = function(client, buffnr)
     nmap('gc', telescope_builtins.lsp_incoming_calls, bufopts)
     nmap('<leader>fs', telescope_builtins.lsp_document_symbols)
     nmap('<leader>fw', telescope_builtins.lsp_workspace_symbols)
+    nmap('<leader>fd', function() telescope_builtins.diagnostics({ bufnr = 0 }) end)
   end
 
   if glance_ok then

@@ -121,8 +121,8 @@ return require('packer').startup(function(use)
   -- better syntax highlighting and formatting via treesitter
   use {
     requires = {
-      'RRethy/nvim-treesitter-endwise',                            -- wisely add `end` to code blocks in languages that use that keyword.
-      'nvim-treesitter/nvim-treesitter-context',                   -- show code context
+      'RRethy/nvim-treesitter-endwise',          -- wisely add `end` to code blocks in languages that use that keyword.
+      'nvim-treesitter/nvim-treesitter-context', -- show code context
       'yioneko/nvim-yati'
     },
     'nvim-treesitter/nvim-treesitter',
@@ -254,6 +254,11 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make'
+  }
+
+  use {
+    "nvim-telescope/telescope-dap.nvim",
+    wants = { "nvim-telescope/telescope.nvim" },
   }
 
   -- find stuff
