@@ -26,24 +26,8 @@ return require('packer').startup(function(use)
   -- themes
   ------------------------------------------------------------------------------
   use 'bluz71/vim-nightfly-colors'
-  use 'comfysage/evergarden'
-  use {
-    'ellisonleao/gruvbox.nvim',
-    config = function() require("gruvbox").setup({ contrast = "soft" }) end
-  }
-  use 'embark-theme/vim'
   use 'folke/tokyonight.nvim'
-  use 'pauchiner/pastelnight.nvim'
   use 'sainnhe/everforest'
-  use { "catppuccin/nvim", as = "catppuccin" }
-  use 'tiagovla/tokyodark.nvim'
-  use 'Everblush/nvim'
-  use {
-    'zenbones-theme/zenbones.nvim',
-    requires = 'rktjmp/lush.nvim'
-  }
-  use 'xero/miasma.nvim'
-  use 'diegoulloao/neofusion.nvim'
   use 'rose-pine/neovim'
 
   ------------------------------------------------------------------------------
@@ -55,7 +39,10 @@ return require('packer').startup(function(use)
   -- for writing
   ------------------------------------------------------------------------------
   -- zen mode to block out the distractions
-  use 'folke/zen-mode.nvim'
+  use {
+    'folke/zen-mode.nvim',
+    cmd = 'ZenMode',
+  }
 
   ------------------------------------------------------------------------------
   -- general quality of life stuff
@@ -74,7 +61,10 @@ return require('packer').startup(function(use)
   use 'tpope/vim-repeat'
 
   -- easily convert between single & multi line statements.
-  use 'AndrewRadev/splitjoin.vim'
+  use {
+    'AndrewRadev/splitjoin.vim',
+    keys = { 'gS', 'gJ' },
+  }
 
   -- easily move function args left and right
   use 'AndrewRadev/sideways.vim'
@@ -82,15 +72,8 @@ return require('packer').startup(function(use)
   -- more powerful <c-a> & <c-x> for incrementing/decrementing/toggling values
   use {
     'nat-418/boole.nvim',
-    config = function() require 'plugins.boole' end
-  }
-
-  -- use tab to move cursor out of enclosing braces, brackets, etc
-  use {
-    'abecodes/tabout.nvim',
-    wants = { 'nvim-treesitter' },
-    after = { 'nvim-cmp' },
-    config = function() require('tabout').setup() end
+    config = function() require 'plugins.boole' end,
+    keys = { '<c-a>', '<c-x>' }
   }
 
   -- -- easily fold code blocks
@@ -139,16 +122,20 @@ return require('packer').startup(function(use)
     requires = 'nvim-treesitter/nvim-treesitter',
   }
 
-  -- use {
-  --   'm-demare/hlargs.nvim',
-  --   config = function() require('hlargs').setup() end
-  -- }
-
   -- auto-close html/xml/jsx tags.
   use {
     'windwp/nvim-ts-autotag',
     after = 'nvim-treesitter',
     config = function() require 'plugins.autotag' end,
+    ft = {
+      'eruby',
+      'html',
+      'javascript',
+      'javascriptreact',
+      'liquid',
+      'typescript',
+      'typescriptreact',
+    }
   }
   -- indent guides
   use {
@@ -159,21 +146,36 @@ return require('packer').startup(function(use)
   -- performant color code highlighting
   use {
     'norcalli/nvim-colorizer.lua',
-    config = function() require 'plugins.colorizer' end
+    config = function() require 'plugins.colorizer' end,
+    ft = {
+      'css',
+      'eruby',
+      'html',
+      'javascript',
+      'javascriptreact',
+      'liquid',
+      'scss',
+      'typescript',
+      'typescriptreact',
+    }
   }
 
   -- file explorer
   use {
     'kyazdani42/nvim-tree.lua',
     requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function() require 'plugins.nvim-tree' end
+    config = function() require 'plugins.nvim-tree' end,
+    cmd = 'NvimTreeToggle',
   }
 
   -- asynchronous build and test dispatching
   use 'tpope/vim-dispatch'
 
   -- manage docker stuff from vim
-  use 'kkvh/vim-docker-tools'
+  use {
+    'kkvh/vim-docker-tools',
+    cmd = 'DockerToolsToggle',
+  }
 
   -- scrollbars with decoration (git, LSP diagnostics, etc.)
   use {
@@ -191,20 +193,14 @@ return require('packer').startup(function(use)
   --------------------------------------
   -- everything else
   --------------------------------------
-  -- persisted sessions
-  -- use {
-  --   'olimorris/persisted.nvim',
-  --   config = function() require 'plugins.persisted' end
-  -- }
-
-  -- tmux command integration
-  use 'tpope/vim-tbone'
-
   -- load plugins quickfast
   use 'lewis6991/impatient.nvim'
 
   -- look up man pages without leaving vim
-  use 'vim-utils/vim-man'
+  use {
+    'vim-utils/vim-man',
+    cmd = { 'Man', 'Sman', 'TMan', 'Vman', }
+  }
 
   -- auto-pairs on braces, quotes, etc.
   use {
@@ -221,12 +217,6 @@ return require('packer').startup(function(use)
   -- easy project management from within vim
   use 'tpope/vim-projectionist'
 
-  -- db ui for vim
-  use {
-    'kristijanhusak/vim-dadbod-ui',
-    requires = { 'tpope/vim-dadbod' },
-  }
-
   -- wrappers to common unix file commands
   use 'tpope/vim-eunuch'
 
@@ -234,22 +224,8 @@ return require('packer').startup(function(use)
   use 'tpope/vim-dotenv'
 
   ------------------------------------------------------------------------------
-  -- ai stuff
-  ------------------------------------------------------------------------------
-  use {
-    "jackMort/ChatGPT.nvim",
-    requires = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
-    },
-    config = function() require("chatgpt").setup() end
-  }
-
-  ------------------------------------------------------------------------------
   -- nvim-telescope & related
   ------------------------------------------------------------------------------
-
   -- use fzf for telescope
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
@@ -261,7 +237,6 @@ return require('packer').startup(function(use)
     wants = { "nvim-telescope/telescope.nvim" },
   }
 
-  -- find stuff
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -282,23 +257,23 @@ return require('packer').startup(function(use)
     config = function() require('other-nvim').setup({ mappings = { 'rails' }, rememberBuffers = false }) end
   }
 
-  -- personal wiki
-  use {
-    'serenevoid/kiwi.nvim',
-    config = function() require 'plugins.kiwi' end,
-    requires = { { 'nvim-lua/plenary.nvim' } }
-  }
-
   ------------------------------------------------------------------------------
   -- git stuff
   ------------------------------------------------------------------------------
 
   -- fugitive for git
-  use 'tpope/vim-fugitive'
+  use {
+    'tpope/vim-fugitive',
+    cmd = 'Git',
+  }
 
-  -- git commit browsing made easy
-  use 'junegunn/gv.vim'
+  -- nice git commit browser
+  use {
+    'junegunn/gv.vim',
+    cmd = 'GV',
+  }
 
+  -- show git diff symbols in the gutter
   use {
     'lewis6991/gitsigns.nvim',
     config = function() require 'plugins.gitsigns' end
@@ -328,10 +303,16 @@ return require('packer').startup(function(use)
   }
 
   -- rails integration
-  use 'tpope/vim-rails'
+  use {
+    'tpope/vim-rails',
+    ft = 'ruby'
+  }
 
   -- Bundler integration
-  use 'tpope/vim-bundler'
+  use {
+    'tpope/vim-bundler',
+    ft = 'ruby'
+  }
 
   --------------------------------------
   -- liquid
@@ -360,12 +341,6 @@ return require('packer').startup(function(use)
     ft = 'json',
   }
 
-  -- supports json objects as vim text objects
-  use {
-    'tpope/vim-jdaddy',
-    ft = 'json',
-  }
-
   --------------------------------------
   -- csv
   --------------------------------------
@@ -373,14 +348,8 @@ return require('packer').startup(function(use)
   use {
     'cameron-wags/rainbow_csv.nvim',
     config = function() require 'rainbow_csv'.setup() end,
+    ft = 'csv'
   }
-
-  --------------------------------------
-  -- kitty
-  --------------------------------------
-  -- kitty config file syntax highlighting
-  use "fladson/vim-kitty"
-
 
   --------------------------------------
   -- debugging
@@ -427,12 +396,13 @@ return require('packer').startup(function(use)
 
   use {
     'neovim/nvim-lspconfig',
-    config = function()
-      require 'plugins.lspconfig'
-    end
+    config = function() require 'plugins.lspconfig' end
   }
 
-  use { 'folke/trouble.nvim', config = function() require 'plugins.trouble' end }
+  use {
+    'folke/trouble.nvim',
+    config = function() require 'plugins.trouble' end
+  }
 
   -- helpful lsp stuff for neovim & lua
   use {
