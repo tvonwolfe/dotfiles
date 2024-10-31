@@ -21,17 +21,7 @@ local servers = {
     filetypes = { 'sh', 'zsh', 'bash' },
   },
   'cssls',
-  gopls = {
-    settings = {
-      gopls = {
-        analyses = {
-          unusedparams = true
-        },
-        staticcheck = true,
-        gofumpt = true,
-      }
-    }
-  },
+  'gopls',
   'html',
   'jsonls',
   'lua_ls',
