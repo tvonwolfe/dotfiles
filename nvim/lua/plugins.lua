@@ -297,22 +297,13 @@ return require('packer').startup(function(use)
   -- ruby/rails
   --------------------------------------
   -- rvm wrapper for vim.
-  use {
-    'tpope/vim-rvm',
-    ft = 'ruby'
-  }
+  use 'tpope/vim-rvm'
 
   -- rails integration
-  use {
-    'tpope/vim-rails',
-    ft = 'ruby'
-  }
+  use 'tpope/vim-rails'
 
   -- Bundler integration
-  use {
-    'tpope/vim-bundler',
-    ft = 'ruby'
-  }
+  use 'tpope/vim-bundler'
 
   --------------------------------------
   -- liquid
