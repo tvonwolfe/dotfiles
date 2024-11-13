@@ -71,8 +71,5 @@ cmp.setup {
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "c", "i" }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { "c", "i" }),
     ['<CR>'] = cmp.mapping.confirm({ select = false })
-  }),
-  experimental = {
-    ghost_text = true
-  }
+  })
 }

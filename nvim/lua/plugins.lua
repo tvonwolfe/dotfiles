@@ -371,9 +371,14 @@ return require('packer').startup(function(use)
   use 'rafamadriz/friendly-snippets'
 
   use {
+    'L3MON4D3/LuaSnip',
+    run = 'make install_jsregexp'
+  }
+
+  use {
     'hrsh7th/nvim-cmp',
     requires = {
-      'L3MON4D3/LuaSnip',
+
       'saadparwaiz1/cmp_luasnip',
       'onsails/lspkind.nvim',
       'hrsh7th/cmp-nvim-lua',
