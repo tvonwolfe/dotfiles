@@ -21,15 +21,27 @@ local function read_bg()
   return 'dark'
 end
 
-require('rose-pine').setup({
-  highlight_groups = {
-    Comment = { italic = true },
-    ["@keyword"] = { italic = true },
-    ["@variable"] = { italic = false },
-    ["@function"] = { italic = false },
-    ["@property"] = { italic = false },
-    ["@variable.parameter"] = { italic = false },
-    ["@parameter"] = { italic = false },
+-- require('rose-pine').setup({
+--   highlight_groups = {
+--     Comment = { italic = true },
+--     ["@keyword"] = { italic = true },
+--     ["@variable"] = { italic = false },
+--     ["@function"] = { italic = false },
+--     ["@property"] = { italic = false },
+--     ["@variable.parameter"] = { italic = false },
+--     ["@parameter"] = { italic = false },
+--   }
+-- })
+
+require('kanagawa').setup({
+  colors = {
+    theme = {
+      all = {
+        ui = {
+          bg_gutter = "none"
+        }
+      }
+    }
   }
 })
 
