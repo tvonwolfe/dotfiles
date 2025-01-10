@@ -29,6 +29,23 @@ return require('packer').startup(function(use)
   use 'folke/tokyonight.nvim'
   use 'sainnhe/everforest'
   use 'rose-pine/neovim'
+  use 'dgox16/oldworld.nvim'
+  use {
+    'rebelot/kanagawa.nvim',
+    config = function()
+      require('kanagawa').setup({
+        colors = {
+          theme = {
+            all = {
+              ui = {
+                bg_gutter = "none"
+              }
+            }
+          }
+        }
+      })
+    end
+  }
 
   ------------------------------------------------------------------------------
   -- whimsical stuff

@@ -35,7 +35,7 @@ require('rose-pine').setup({
 
 colorscheme.setup {
   fallback = 'slate',
-  dark = 'rose-pine-main',
+  dark = 'kanagawa',
   light = 'rose-pine-dawn',
   on_toggle = on_toggle,
   get_bg = read_bg,

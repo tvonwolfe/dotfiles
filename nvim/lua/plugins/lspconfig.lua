@@ -39,6 +39,7 @@ local servers = {
   'solargraph',
   ruby_lsp = {
     init_options = {
+      formatter = 'rubocop',
       indexing = {
         includedPatterns = {
           "**/spec/**/*.rb",
