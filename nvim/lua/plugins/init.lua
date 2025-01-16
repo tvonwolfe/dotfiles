@@ -1,0 +1,18 @@
+return {
+  'windwp/nvim-ts-autotag',
+  'AndrewRadev/splitjoin.vim',
+  'christoomey/vim-tmux-navigator',
+  'tpope/vim-liquid',
+  'folke/zen-mode.nvim',
+  'junegunn/gv.vim',
+  'rafamadriz/friendly-snippets',
+  'tpope/vim-abolish',
+  'tpope/vim-bundler',
+  'tpope/vim-dispatch',
+  'tpope/vim-fugitive',
+  'tpope/vim-projectionist',
+  'tpope/vim-rails',
+  'tpope/vim-repeat',
+  { 'kylechui/nvim-surround',   opts = {} },
+  { 'lewis6991/satellite.nvim', opts = {} },
+}

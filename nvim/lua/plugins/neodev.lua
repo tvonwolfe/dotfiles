@@ -1,5 +1,9 @@
-local neodev_status_ok, neodev = pcall(require, 'neodev')
-
-if neodev_status_ok then
-  neodev.setup()
-end
+return {
+  "folke/neodev.nvim",
+  opts = {
+    library = {
+      plugins = { "nvim-dap-ui" },
+      types = true,
+    },
+  }
+}

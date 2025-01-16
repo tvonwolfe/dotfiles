@@ -1,5 +1,13 @@
-local indent_blankline = require 'ibl'
-
-indent_blankline.setup {
-  exclude = { filetypes = { 'text', 'markdown', 'man' } }
+return {
+  'lukas-reineke/indent-blankline.nvim',
+  main = 'ibl',
+  opts = {
+    exclude = {
+      filetypes = {
+        'text',
+        'markdown',
+        'man',
+      },
+    }
+  }
 }

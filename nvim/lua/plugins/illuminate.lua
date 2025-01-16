@@ -1,2 +1,4 @@
-local illuminate = require 'illuminate'
-illuminate.configure()
+return {
+  'RRethy/vim-illuminate',
+  config = function() require('illuminate').configure() end
+}

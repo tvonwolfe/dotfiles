@@ -1,28 +1,33 @@
-local lualine = require 'lualine'
-local lsp_progress = require 'lsp-progress'
-
-lsp_progress.setup()
-
-local function get_lsp_progres()
-  return lsp_progress.progress()
-end
-
-lualine.setup {
-  options = {
-    component_separators = '',
-    section_separators = '',
-    -- section_separators = { left = '', right = '' },
+return {
+  'nvim-lualine/lualine.nvim',
+  dependencies = {
+    'linrongbin16/lsp-progress.nvim',
+    'nvim-tree/nvim-web-devicons',
   },
-  sections = {
-    lualine_x = {
-      get_lsp_progres, 'filetype',
-    }
-  }
-}
+  config = function()
+    local lualine = require('lualine')
+    local lsp_progress = require('lsp-progress')
+    lsp_progress.setup()
 
-vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
-vim.api.nvim_create_autocmd("User", {
-  group = "lualine_augroup",
-  pattern = "LspProgressStatusUpdated",
-  callback = lualine.refresh,
-})
+    lualine.setup({
+      options = {
+        component_separators = '',
+        section_separators = '',
+        -- section_separators = { left = '', right = '' },
+      },
+      sections = {
+        lualine_x = {
+          lsp_progress.progress,
+          'filetype',
+        }
+      }
+    })
+
+    vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+    vim.api.nvim_create_autocmd("User", {
+      group = "lualine_augroup",
+      pattern = "LspProgressStatusUpdated",
+      callback = require('lualine').refresh,
+    })
+  end
+}
