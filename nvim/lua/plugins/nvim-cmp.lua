@@ -1,4 +1,5 @@
 return {
+  'rafamadriz/friendly-snippets',
   { 'L3MON4D3/LuaSnip',         build = "make install_jsregexp", lazy = true },
   { 'onsails/lspkind.nvim',     lazy = true },
   { 'saadparwaiz1/cmp_luasnip', lazy = true },
@@ -12,18 +13,15 @@ return {
       'hrsh7th/cmp-buffer'
     },
     config = function()
-      local cmp = require 'cmp'
-      local cmp_context = require 'cmp.config.context'
-      local lspkind_status_ok, lspkind = pcall(require, 'lspkind')
-      local snip_status_ok, luasnip = pcall(require, 'luasnip')
-      local friendly_snippets_ok, friendly_snippets = pcall(require, 'luasnip.loaders.from_vscode')
+      local cmp = require('cmp')
+      local cmp_context = require('cmp.config.context')
+      local lspkind = require('lspkind')
+      local luasnip = require('luasnip')
+      require('luasnip.loaders.from_vscode').lazy_load()
 
-      if not snip_status_ok then return end
-      if not friendly_snippets_ok then return end
-      friendly_snippets.lazy_load()
+      local lspkind_formatting = lspkind.cmp_format({ mode = 'symbol_text', symbol_map = { Copilot = '' } })
 
-      local lspkind_formatting = lspkind_status_ok and
-          lspkind.cmp_format({ mode = 'symbol_text', symbol_map = { Copilot = '' } }) or nil
+      luasnip.filetype_extend('ruby', { 'rails' })
 
       cmp.setup {
         enabled = function()

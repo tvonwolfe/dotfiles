@@ -1,5 +1,6 @@
 return {
   'lewis6991/gitsigns.nvim',
+  lazy = false,
   opts = {},
   keys = {
     { '[g', function() require('gitsigns').nav_hunk('prev') end, { desc = 'Jump to previous git change hunk' } },

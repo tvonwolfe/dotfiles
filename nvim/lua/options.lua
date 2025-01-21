@@ -109,6 +109,9 @@ opts.list = true
 --     noinsert = do not insert text for a match until it's selected
 opts.completeopt = { 'menu', 'menuone', 'noinsert' }
 
+opts.breakindent = true
+opts.breakindentopt = "list:-1"
+
 -- use treesitter for folds
 vim.foldmethod = 'expr'
 vim.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

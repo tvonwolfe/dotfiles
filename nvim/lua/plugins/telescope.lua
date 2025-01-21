@@ -20,12 +20,16 @@ return {
 
     telescope.setup({
       defaults = {
-        winblend = 15
+        winblend = 15,
+        preview = {
+          filesize_limit = 0.1
+        }
       },
       pickers = {
         find_files = {
           hidden = true,
-          theme = 'dropdown'
+          theme = 'dropdown',
+          find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
         },
         buffers = {
           theme = 'dropdown'
@@ -44,9 +48,6 @@ return {
           case_mode = 'smart_case',
         }
       },
-      file_ignore_patterns = {
-        ".git/",
-      }
     })
   end,
   keys = {

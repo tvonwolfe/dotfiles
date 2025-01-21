@@ -1,6 +1,7 @@
 return {
   'dnlhc/glance.nvim',
   lazy = true,
+  cmd = 'Glance',
   opts = {
     hooks = {
       before_open = function(results, open, jump, method)
