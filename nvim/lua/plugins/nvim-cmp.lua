@@ -12,6 +12,7 @@ return {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer'
     },
+    event = 'InsertEnter',
     config = function()
       local cmp = require('cmp')
       local cmp_context = require('cmp.config.context')

@@ -4,6 +4,7 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lsp'
   },
+  event = 'InsertEnter',
   config = function()
     local cmp_nvim_lsp = require('cmp_nvim_lsp')
     local nvim_lsp_config = require('lspconfig')
