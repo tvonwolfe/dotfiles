@@ -45,10 +45,9 @@ return {
         }),
       },
       'rust_analyzer',
-      'solargraph',
+      'rubocop',
       ruby_lsp = {
         init_options = {
-          formatter = 'rubocop',
           indexing = {
             includedPatterns = {
               "**/spec/**/*.rb",
@@ -74,6 +73,7 @@ return {
           end
         end,
       },
+      'solargraph',
       'tailwindcss',
       'ts_ls',
     }

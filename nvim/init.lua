@@ -8,8 +8,7 @@ local work_ok, work = pcall(require, 'work')
 if work_ok then work.setup_work_commands() end
 
 require 'options'
-require("config.lazy")
--- require 'plugins'
+require('config.lazy')
 require('keymaps').setup()
 require 'autocmds'
 

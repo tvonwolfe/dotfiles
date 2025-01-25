@@ -3,12 +3,21 @@ return {
   dependencies = {
     'rcarriga/nvim-dap-ui',
     'liadoz/nvim-dap-repl-highlights',
-    'nvim-neotest/nvim-nio'
+    'nvim-neotest/nvim-nio',
+    'jbyuki/one-small-step-for-vimkind',
   },
   config = function()
     local dap = require('dap')
     local dapui = require('dapui')
     local dap_repl_highlights = require('nvim-dap-repl-highlights')
+
+    dap.adapters.nlua = function(callback, config)
+      callback {
+        type = 'server',
+        host = config.host or '127.0.0.1',
+        port = config.port or 8086,
+      }
+    end
 
     dap.adapters.ruby = function(callback, config)
       callback {
@@ -23,6 +32,14 @@ return {
         },
       }
     end
+
+    dap.configurations.lua = {
+      {
+        type = 'nlua',
+        request = 'attach',
+        name = 'Attach to running Neovim instance'
+      }
+    }
 
     dap.configurations.ruby = {
       {
@@ -80,6 +97,9 @@ return {
     dap_repl_highlights.setup()
   end,
   keys = {
+    {
+      '<leader>dl', function() require("osv").launch({ port = 8086 }) end
+    },
     {
       '<F3>',
       function()

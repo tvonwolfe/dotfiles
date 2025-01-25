@@ -7,7 +7,6 @@ if work_ok then
 end
 
 return {
-  'AndrewRadev/splitjoin.vim',
   'christoomey/vim-tmux-navigator',
   'tpope/vim-abolish',
   'tpope/vim-dispatch',
