@@ -76,6 +76,7 @@ return {
       'solargraph',
       'tailwindcss',
       'ts_ls',
+      'zls',
     }
 
     for k, v in pairs(servers) do
