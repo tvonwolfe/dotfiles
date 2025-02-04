@@ -15,6 +15,7 @@ event_handling.setup({
   ['toggle-colorscheme'] = function(window, _)
     local overrides = window:get_config_overrides() or {}
 
+    -- TODO: figure out how to make this work with color_scheme and colors
     if not overrides.color_scheme then
       overrides.color_scheme = theming.color_schemes.light
     else
