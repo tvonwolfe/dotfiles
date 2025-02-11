@@ -42,7 +42,7 @@ return {
       '<leader>sa',
       function()
         local neotest = require('neotest')
-        neotest.summary.toggle()
+        neotest.summary.open()
         neotest.run.run(vim.fn.getcwd())
       end,
       { desc = 'Run all specs in project' },
