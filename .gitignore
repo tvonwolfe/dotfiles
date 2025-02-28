@@ -6,3 +6,6 @@
 !kitty/**
 !neofetch
 !tmux
+!tmux/**
+!ghostty
+!ghostty/**
