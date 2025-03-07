@@ -73,7 +73,6 @@ return {
           end
         end,
       },
-      'solargraph',
       'tailwindcss',
       'ts_ls',
       'zls',

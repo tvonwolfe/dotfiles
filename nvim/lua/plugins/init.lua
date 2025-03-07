@@ -13,6 +13,7 @@ return {
   'tpope/vim-projectionist',
   'tpope/vim-rails',
   'tpope/vim-repeat',
+  { 'Everblush/nvim',           name = 'everblush' },
   { 'folke/zen-mode.nvim',      opts = {},                         cmd = 'ZenMode',                                                                          lazy = true },
   { 'junegunn/gv.vim',          cmd = 'GV',                        lazy = true },
   { 'kylechui/nvim-surround',   opts = {} },
