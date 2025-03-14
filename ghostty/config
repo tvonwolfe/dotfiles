@@ -3,3 +3,5 @@ font-size = 12
 font-thicken = true
 font-thicken-strength = 0
 adjust-cell-width = -1
+
+keybind = cmd+s=toggle_quick_terminal
