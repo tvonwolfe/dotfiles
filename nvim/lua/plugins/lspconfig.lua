@@ -78,6 +78,13 @@ return {
       'zls',
     }
 
+    local work_ok, work = pcall(require, 'work')
+
+    if work_ok then
+      -- overwrite server config if we're at work
+      servers = work.lsp_servers
+    end
+
     for k, v in pairs(servers) do
       local has_config = type(v) == "table"
       local server_name = has_config and k or v
