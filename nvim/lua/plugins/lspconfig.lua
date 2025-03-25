@@ -73,7 +73,6 @@ return {
           end
         end,
       },
-      'tailwindcss',
       'ts_ls',
       'zls',
     }
