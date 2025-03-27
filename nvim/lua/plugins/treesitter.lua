@@ -4,7 +4,8 @@ return {
   dependencies = {
     'RRethy/nvim-treesitter-endwise',          -- wisely add `end` to code blocks in languages that use that keyword.
     'nvim-treesitter/nvim-treesitter-context', -- show code context
-    'yioneko/nvim-yati'
+    'yioneko/nvim-yati',
+    'nvim-treesitter/nvim-treesitter-textobjects'
   },
   main = 'nvim-treesitter.configs',
   version = false,
@@ -81,6 +82,8 @@ return {
           ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
           -- You can also use captures from other query groups like `locals.scm`
           ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+          ["ib"] = "@block.inner",
+          ["ab"] = "@block.outer",
         },
         -- You can choose the select mode (default is charwise 'v')
         --
@@ -103,7 +106,7 @@ return {
         -- * query_string: eg '@function.inner'
         -- * selection_mode: eg 'v'
         -- and should return true of false
-        include_surrounding_whitespace = true,
+        include_surrounding_whitespace = false,
       },
       move = {
         enable = true,
