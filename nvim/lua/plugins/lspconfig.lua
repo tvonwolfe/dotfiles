@@ -9,7 +9,7 @@ return {
     local cmp_nvim_lsp = require('cmp_nvim_lsp')
     local nvim_lsp_config = require('lspconfig')
     local telescope_builtins = require('telescope.builtin')
-    local keymap = require('../keymaps')
+    local keymap = require('config.keymaps')
     local nmap = keymap.nmap
 
     require('neodev').setup()
