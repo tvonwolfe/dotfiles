@@ -4,7 +4,7 @@ vim.loader.enable()
 
 _G.nvim_config = {}
 
-local work_ok, work = pcall(require, 'work')
+local work_ok, work = pcall(require, 'config.work')
 if work_ok then work.setup_work_commands() end
 
 require 'config.options'
