@@ -77,7 +77,7 @@ return {
       'zls',
     }
 
-    local work_ok, work = pcall(require, 'work')
+    local work_ok, work = pcall(require, 'config.work')
 
     if work_ok then
       -- overwrite server config if we're at work
