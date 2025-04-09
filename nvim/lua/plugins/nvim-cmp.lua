@@ -1,18 +1,16 @@
 return {
   'rafamadriz/friendly-snippets',
+  'hrsh7th/cmp-nvim-lua',
+  'hrsh7th/cmp-nvim-lsp-signature-help',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-buffer',
+  'tailwind-tools',
   { 'L3MON4D3/LuaSnip',         build = "make install_jsregexp", lazy = true },
   { 'onsails/lspkind.nvim',     lazy = true },
   { 'saadparwaiz1/cmp_luasnip', lazy = true },
   {
     'hrsh7th/nvim-cmp',
-    dependencies = {
-      'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-buffer',
-      'tailwind-tools',
-    },
     event = 'InsertEnter',
     config = function()
       local cmp = require('cmp')
@@ -42,8 +40,13 @@ return {
         snippet = {
           expand = function(args) luasnip.lsp_expand(args.body) end
         },
-        sources = {
+        sources = cmp.config.sources({
           { name = 'nvim_lua' },
+          { name = 'nvim_lsp_signature_help' },
+          { name = 'buffer' },
+          { name = 'path' },
+          { name = 'luasnip' },
+          { name = 'copilot',                group_index = 1 },
           { name = 'nvim_lsp',
             option = {
               markdown_oxide = {
@@ -51,12 +54,7 @@ return {
               }
             }
           },
-          { name = 'nvim_lsp_signature_help' },
-          { name = 'buffer' },
-          { name = 'path' },
-          { name = 'luasnip' },
-          { name = 'copilot',                group_index = 2 },
-        },
+        }),
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
