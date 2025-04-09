@@ -7,4 +7,6 @@ cmd 'autocmd! TermOpen * setlocal nonumber norelativenumber nocursorline|startin
 cmd 'autocmd! VimResized * wincmd ='
 
 -- format files on save if there's an lsp attached
+-- TODO: refactor so autocmd is created for buffers with LSPs attached
+-- (on_attach callback)
 cmd [[autocmd! BufWritePre * lua vim.lsp.buf.format()]]
