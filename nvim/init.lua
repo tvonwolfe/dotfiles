@@ -11,6 +11,7 @@ require 'config.options'
 require('config.lazy')
 require('config.keymaps').setup()
 require 'config.autocmds'
+require 'config.macros'
 
 -- local colorscheme = require('colorscheme')
 
