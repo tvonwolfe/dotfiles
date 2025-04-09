@@ -3,3 +3,4 @@ autoload/
 .netrwhist
 !lua/
 !lua/**
+lazy-lock.json
