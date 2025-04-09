@@ -1,4 +1,4 @@
-local work_ok, work = pcall(require, '../work')
+local work_ok, work = pcall(require, 'config.work')
 
 local work_plugins = {}
 
