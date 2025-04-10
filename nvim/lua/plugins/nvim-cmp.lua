@@ -41,19 +41,20 @@ return {
           expand = function(args) luasnip.lsp_expand(args.body) end
         },
         sources = cmp.config.sources({
-          { name = 'nvim_lua' },
-          { name = 'nvim_lsp_signature_help' },
-          { name = 'buffer' },
-          { name = 'path' },
-          { name = 'luasnip' },
-          { name = 'copilot',                group_index = 1 },
           { name = 'nvim_lsp',
+            group_index = 1,
             option = {
               markdown_oxide = {
                 keyword_pattern = [[\(\k\| \|\/\|#\)\+]]
               }
             }
           },
+          { name = 'copilot',                 group_index = 2 },
+          { name = 'luasnip',                 group_index = 3 },
+          { name = 'nvim_lua' },
+          { name = 'buffer',                  group_index = 4 },
+          { name = 'path',                    group_index = 5 },
+          { name = 'nvim_lsp_signature_help', group_index = 6 },
         }),
         window = {
           completion = cmp.config.window.bordered(),
