@@ -1,9 +1,15 @@
 return {
-  'rebelot/kanagawa.nvim',
+  dir = '~/.config/nvim/lua/plugin/colorscheme',
+  dependencies = {
+    'rebelot/kanagawa.nvim',
+    'rose-pine/neovim',
+  },
   priority = 1000,
   lazy = false,
   config = function()
-    require('kanagawa').setup({
+    -- set up dark theme
+    local kanagawa = require('kanagawa')
+    kanagawa.setup({
       compile = true,
       colors = {
         theme = {
@@ -30,6 +36,22 @@ return {
       end
     })
 
-    vim.cmd "colorscheme kanagawa"
+    -- set up light theme
+    require('rose-pine').setup({
+      highlight_groups = {
+        Comment = { italic = true },
+        ["@keyword"] = { italic = true },
+        ["@variable"] = { italic = false },
+        ["@function"] = { italic = false },
+        ["@property"] = { italic = false },
+        ["@variable.parameter"] = { italic = false },
+        ["@parameter"] = { italic = false },
+      }
+    })
+
+    require('plugin.colorscheme').setup({
+      dark = "kanagawa",
+      light = 'rose-pine'
+    })
   end
 }

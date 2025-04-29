@@ -1,4 +1,4 @@
-theme = Kanagawa Wave
+theme = dark:Kanagawa Wave,light:rose-pine-dawn
 font-size = 12
 font-thicken = true
 font-thicken-strength = 0

@@ -3,22 +3,47 @@ return {
   dependencies = {
     'linrongbin16/lsp-progress.nvim',
     'nvim-tree/nvim-web-devicons',
+    'AndreM222/copilot-lualine'
   },
   config = function()
     local lualine = require('lualine')
     local lsp_progress = require('lsp-progress')
     lsp_progress.setup()
 
+    local fmt = function(hide_width)
+      return function(str)
+        local width = vim.fn.winwidth(0)
+        if width < hide_width then
+          return ''
+        end
+        return str
+      end
+    end
+
     lualine.setup({
       options = {
         component_separators = '',
         section_separators = '',
-        -- section_separators = { left = '', right = '' },
       },
       sections = {
+        lualine_b = {
+          { 'branch',      fmt = fmt(120) },
+          { 'diff',        fmt = fmt(80) },
+          { 'diagnostics', fmt = fmt(80) }
+        },
+        lualine_c = {
+          {
+            'filename',
+            symbols = {
+              modified = ' ',
+              readonly = ' ',
+            },
+          },
+        },
         lualine_x = {
-          lsp_progress.progress,
-          'filetype',
+          { 'copilot',             fmt = fmt(70) },
+          { lsp_progress.progress, fmt = fmt(70) },
+          { 'filetype',            fmt = fmt(50) }
         }
       }
     })

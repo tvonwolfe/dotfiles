@@ -1,6 +1,7 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
   main = 'ibl',
+  priority = 1,
   opts = {
     indent = {
       char = '│'
@@ -14,7 +15,6 @@ return {
         'help',
         'terminal',
         'dashboard',
-        'packer',
         'TelescopePrompt',
         'TelescopeResults',
         '',

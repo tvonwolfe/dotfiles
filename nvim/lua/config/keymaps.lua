@@ -5,8 +5,6 @@ MODES = {
   terminal = 't',
 }
 
-local cmd = vim.cmd
-
 local function map(mode, shortcut, command, opts)
   opts = vim.tbl_extend('force', { noremap = true, silent = true }, opts or {})
   vim.keymap.set(mode, shortcut, command, opts)
@@ -25,7 +23,7 @@ local function tmap(shortcut, command, opts)
 end
 
 local setup = function()
-  cmd('noremap <C-b> :noh<CR>:call clearmatches()<CR>')
+  vim.cmd('noremap <C-b> :noh<CR>:call clearmatches()<CR>')
 
   vim.g.mapleader = ' '
 

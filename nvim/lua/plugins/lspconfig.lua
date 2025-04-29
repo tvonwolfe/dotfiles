@@ -4,7 +4,7 @@ return {
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lsp'
   },
-  event = 'InsertEnter',
+  event = 'BufEnter',
   config = function()
     local cmp_nvim_lsp = require('cmp_nvim_lsp')
     local nvim_lsp_config = require('lspconfig')
@@ -47,13 +47,6 @@ return {
       'rust_analyzer',
       'rubocop',
       ruby_lsp = {
-        init_options = {
-          indexing = {
-            includedPatterns = {
-              "**/spec/**/*.rb",
-            },
-          },
-        },
         on_attach = function(client, bufnr)
           vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { noremap = true, silent = true })
           client.commands = client.commands or {}
