@@ -114,6 +114,7 @@ opts.breakindentopt = "list:-1"
 
 -- symbols to use for file diagnostics
 vim.diagnostic.config({
+  virtual_lines = true,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "",
