@@ -7,6 +7,7 @@ if work_ok then
 end
 
 return {
+  'bettervim/yugen.nvim',
   'christoomey/vim-tmux-navigator',
   'tpope/vim-abolish',
   'tpope/vim-dispatch',
