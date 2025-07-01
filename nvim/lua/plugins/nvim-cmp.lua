@@ -1,7 +1,6 @@
 return {
   'rafamadriz/friendly-snippets',
   'hrsh7th/cmp-nvim-lua',
-  'hrsh7th/cmp-nvim-lsp-signature-help',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-path',
   'hrsh7th/cmp-buffer',
@@ -49,12 +48,11 @@ return {
               }
             }
           },
-          { name = 'copilot',                 group_index = 2 },
-          { name = 'luasnip',                 group_index = 3 },
+          { name = 'copilot', group_index = 2 },
+          { name = 'luasnip', group_index = 3 },
           { name = 'nvim_lua' },
-          { name = 'buffer',                  group_index = 4 },
-          { name = 'path',                    group_index = 5 },
-          { name = 'nvim_lsp_signature_help', group_index = 6 },
+          { name = 'buffer',  group_index = 4 },
+          { name = 'path',    group_index = 5 },
         }),
         window = {
           completion = cmp.config.window.bordered(),

@@ -12,31 +12,6 @@ return {
   lazy = false,
   opts = {
     auto_install = true,
-    ensure_installed = {
-      'git_config',
-      'gitattributes',
-      'gitcommit',
-      'gitignore',
-      'html',
-      'javascript',
-      'json',
-      'lua',
-      'luadoc',
-      'markdown',
-      'markdown_inline',
-      'nginx',
-      'nix',
-      'ruby',
-      'sql',
-      'tmux',
-      'tsx',
-      'typescript',
-      'vim',
-      'vimdoc',
-      'xml',
-      'yaml',
-      'zig',
-    },
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
     highlight = {
       enable = true,      -- false will disable the whole extension

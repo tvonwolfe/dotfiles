@@ -23,6 +23,7 @@ return {
           hidden = true,
           theme = 'dropdown',
           find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
+          previewer = false,
         },
         buffers = {
           theme = 'dropdown'

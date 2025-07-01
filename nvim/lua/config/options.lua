@@ -5,6 +5,10 @@ local opts = vim.opt
 
 vim.g.loaded_ruby_provider = 0
 
+vim.g.have_nerd_font = true
+
+vim.o.inccommand = 'split'
+
 -- keep the signcolumn open all the time
 opts.signcolumn = 'yes'
 
@@ -111,6 +115,8 @@ opts.completeopt = { 'menu', 'menuone', 'noinsert' }
 
 opts.breakindent = true
 opts.breakindentopt = "list:-1"
+
+opts.updatetime = 250
 
 -- symbols to use for file diagnostics
 vim.diagnostic.config({

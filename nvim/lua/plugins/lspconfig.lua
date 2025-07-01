@@ -1,7 +1,6 @@
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
-    'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-nvim-lsp'
   },
   event = 'BufEnter',
@@ -30,7 +29,6 @@ return {
         filetypes = { 'sh', 'zsh', 'bash' },
       },
       'cssls',
-      'gopls',
       'html',
       'jsonls',
       'lua_ls',
@@ -44,7 +42,6 @@ return {
           },
         }),
       },
-      'rust_analyzer',
       'rubocop',
       ruby_lsp = {
         on_attach = function(client, bufnr)
@@ -97,12 +94,6 @@ return {
         opts.desc = 'Show signature help'
         nmap('<leader>gh', lsp_buf.signature_help, opts)
 
-        opts.desc = 'Show available LSP code actions'
-        nmap('<leader>ca', lsp_buf.code_action, opts)
-
-        opts.desc = 'Rename symbol'
-        nmap('<leader>rn', lsp_buf.rename, opts)
-
         opts.desc = 'List function call locations'
         nmap('gc', telescope_builtins.lsp_incoming_calls, opts)
 
@@ -116,10 +107,10 @@ return {
         nmap('<leader>fd', function() telescope_builtins.diagnostics({ bufnr = 0 }) end)
 
         opts.desc = 'Show references to the symbol under the cursor'
-        nmap('gr', '<CMD>Glance references<CR>', opts)
+        nmap('gr', telescope_builtins.lsp_references, opts)
 
         opts.desc = 'Show definitions of the symbol under the cursor'
-        nmap('gd', '<CMD>Glance definitions<CR>', opts)
+        nmap('gd', telescope_builtins.lsp_definitions, opts)
 
         server_on_attach(client, bufnr)
       end
