@@ -24,6 +24,13 @@ return {
       options = {
         component_separators = '',
         section_separators = '',
+        disabled_filetypes = {
+          'Avante',
+          'AvanteInput',
+          'AvanteSelectedFiles',
+          'neotest-summary',
+          'NvimTree'
+        }
       },
       sections = {
         lualine_b = {

@@ -1,10 +1,14 @@
-theme = 'catppuccin_mocha'
+theme = 'kanagawa'
 
 [editor]
 line-number = 'relative'
 mouse = true
 cursorline = true
 color-modes = true
+
+[editor.indent-guides]
+character = "│"
+render = true
 
 [editor.statusline]
 right = ["version-control", "diagnostics", "selections", "position"]
