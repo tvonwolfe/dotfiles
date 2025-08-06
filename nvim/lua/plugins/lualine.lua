@@ -28,6 +28,7 @@ return {
           'Avante',
           'AvanteInput',
           'AvanteSelectedFiles',
+          'AvanteTodos',
           'neotest-summary',
           'NvimTree'
         }
