@@ -42,7 +42,6 @@ return {
           },
         }),
       },
-      'rubocop',
       ruby_lsp = {
         on_attach = function(client, bufnr)
           vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { noremap = true, silent = true })
