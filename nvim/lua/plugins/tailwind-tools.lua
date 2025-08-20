@@ -8,6 +8,11 @@ return {
     "nvim-telescope/telescope.nvim", -- optional
     "neovim/nvim-lspconfig",         -- optional
   },
-  opts = {}                          -- your configuration
+  opts = {
+    keymaps = {
+      smart_increment = {
+        enabled = false -- interferes with dial.nvim otherwise
+      }
+    }
+  }
 }
-
