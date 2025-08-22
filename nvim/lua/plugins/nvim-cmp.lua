@@ -1,13 +1,11 @@
 return {
-  'rafamadriz/friendly-snippets',
+  'hrsh7th/cmp-nvim-lsp-signature-help',
   'hrsh7th/cmp-nvim-lua',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-path',
   'hrsh7th/cmp-buffer',
   'tailwind-tools',
-  { 'L3MON4D3/LuaSnip',         build = "make install_jsregexp", lazy = true },
-  { 'onsails/lspkind.nvim',     lazy = true },
-  { 'saadparwaiz1/cmp_luasnip', lazy = true },
+  { 'onsails/lspkind.nvim', lazy = true },
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
@@ -15,12 +13,8 @@ return {
       local cmp = require('cmp')
       local cmp_context = require('cmp.config.context')
       local lspkind = require('lspkind')
-      local luasnip = require('luasnip')
-      require('luasnip.loaders.from_vscode').lazy_load()
 
       local lspkind_formatting = lspkind.cmp_format({ mode = 'symbol_text', symbol_map = { Copilot = '' } })
-
-      luasnip.filetype_extend('ruby', { 'rails' })
 
       cmp.setup {
         enabled = function()
@@ -36,9 +30,6 @@ return {
           end
         end,
         formatting = { format = lspkind_formatting },
-        snippet = {
-          expand = function(args) luasnip.lsp_expand(args.body) end
-        },
         sources = cmp.config.sources({
           { name = 'nvim_lsp',
             group_index = 1,
@@ -48,24 +39,20 @@ return {
               }
             }
           },
-          { name = 'copilot', group_index = 2 },
-          { name = 'luasnip', group_index = 3 },
-          { name = 'nvim_lua' },
-          { name = 'buffer',  group_index = 4 },
-          { name = 'path',    group_index = 5 },
+          { name = 'copilot',                 group_index = 1 },
+          { name = 'nvim_lsp_signature_help', group_index = 1 },
+          { name = 'nvim_lua',                group_index = 1 },
+          { name = 'buffer',                  group_index = 2 },
+          { name = 'path',                    group_index = 2 },
         }),
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          completion = { winblend = 15 },
+          documentation = { winblend = 15 },
         },
         mapping = cmp.mapping.preset.insert({
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif luasnip.expandable() then
-              luasnip.expand()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
             else
               fallback()
             end
@@ -73,8 +60,6 @@ return {
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
             else
               fallback()
             end

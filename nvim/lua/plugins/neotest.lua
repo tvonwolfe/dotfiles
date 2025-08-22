@@ -3,11 +3,11 @@ return {
   dependencies = {
     'nvim-neotest/nvim-nio',
     'nvim-lua/plenary.nvim',
-    'antoinemadec/FixCursorHold.nvim',
     'nvim-treesitter/nvim-treesitter',
     'olimorris/neotest-rspec',
     'nvim-neotest/neotest-jest',
   },
+  commit = '52fca6717ef972113ddd6ca223e30ad0abb2800c',
   config = function()
     local neotest = require('neotest')
     local neotest_rspec = require('neotest-rspec')

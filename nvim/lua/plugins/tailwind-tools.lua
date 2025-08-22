@@ -11,7 +11,7 @@ return {
   opts = {
     keymaps = {
       smart_increment = {
-        enabled = false -- interferes with dial.nvim otherwise
+        enabled = false -- interferes with dial.nvim
       }
     }
   }
