@@ -8,6 +8,8 @@ end
 
 return {
   'christoomey/vim-tmux-navigator',
+  'hrsh7th/cmp-nvim-lsp',
+  'neovim/nvim-lspconfig',
   'tpope/vim-abolish',
   'tpope/vim-dispatch',
   'tpope/vim-fugitive',

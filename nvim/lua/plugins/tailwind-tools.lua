@@ -8,6 +8,7 @@ return {
     "nvim-telescope/telescope.nvim", -- optional
     "neovim/nvim-lspconfig",         -- optional
   },
+  lazy = true,
   opts = {
     keymaps = {
       smart_increment = {

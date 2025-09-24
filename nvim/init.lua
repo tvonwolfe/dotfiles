@@ -11,3 +11,4 @@ require 'config.lazy'
 require('config.keymaps').setup()
 require 'config.autocmds'
 require 'config.macros'
+require 'config.lsp'
