@@ -1,7 +1,6 @@
-theme = dark:Kanagawa Wave,light:rose-pine-dawn
-font-size = 12
+theme = Kanagawa Wave
+font-size = 11
 font-thicken = true
 font-thicken-strength = 0
-adjust-cell-width = -1
 
 keybind = cmd+s=toggle_quick_terminal

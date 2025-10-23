@@ -8,6 +8,7 @@ end
 
 return {
   'christoomey/vim-tmux-navigator',
+  'folke/zen-mode.nvim',
   'hrsh7th/cmp-nvim-lsp',
   'neovim/nvim-lspconfig',
   'tpope/vim-abolish',
