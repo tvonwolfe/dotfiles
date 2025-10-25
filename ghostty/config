@@ -1,5 +1,8 @@
 theme = dark:Kanagawa Wave,light:Rose Pine Dawn
+mouse-hide-while-typing = true
 
 keybind = cmd+s=toggle_quick_terminal
 
 config-file = ?device-specific
+
+shell-integration-features = ssh-terminfo,no-cursor
