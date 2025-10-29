@@ -5,4 +5,4 @@ keybind = cmd+s=toggle_quick_terminal
 
 config-file = ?device-specific
 
-shell-integration-features = ssh-terminfo,no-cursor
+shell-integration-features = no-cursor
