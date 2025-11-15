@@ -25,16 +25,14 @@ opts.diffopt = 'vertical'
 opts.textwidth = 80
 
 -- custom formatting options:
---     t = auto-wrap lines using 'textwidth'
---     c = auto-wrap comments using 'textwidth'
+--     t = auto-break lines using 'textwidth'
+--     c = auto-break comments using 'textwidth'
 --     q = allow formatting of comments with 'gq'
 --     j = remove comment leader when joining lines
 --     r = auto-insert comment leader when hitting <enter> in insert mode
 --     o = auto-insert commend leader when hitting 'o' or 'O' in normal mode
 --     n = recognize numbered lists when formatting (uses 'formatlistpat' option)
---     w = trailing white space indicates a paragraph continues on the next line,
---         a line that ends with a non-white space character ends the paragraph
-opts.formatoptions = 'tcqjronw'
+opts.formatoptions = 'tcqjron'
 
 -- standard utf-8 encoding
 opts.encoding = 'utf-8'
