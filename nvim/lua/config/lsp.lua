@@ -35,7 +35,7 @@ local servers = {
     }),
   },
   ruby_lsp = {
-    on_attach = function(client, bufnr)
+    on_attach = function(client, _)
       vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { noremap = true, silent = true })
       client.commands = client.commands or {}
 
