@@ -32,18 +32,17 @@ return {
         formatting = { format = lspkind_formatting },
         sources = cmp.config.sources({
           { name = 'nvim_lsp',
-            group_index = 1,
             option = {
               markdown_oxide = {
                 keyword_pattern = [[\(\k\| \|\/\|#\)\+]]
               }
             }
           },
-          { name = 'copilot',                 group_index = 1 },
-          { name = 'nvim_lsp_signature_help', group_index = 1 },
-          { name = 'nvim_lua',                group_index = 1 },
-          { name = 'buffer',                  group_index = 2 },
-          { name = 'path',                    group_index = 2 },
+          { name = 'copilot' },
+          { name = 'nvim_lsp_signature_help' },
+          { name = 'nvim_lua' },
+          { name = 'buffer' },
+          { name = 'path' },
         }),
         window = {
           completion = { winblend = 15 },

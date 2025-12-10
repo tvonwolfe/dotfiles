@@ -9,7 +9,9 @@ return {
   },
   config = function()
     local neotest = require('neotest')
-    local neotest_rspec = require('neotest-rspec')
+    local neotest_rspec = require('neotest-rspec')({
+      engine_support = false
+    })
     local neotest_jest = require('neotest-jest')
 
     neotest.setup {
