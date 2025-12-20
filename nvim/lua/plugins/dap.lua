@@ -19,20 +19,6 @@ return {
       }
     end
 
-    dap.adapters.ruby = function(callback, config)
-      callback {
-        type = "server",
-        host = "127.0.0.1",
-        port = "${port}",
-        executable = {
-          command = "rdbg",
-          args = { "-n", "--open", "--port", "${port}",
-            "-c", "--", "bundle", "exec", config.command, config.script,
-          },
-        },
-      }
-    end
-
     dap.configurations.lua = {
       {
         type = 'nlua',
@@ -40,6 +26,30 @@ return {
         name = 'Attach to running Neovim instance'
       }
     }
+
+    dap.adapters.ruby = function(callback, config)
+      port = config.port or "${port}"
+      callback {
+        type = "server",
+        host = "127.0.0.1",
+        port = port,
+        executable = {
+          command = "bundle",
+          args = {
+            "exec",
+            "rdbg",
+            "-n",
+            "--open",
+            "--port",
+            port,
+            "-c",
+            "--",
+            config.command,
+            config.script,
+          },
+        },
+      }
+    end
 
     dap.configurations.ruby = {
       {
@@ -52,7 +62,7 @@ return {
       },
       {
         type = "ruby",
-        name = "run current spec file",
+        name = "debug current spec file",
         request = "attach",
         localfs = true,
         command = "rspec",
@@ -60,7 +70,7 @@ return {
       },
       {
         type = "ruby",
-        name = "run spec at current line",
+        name = "debug spec on current line",
         request = "attach",
         localfs = true,
         command = "rspec",
@@ -77,6 +87,7 @@ return {
         localfs = true,
         command = "rails",
         script = "server",
+        port = 38698
       }
     }
 
