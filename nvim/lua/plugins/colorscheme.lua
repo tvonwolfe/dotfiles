@@ -50,7 +50,7 @@ return {
     })
 
     require('plugin.colorscheme').setup({
-      dark = "kanagawa",
+      dark = 'kanagawa',
       light = 'rose-pine'
     })
   end

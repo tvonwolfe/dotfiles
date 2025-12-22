@@ -1,5 +1,4 @@
--- nvim options config
-local home = os.getenv('HOME')
+-- options config
 
 local opts = vim.opt
 
@@ -38,6 +37,7 @@ opts.formatoptions = 'tcqjron'
 opts.encoding = 'utf-8'
 
 -- store swapfiles here, prevent getting them mixed into source control
+local home = os.getenv('HOME')
 opts.directory = home .. '/.config/nvim/swapfiles'
 
 -- show line numbers
@@ -55,7 +55,7 @@ opts.autoindent = true
 -- smartly do auto-indenting
 opts.smartindent = true
 
---
+-- number of spaces to use for each level of indentation
 opts.shiftwidth = 2
 
 -- by setting this rather than tabstop, <bs> will remove the full tab rather
