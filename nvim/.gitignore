@@ -4,3 +4,4 @@ autoload/
 !lua/
 !lua/**
 lazy-lock.json
+device-specific.lua

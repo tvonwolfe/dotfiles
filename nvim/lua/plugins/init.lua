@@ -1,16 +1,8 @@
-local work_ok, work = pcall(require, 'config.work')
-
-local work_plugins = {}
-
-if work_ok then
-  work_plugins = work.plugins()
-end
-
 return {
   'christoomey/vim-tmux-navigator',
   'folke/zen-mode.nvim',
   'hrsh7th/cmp-nvim-lsp',
-  'neovim/nvim-lspconfig',
+  -- 'neovim/nvim-lspconfig',
   'tpope/vim-abolish',
   'tpope/vim-dispatch',
   'tpope/vim-fugitive',
@@ -23,5 +15,4 @@ return {
   { 'rgroli/other.nvim',      opts = { mappings = { 'rails' } }, main = 'other-nvim' },
   { 'tpope/vim-liquid',       ft = 'liquid', },
   { 'windwp/nvim-ts-autotag', opts = {},                         ft = { 'html', 'eruby', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' } },
-  work_plugins
 }

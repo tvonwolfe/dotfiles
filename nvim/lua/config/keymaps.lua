@@ -1,55 +1,16 @@
-MODES = {
-  normal = 'n',
-  insert = 'i',
-  visual = 'v',
-  terminal = 't',
-}
+vim.g.mapleader = ' '
 
-local function map(mode, shortcut, command, opts)
-  opts = vim.tbl_extend('force', { noremap = true, silent = true }, opts or {})
-  vim.keymap.set(mode, shortcut, command, opts)
-end
+-- search for other instances of visual selection
+vim.keymap.set('v', '//', "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>",
+  { desc = 'Search for other instances of visual selection' })
 
-local function nmap(shortcut, command, opts)
-  map(MODES.normal, shortcut, command, opts)
-end
+vim.keymap.set('v', '<leader>y', '"+y', { desc = 'Copy selected text to system clipboard' })
+-- vim.keymap.set('n', '<leader>Y', '+yg_', { desc = 'Copy ' }) -- doesn't work
+vim.keymap.set('n', '<leader>Yy', '"+yy', { desc = 'Copy current line to system clipboard' })
 
-local function vmap(shortcut, command, opts)
-  map(MODES.visual, shortcut, command, opts)
-end
+-- paste from clipboard
+vim.keymap.set('n', '<leader>p', '"+p', { desc = 'Paste from system clipboard' })
+vim.keymap.set('n', '<leader>P', '"+P', { desc = 'Paste from system clipboard above current line' })
 
-local function tmap(shortcut, command, opts)
-  map(MODES.terminal, shortcut, command, opts)
-end
-
-local setup = function()
-  vim.cmd('noremap <C-b> :noh<CR>:call clearmatches()<CR>')
-
-  vim.g.mapleader = ' '
-
-  -- search for other instances of visual selection
-  vmap('//', "y/\\V<C-R>=escape(@\",'/\\')<CR><CR>", { desc = 'Search for other instances of visual selection' })
-
-  vmap('<leader>y', '"+y', { desc = 'Copy selected text to system clipboard' })
-  -- nmap('<leader>Y', '+yg_', { desc = 'Copy ' }) -- doesn't work
-  nmap('<leader>Yy', '"+yy', { desc = 'Copy current line to system clipboard' })
-
-  -- paste from clipboard
-  nmap('<leader>p', '"+p', { desc = 'Paste from system clipboard' })
-  nmap('<leader>P', '"+P', { desc = 'Paste from system clipboard above current line' })
-
-  -- vim-fugitive
-  nmap('<leader>gp', '<cmd>Git pull<CR>', { desc = 'Pull git branch from remote' })
-  nmap('<leader>gP', '<cmd>Git push<CR>', { desc = 'Push git branch to remote' })
-  nmap('<leader>ga', '<cmd>Git add %<CR>', { desc = 'Stage current file' })
-  nmap('<leader>gc', '<cmd>Git commit<CR>', { desc = 'Commit staged files in git' })
-
-  tmap('<esc>', [[<C-\><C-n>]], { desc = 'Enable pressing <esc> to exit insert mode in a terminal buffer' })
-end
-
-return {
-  setup = setup,
-  nmap = nmap,
-  vmap = vmap,
-  tmap = tmap,
-}
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]],
+  { desc = 'Enable pressing <esc> to exit insert mode in a terminal buffer' })
