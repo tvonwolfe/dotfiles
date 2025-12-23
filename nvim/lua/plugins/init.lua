@@ -2,7 +2,6 @@ return {
   'christoomey/vim-tmux-navigator',
   'folke/zen-mode.nvim',
   'hrsh7th/cmp-nvim-lsp',
-  -- 'neovim/nvim-lspconfig',
   'tpope/vim-abolish',
   'tpope/vim-dispatch',
   'tpope/vim-fugitive',
@@ -10,9 +9,7 @@ return {
   'tpope/vim-bundler',
   'tpope/vim-rails',
   'tpope/vim-repeat',
-  { 'junegunn/gv.vim',        cmd = 'GV', },
   { 'kylechui/nvim-surround', opts = {} },
   { 'rgroli/other.nvim',      opts = { mappings = { 'rails' } }, main = 'other-nvim' },
-  { 'tpope/vim-liquid',       ft = 'liquid', },
   { 'windwp/nvim-ts-autotag', opts = {},                         ft = { 'html', 'eruby', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' } },
 }
