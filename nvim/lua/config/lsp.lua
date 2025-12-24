@@ -19,7 +19,10 @@ local capabilities = cmp_nvim_lsp.default_capabilities(vim.lsp.protocol.make_cli
 vim.o.completeopt = "menu,menuone,popup,fuzzy,noselect"
 
 -- apply these settings to all LSP configs
-vim.lsp.config('*', { capabilities = capabilities, single_file_support = true, })
+vim.lsp.config('*', {
+  capabilities = capabilities,
+  single_file_support = true,
+})
 
 -- this is essentially default `on_attach`, and allows other lsp config
 -- definitions to declare their own `on_attach` function that will not conflict
@@ -31,7 +34,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local bufnr = ev.buf
 
-    vim.lsp.completion.enable(true, ev.data.client_id, bufnr, { autotrigger = true, })
+    -- vim.lsp.completion.enable(true, ev.data.client_id, bufnr, { autotrigger = true, })
 
     if client and client.server_capabilities.codeLensProvider then
       vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
@@ -62,5 +65,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- run codelens actions
     vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { noremap = true, silent = true })
+
+    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ max_width = 80, border = 'solid' }) end, opts)
   end
 })

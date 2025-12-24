@@ -1,7 +1,6 @@
 return {
   'christoomey/vim-tmux-navigator',
   'folke/zen-mode.nvim',
-  'hrsh7th/cmp-nvim-lsp',
   'tpope/vim-abolish',
   'tpope/vim-dispatch',
   'tpope/vim-fugitive',
