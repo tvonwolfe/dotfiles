@@ -1,7 +1,6 @@
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local telescope_builtins = require('telescope.builtin')
 
--- servers to enable
 vim.lsp.enable({
   'bashls',
   'cssls',
@@ -33,8 +32,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
     local bufnr = ev.buf
-
-    -- vim.lsp.completion.enable(true, ev.data.client_id, bufnr, { autotrigger = true, })
 
     if client and client.server_capabilities.codeLensProvider then
       vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {

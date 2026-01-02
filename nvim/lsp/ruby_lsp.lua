@@ -34,6 +34,24 @@ local config = {
     config.cmd_cwd = config.root_dir
     return client.config.cmd_cwd == config.cmd_cwd
   end,
+
+  on_attach = function(client, _)
+    client.commands = client.commands or {}
+
+    -- allows codelends actions for e.g. jumping between controller, view, routes
+    client.commands['rubyLsp.openFile'] = function(command)
+      local file_path = command.arguments[1][1]
+
+      local path, line = string.match(file_path, '(.+)#L(%d+)')
+      path = path or file_path -- if no line number, use the whole path
+
+      vim.cmd('edit ' .. path)
+
+      if line then
+        vim.cmd(line)
+      end
+    end
+  end
 }
 
 return config
