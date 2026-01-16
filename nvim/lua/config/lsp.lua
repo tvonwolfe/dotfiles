@@ -63,6 +63,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- run codelens actions
     vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { noremap = true, silent = true })
 
-    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ max_width = 80, border = 'solid' }) end, opts)
+    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ max_width = 80 }) end, opts)
   end
 })

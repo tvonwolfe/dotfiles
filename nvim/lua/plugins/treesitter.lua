@@ -117,8 +117,8 @@ return {
       })
 
       vim.api.nvim_create_autocmd('FileType', {
-        pattern = treesitter.get_installed(),
-        callback = function() vim.treesitter.start() end,
+        pattern = '*',
+        callback = function() pcall(vim.treesitter.start) end,
       })
     end,
     keys = {

@@ -1,1 +1,1 @@
-require 'css'
+vim.opt_local.iskeyword:append({ "-" })

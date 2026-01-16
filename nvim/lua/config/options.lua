@@ -21,7 +21,7 @@ opts.cursorline = true
 opts.diffopt = 'vertical'
 
 -- limit lines to this width by default
-opts.textwidth = 80
+opts.textwidth = 88
 
 -- custom formatting options:
 --     t = auto-break lines using 'textwidth'
