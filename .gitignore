@@ -9,6 +9,8 @@
 !solargraph/**
 !sway
 !sway/**
+!task
+!task/**
 !tmux
 !tmux/**
 !wezterm
