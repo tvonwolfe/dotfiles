@@ -11,4 +11,8 @@ return {
   { 'kylechui/nvim-surround', opts = {} },
   { 'rgroli/other.nvim',      opts = { mappings = { 'rails' } }, main = 'other-nvim' },
   { 'windwp/nvim-ts-autotag', opts = {},                         ft = { 'html', 'eruby', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' } },
+  'kepano/flexoki',
+  'vague-theme/vague.nvim',
+  'aktersnurra/no-clown-fiesta.nvim',
+  'projekt0n/github-nvim-theme'
 }

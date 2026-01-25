@@ -52,9 +52,6 @@ opts.wildmenu = true
 -- automatically indent from last line when creating a new one
 opts.autoindent = true
 
--- smartly do auto-indenting
-opts.smartindent = true
-
 -- number of spaces to use for each level of indentation
 opts.shiftwidth = 2
 
