@@ -17,9 +17,8 @@ return {
             auto_open = false
           }
         },
-        preselect = 'none', -- don't preselect anything, ever
         enabled = function()
-          if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+          if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" then return false end
 
           -- disable completion in comments
           -- keep command mode completion enabled when cursor is in a comment
@@ -58,14 +57,14 @@ return {
               cmp.open_docs()
             end
           end),
-          ['<Tab>'] = cmp.mapping(function(fallback)
+          ['<C-n>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
             else
               fallback()
             end
           end, { "i", "s" }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
+          ['<C-p>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_prev_item()
             else
@@ -74,7 +73,7 @@ return {
           end, { "i", "s" }),
           ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "c", "i" }),
           ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { "c", "i" }),
-          ['<CR>'] = cmp.mapping.confirm({ select = false })
+          ['<C-y>'] = cmp.mapping.confirm({ select = false })
         })
       })
     end
