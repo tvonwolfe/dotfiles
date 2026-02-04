@@ -1,5 +1,4 @@
 return {
-  'hrsh7th/cmp-nvim-lsp-signature-help',
   'hrsh7th/cmp-nvim-lua',
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-path',
@@ -40,7 +39,6 @@ return {
             }
           },
           { name = 'copilot' },
-          { name = 'nvim_lsp_signature_help' },
           { name = 'nvim_lua' },
           { name = 'buffer' },
           { name = 'path' },
