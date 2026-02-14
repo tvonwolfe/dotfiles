@@ -29,7 +29,5 @@ include device-specific
 
 context.home.read=project:Home
 context.home.write=project:Home
-context.personal.read=project:Personal
-context.personal.write=project:Personal
 context.learning.read=+learning
 context.learning.write=+learning
