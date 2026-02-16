@@ -2,13 +2,14 @@
 
 This repo contains my personal config files for:
 - neovim
-- sway (and related programs)
+- sway
+- waybar
 - ghostty
 - helix
 - tmux
 - neofetch
 - nix home manager
-- wezterm
+- taskwarrior
 
 ## License
 This repo uses the Unlicense. I claim no rights to the code within.
