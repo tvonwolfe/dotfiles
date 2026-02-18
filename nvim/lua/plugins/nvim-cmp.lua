@@ -5,10 +5,16 @@ return {
   'hrsh7th/cmp-buffer',
   {
     'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     config = function()
       local cmp = require('cmp')
       local cmp_context = require('cmp.config.context')
+
+      local has_words_before = function()
+        unpack = unpack or table.unpack
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+      end
 
       cmp.setup({
         view = {
@@ -55,23 +61,27 @@ return {
               cmp.open_docs()
             end
           end),
-          ['<C-n>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            else
-              fallback()
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if not cmp.select_next_item() then
+              if vim.bo.buftype ~= 'prompt' and has_words_before() then
+                cmp.complete()
+              else
+                fallback()
+              end
             end
           end, { "i", "s" }),
-          ['<C-p>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            else
-              fallback()
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if not cmp.select_prev_item() then
+              if vim.bo.buftype ~= 'prompt' and has_words_before() then
+                cmp.complete()
+              else
+                fallback()
+              end
             end
           end, { "i", "s" }),
           ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "c", "i" }),
           ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { "c", "i" }),
-          ['<C-y>'] = cmp.mapping.confirm({ select = false })
+          ['<CR>'] = cmp.mapping.confirm({ select = false })
         })
       })
     end
