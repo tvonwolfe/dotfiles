@@ -9,6 +9,8 @@
 !solargraph/**
 !sway
 !sway/**
+!swaylock
+!swaylock/**
 !task
 !task/**
 !tmux
