@@ -17,3 +17,5 @@
 !tmux/**
 !wezterm
 !wezterm/**
+!waybar
+!waybar/**
