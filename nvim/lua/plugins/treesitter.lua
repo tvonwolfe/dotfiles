@@ -66,12 +66,7 @@ return {
       vim.api.nvim_create_autocmd('FileType', {
         pattern = '*',
         callback = function()
-          local treesitter_ok, _ = pcall(vim.treesitter.start)
-
-          if treesitter_ok then
-            -- use treesitter for indenting
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
+          pcall(vim.treesitter.start)
         end,
       })
     end,
