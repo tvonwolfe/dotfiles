@@ -2,12 +2,14 @@ local cmp_nvim_lsp = require('cmp_nvim_lsp')
 local telescope_builtins = require('telescope.builtin')
 
 vim.lsp.enable({
+  'arduino_language_server',
   'bashls',
   'cssls',
   'html',
   'jsonls',
   'lua_ls',
   'markdown_oxide',
+  'openscad_lsp',
   'ruby_lsp',
   'tailwindcss',
   'ts_ls',
@@ -36,7 +38,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client and client.server_capabilities.codeLensProvider then
       vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
         buffer = bufnr,
-        callback = vim.lsp.codelens.refresh,
+        callback = function() vim.lsp.codelens.enable(true) end,
       })
     end
 
@@ -64,5 +66,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>cl', vim.lsp.codelens.run, { noremap = true, silent = true })
 
     vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ max_width = 80 }) end, opts)
+
+    vim.keymap.set('n', 'gK', function()
+      local new_config = not vim.diagnostic.config().virtual_lines
+      vim.diagnostic.config({ virtual_lines = new_config })
+    end, { desc = 'Toggle diagnostic virtual_lines' })
   end
 })

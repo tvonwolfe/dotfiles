@@ -51,7 +51,12 @@ return {
 
     require('plugin.colorscheme').setup({
       dark = 'kanagawa',
-      light = 'rose-pine'
+      light = 'rose-pine',
+      on_set_colorscheme = function()
+        -- for some reason, these plugins don't play nicely with this setup
+        require('lualine').setup()
+        vim.cmd("IBLEnable")
+      end
     })
   end
 }

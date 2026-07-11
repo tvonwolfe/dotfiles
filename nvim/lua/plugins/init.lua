@@ -10,7 +10,7 @@ return {
   'tpope/vim-repeat',
   { 'kylechui/nvim-surround', opts = {} },
   { 'rgroli/other.nvim',      opts = { mappings = { 'rails' } }, main = 'other-nvim' },
-  { 'windwp/nvim-ts-autotag', opts = {},                         ft = { 'html', 'eruby', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' } },
+  { 'windwp/nvim-ts-autotag', opts = {},                         ft = { 'html', 'eruby', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'xml' } },
   'kepano/flexoki',
   'vague-theme/vague.nvim',
   'aktersnurra/no-clown-fiesta.nvim',
