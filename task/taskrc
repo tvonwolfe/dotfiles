@@ -31,3 +31,6 @@ context.home.read=project:Home
 context.home.write=project:Home
 context.learning.read=+learning
 context.learning.write=+learning
+context.miata.read=project:Miata
+context.miata.write=project:Miata
+
