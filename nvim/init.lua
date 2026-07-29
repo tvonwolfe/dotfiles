@@ -13,3 +13,5 @@ require 'config.keymaps'
 require 'config.autocmds'
 require 'config.macros'
 require 'config.lsp'
+
+require('vim._core.ui2').enable()
