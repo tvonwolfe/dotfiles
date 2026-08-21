@@ -30,7 +30,9 @@ return {
           'AvanteSelectedFiles',
           'AvanteTodos',
           'neotest-summary',
-          'NvimTree'
+          'NvimTree',
+          'man',
+
         }
       },
       sections = {
