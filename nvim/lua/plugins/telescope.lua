@@ -21,12 +21,11 @@ return {
       pickers = {
         find_files = {
           hidden = true,
-          theme = 'dropdown',
+          theme = 'ivy',
           find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
-          previewer = false,
         },
         buffers = {
-          theme = 'dropdown'
+          theme = 'ivy'
         },
         lsp_document_symbols = {
           sorting_strategy = 'ascending'
