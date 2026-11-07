@@ -115,7 +115,8 @@ opts.updatetime = 250
 
 -- symbols to use for file diagnostics
 vim.diagnostic.config({
-  virtual_lines = true,
+  virtual_lines = false,
+  update_in_insert = true,
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "",

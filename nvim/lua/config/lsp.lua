@@ -42,6 +42,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
+    -- format files on save
+    vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+      buffer = bufnr,
+      callback = function() vim.lsp.buf.format() end
+    })
+
     -- setup keybindings
     local opts = { buffer = bufnr }
     opts.desc = 'List function call locations'
