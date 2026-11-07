@@ -7,7 +7,8 @@ return {
         'nvim-treesitter/nvim-treesitter-textobjects', -- enable additional text objects
         branch = 'main'
       },
-      'RRethy/nvim-treesitter-endwise', -- wisely add `end` to code blocks in languages that use that keyword.
+      'RRethy/nvim-treesitter-endwise',   -- wisely add `end` to code blocks in languages that use that keyword.
+      'zivarah/fugitive-treesitter.nvim', -- treesitter highlights for fugitive buffers
     },
     branch = 'main',
     version = false,
