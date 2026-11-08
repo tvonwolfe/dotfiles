@@ -28,6 +28,7 @@ vim.lsp.config('*', {
 -- this is essentially default `on_attach`, and allows other lsp config
 -- definitions to declare their own `on_attach` function that will not conflict
 -- with this autocmd's callback.
+
 local group = vim.api.nvim_create_augroup('UserLspAttach', { clear = true })
 vim.api.nvim_create_autocmd('LspAttach', {
   group = group,
@@ -38,6 +39,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client and client.server_capabilities.codeLensProvider then
       vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
         buffer = bufnr,
+        group = group,
         callback = function() vim.lsp.codelens.enable(true) end,
       })
     end
@@ -45,6 +47,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- format files on save
     vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
       buffer = bufnr,
+      group = group,
       callback = function() vim.lsp.buf.format() end
     })
 

@@ -6,6 +6,7 @@ vim.g.loaded_ruby_provider = 0
 
 vim.g.have_nerd_font = true
 
+-- show results of substitute or other user commands in a preview window
 vim.o.inccommand = 'split'
 
 -- keep the signcolumn open all the time
@@ -108,7 +109,11 @@ opts.list = true
 --     noinsert = do not insert text for a match until it's selected
 opts.completeopt = { 'menu', 'menuone', 'noinsert' }
 
+-- visually indents wrapped lines to preserve horizontal blocks of text
 opts.breakindent = true
+
+-- uses the width of a match with 'formatlistpat' for indentation
+-- ('formatlistpat' is a pattern used to recognize list headers)
 opts.breakindentopt = "list:-1"
 
 opts.updatetime = 250

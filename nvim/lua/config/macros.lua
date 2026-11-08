@@ -1,10 +1,11 @@
 local esc = vim.api.nvim_replace_termcodes('<Esc>', true, true, true)
 local space = vim.api.nvim_replace_termcodes('<Space>', true, true, true)
 
--- take the currently-selected expression and print it with console.log
-vim.api.nvim_create_augroup("ConsoleLogMacro", { clear = true })
+-- take the currently-selected expression and print it to the console
+local group = "ConsoleLogMacro"
+vim.api.nvim_create_augroup(group, { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-  group = "ConsoleLogMacro",
+  group = group,
   pattern = {
     "javascript",
     "javascriptreact",
@@ -17,7 +18,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = "ConsoleLogMacro",
+  group = group,
   pattern = {
     "ruby"
   },
